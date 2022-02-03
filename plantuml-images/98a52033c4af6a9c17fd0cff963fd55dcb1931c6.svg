@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="597px" preserveAspectRatio="none" style="width:779px;height:597px;background:#F3F6F6;" version="1.1" viewBox="0 0 779 597" width="779px" zoomAndPan="magnify"><defs/><g><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="156" x="344.5" y="111"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="349.5" y="135.8467">Experimental Preview</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="190" x="230.5" y="237"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="235.5" y="261.8467">Aggressive Obsolescence</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="193" x="7" y="363"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="12" y="387.8467">Limited Lifetime Guarantee</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="134" x="260.5" y="457"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="265.5" y="481.8467">Two In Production</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="115" x="270" y="551"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="275" y="575.8467">N In Production</text><ellipse cx="422.5" cy="11" fill="#000000" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><path d="M422.5,25.1226 C422.5,44.8565 422.5,86.2154 422.5,110.6862 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="422.5,110.6862,426.5,101.6862,422.5,105.6862,418.5,101.6862,422.5,110.6862" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="209" x="424.5" y="56.9951">Introduce changes and gather</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="207" x="427.5" y="73.292">feedback from clients, without</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="452.5" y="89.5889">long term commitment</text><path d="M345.9546,151.0695 C338.3631,155.7848 331.5957,161.6656 326.5,169 C312.7101,188.848 315.767,217.8704 319.9988,236.846 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="319.9988,236.846,321.9439,227.1912,318.9105,231.9659,314.1357,228.9325,319.9988,236.846" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="327.5" y="182.9951">Increase guarantees, but</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="335.5" y="199.292">keep options to sunset</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="351" y="215.5889">as early as possible</text><path d="M230.4129,263.3481 C202.8997,268.6411 174.1985,278.1677 151.5,295 C128.7756,311.8515 115.4676,342.8168 108.8374,362.8968 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="108.8374,362.8968,115.4575,355.6048,110.4051,358.1489,107.8609,353.0965,108.8374,362.8968" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="152.5" y="308.9951">Give a fixed time-frame</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="162.5" y="325.292">during which the API</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="173.5" y="341.5889">will not be broken</text><path d="M486.9158,151.1496 C494.2504,155.8628 500.7758,161.7216 505.5,169 C532.9102,211.2294 581.9792,278.63 495.5,403 C472.4431,436.1592 430.9167,454.3842 394.9205,464.3318 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="394.9205,464.3318,404.6608,465.79,399.7398,462.9999,402.5298,458.079,394.9205,464.3318" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="561.5" y="316.9951">Ease migration for clients by</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="223" x="548.5" y="333.292">providing more than one version</text><path d="M325.6775,277.346 C326.057,318.7153 326.9437,415.3667 327.3229,456.6973 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="327.3229,456.6973,331.2402,447.661,327.277,451.6975,323.2405,447.7344,327.3229,456.6973" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97" x="361" y="379.9951">Provide stable</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="332.5" y="396.292">and less stable version</text><path d="M90.8728,403.2588 C85.0257,414.808 81.0391,429.1221 89.5,439 C111.16,464.2875 197.9711,472.4317 260.4944,474.9758 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="260.4944,474.9758,251.6645,470.6132,255.4985,474.7725,251.3392,478.6066,260.4944,474.9758" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="90.5" y="434.9951">Guarantee overlapping life times</text><path d="M327.5,497.0625 C327.5,512.8519 327.5,535.1792 327.5,550.962 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="327.5,550.962,331.5,541.962,327.5,545.962,323.5,541.962,327.5,550.962" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="194" x="328.5" y="528.9951">Offer three or more versions</text><!--MD5=[eb0bf9f8c63e5e5da8623682f32c95d1]
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+state "Experimental Preview" as ExperimentalPreview
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Limited Lifetime Guarantee" as LimitedLifetimeGuarantee
+state "Two In Production" as TwoInProduction
+state "N In Production" as NInProduction
+
+[*] - -> ExperimentalPreview : Introduce changes and gather \n feedback from clients, without \nlong term commitment
+
+ExperimentalPreview - -> AggressiveObsolescence : Increase guarantees, but \n keep options to sunset \n as early as possible
+
+AggressiveObsolescence - -> LimitedLifetimeGuarantee : Give a fixed time-frame \n during which the API \n will not be broken
+
+ExperimentalPreview - -> TwoInProduction : Ease migration for clients by\n providing more than one version
+
+AggressiveObsolescence - -> TwoInProduction : Provide stable\n and less stable version
+
+LimitedLifetimeGuarantee - -> TwoInProduction : Guarantee overlapping life times  
+
+TwoInProduction - -> NInProduction: Offer three or more versions
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

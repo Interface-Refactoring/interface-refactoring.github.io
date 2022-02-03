@@ -1,0 +1,39 @@
+@startuml
+!include default.iuml
+
+class Endpoint <<(C,#57d4ff)basicConcept>> {
+ Address location
+ MAPDecorator role
+}
+note left: <b>Endpoint Refactorings:</b>\n * <i>Rename Endpoint</i> \n * <i>Merge Endpoints</i> \n * <i>Segregate Commands from Queries </i>
+
+'note right of Endpoint: <b>Evolution Refactorings:</b>\n * <i>Strengthen Evolution Strategy</i> \n * <i>Relax Evolution Strategy</i>
+
+
+class Operation <<(C,#57d4ff)basicConcept>> {
+ String name
+ MAPDecorator responsibility
+}
+note left: <b>Operation Refactorings:</b>\n * <i>Extract Endpoint</i> \n * <i>Move Operation</i> \n * <i>Rename Operation</i> \n * <i>Split Operation</i> \n * <i>Merge Operations</i> 
+
+'note right of Operation: <b>Evolution Refactorings:</b>\n * <i>Introduce Version Identifier</i>\n * <i>Introduce Version Mediator</i> 
+
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note left: <b>Message Refactorings:</b>\n * <i>Introduce Data Transfer Object</i> \n * <i>Extract Information Holder</i> \n * <i>Inline Information Holder</i> \n * <i>Introduce Pagination</i> \n * <i>Rename Representation Element</i>
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note right: <b>Message Refactorings:</b>\n * <i>Add Wish List</i> \n * <i>Add Wish Template</i> \n * <i>Bundle Requests</i> \n * <i>Make Request Conditional</i> \n * <i>Externalize Context Representation</i>
+
+Endpoint *--> Operation 
+Operation *--> RequestMessagePayload 
+Operation *--> ResponseMessagePayload
+' RequestMessage *-- InParameters
+' ResponseMessage*-- OutParameters
+
+@enduml

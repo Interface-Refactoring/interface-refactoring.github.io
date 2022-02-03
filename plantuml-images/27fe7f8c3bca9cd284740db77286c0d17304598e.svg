@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="383px" preserveAspectRatio="none" style="width:1216px;height:383px;background:#F3F6F6;" version="1.1" viewBox="0 0 1216 383" width="1216px" zoomAndPan="magnify"><defs/><g><!--MD5=[4fd3bb6c1d79f4919f90c95b62a35422]
+class Endpoint--><rect codeLine="3" fill="#FFFFFF" height="83.1875" id="Endpoint" style="stroke:#A80036;stroke-width:1.5;" width="141" x="540" y="6.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="554.5" y="24.1826">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="576" y="40.4795">Endpoint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="541" x2="680" y1="48.7813" y2="48.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="546" y="65.7764">Address location</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="546" y="82.0732">MAPDecorator role</text><path d="M235.5,10.1875 L235.5,85.375 L521.5,85.375 L521.5,20.1875 L511.5,10.1875 L235.5,10.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M511.5,10.1875 L511.5,20.1875 L521.5,20.1875 L511.5,10.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="180" x="241.5" y="28.1826">Endpoint Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="245.5" y="44.4795">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="124" x="256.5" y="44.4795">Rename Endpoint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="384.5" y="44.4795"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="245.5" y="60.7764">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="117" x="256.5" y="60.7764">Merge Endpoints</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="377.5" y="60.7764"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="245.5" y="77.0732">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="246" x="256.5" y="77.0732">Segregate Commands from Queries</text><!--MD5=[cca5d97aaf46870920fae66c9bd85cdd]
+class Operation--><rect codeLine="12" fill="#FFFFFF" height="83.1875" id="Operation" style="stroke:#A80036;stroke-width:1.5;" width="205" x="508" y="137.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="554.5" y="155.6826">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="78" x="571.5" y="171.9795">Operation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="509" x2="712" y1="180.2813" y2="180.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="514" y="197.2764">String name</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="514" y="213.5732">MAPDecorator responsibility</text><path d="M279.5,125.1875 L279.5,232.9688 L489.5,232.9688 L489.5,135.1875 L479.5,125.1875 L279.5,125.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M479.5,125.1875 L479.5,135.1875 L489.5,135.1875 L479.5,125.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="189" x="285.5" y="143.1826">Operation Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="289.5" y="159.4795">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="114" x="300.5" y="159.4795">Extract Endpoint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="418.5" y="159.4795"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="289.5" y="175.7764">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="110" x="300.5" y="175.7764">Move Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="414.5" y="175.7764"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="289.5" y="192.0732">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="130" x="300.5" y="192.0732">Rename Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="434.5" y="192.0732"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="289.5" y="208.3701">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="101" x="300.5" y="208.3701">Split Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="405.5" y="208.3701"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="289.5" y="224.667">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="123" x="300.5" y="224.667">Merge Operations</text><!--MD5=[e93d480bc88e1c582484fbb697036f76]
+class ResponseMessagePayload--><rect codeLine="20" fill="#FFFFFF" height="83.1875" id="ResponseMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="295" x="914" y="281.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="1005.5" y="299.6826">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="209" x="957" y="315.9795">ResponseMessagePayload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="915" x2="1208" y1="324.2813" y2="324.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="920" y="341.2764">KeyValuePairs protocolHeaders</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="920" y="357.5732">RepresentationElements requestPayload</text><path d="M631,269.1875 L631,376.9688 L896,376.9688 L896,279.1875 L886,269.1875 L631,269.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M886,269.1875 L886,279.1875 L896,279.1875 L886,269.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="181" x="637" y="287.1826">Message Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="641" y="303.4795">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="212" x="652" y="303.4795">Introduce Data Transfer Object</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="868" y="303.4795"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="641" y="319.7764">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="180" x="652" y="319.7764">Extract Information Holder</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="836" y="319.7764"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="641" y="336.0732">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="169" x="652" y="336.0732">Inline Information Holder</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="825" y="336.0732"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="641" y="352.3701">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="142" x="652" y="352.3701">Introduce Pagination</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="798" y="352.3701"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="641" y="368.667">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="229" x="652" y="368.667">Rename Representation Element</text><!--MD5=[2266c51e2e890c8bcebcea740afba0fd]
+class RequestMessagePayload--><rect codeLine="26" fill="#FFFFFF" height="83.1875" id="RequestMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="307" x="7" y="281.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="104.5" y="299.6826">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="196" x="62.5" y="315.9795">RequestMessagePayload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="313" y1="324.2813" y2="324.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="13" y="341.2764">KeyValuePairs protocolHeaders</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="295" x="13" y="357.5732">RepresentationElements responsePayload</text><path d="M332.5,269.1875 L332.5,376.9688 L612.5,376.9688 L612.5,279.1875 L602.5,269.1875 L332.5,269.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M602.5,269.1875 L602.5,279.1875 L612.5,279.1875 L602.5,269.1875 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="181" x="338.5" y="287.1826">Message Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="342.5" y="303.4795">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="353.5" y="303.4795">Add Wish List</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="449.5" y="303.4795"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="342.5" y="319.7764">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="134" x="353.5" y="319.7764">Add Wish Template</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="491.5" y="319.7764"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="342.5" y="336.0732">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="118" x="353.5" y="336.0732">Bundle Requests</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="475.5" y="336.0732"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="342.5" y="352.3701">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="180" x="353.5" y="352.3701">Make Request Conditional</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="537.5" y="352.3701"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7" x="342.5" y="368.667">*</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="244" x="353.5" y="368.667">Externalize Context Representation</text><path d="M521.6875,47.6875 C527.7008,47.6875 533.7142,47.6875 539.7275,47.6875 " fill="none" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><path d="M489.5547,179.1875 C495.6964,179.1875 501.8382,179.1875 507.9799,179.1875 " fill="none" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><path d="M896.2031,323.1875 C902.122,323.1875 908.0408,323.1875 913.9596,323.1875 " fill="none" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><path d="M314.0625,323.1875 C320.1483,323.1875 326.2341,323.1875 332.3199,323.1875 " fill="none" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><path d="M610.5,89.3068 C610.5,104.5871 610.5,121.9595 610.5,137.2671 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="610.5,89.3068,606.5,95.3068,610.5,101.3068,614.5,95.3068,610.5,89.3068" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="610.5,137.2671,614.5,128.2671,610.5,132.2671,606.5,128.2671,610.5,137.2671" style="stroke:#A80036;stroke-width:1.0;"/><path d="M530.6976,220.7629 C520.0302,225.3515 509.1096,229.6429 498.5,233.1875 C423.1857,258.3497 400.2655,248.879 323.5,269.1875 C309.404,272.9166 294.7324,277.1599 280.222,281.5839 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="530.6976,220.7629,523.6053,219.4593,519.6741,225.5046,526.7664,226.8083,530.6976,220.7629" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="280.222,281.5839,289.9973,282.7854,285.0047,280.1258,287.6643,275.1331,280.222,281.5839" style="stroke:#A80036;stroke-width:1.0;"/><path d="M713.1624,210.2139 C769.9977,227.0742 841.8236,248.7719 905.5,269.1875 C917.8933,273.161 930.8091,277.3962 943.6702,281.6747 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="713.1624,210.2139,717.777,215.7551,724.6669,213.6267,720.0522,208.0854,713.1624,210.2139" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="943.6702,281.6747,936.393,275.0383,938.9259,280.0964,933.8678,282.6293,943.6702,281.6747" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b42960f746b7f279b4e09ff5b0df30b6]
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+!include default.iuml
+
+class Endpoint <<(C,#57d4ff)basicConcept>> {
+ Address location
+ MAPDecorator role
+}
+note left: <b>Endpoint Refactorings:</b>\n * <i>Rename Endpoint</i> \n * <i>Merge Endpoints</i> \n * <i>Segregate Commands from Queries </i>
+
+'note right of Endpoint: <b>Evolution Refactorings:</b>\n * <i>Strengthen Evolution Strategy</i> \n * <i>Relax Evolution Strategy</i>
+
+
+class Operation <<(C,#57d4ff)basicConcept>> {
+ String name
+ MAPDecorator responsibility
+}
+note left: <b>Operation Refactorings:</b>\n * <i>Extract Endpoint</i> \n * <i>Move Operation</i> \n * <i>Rename Operation</i> \n * <i>Split Operation</i> \n * <i>Merge Operations</i> 
+
+'note right of Operation: <b>Evolution Refactorings:</b>\n * <i>Introduce Version Identifier</i>\n * <i>Introduce Version Mediator</i> 
+
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note left: <b>Message Refactorings:</b>\n * <i>Introduce Data Transfer Object</i> \n * <i>Extract Information Holder</i> \n * <i>Inline Information Holder</i> \n * <i>Introduce Pagination</i> \n * <i>Rename Representation Element</i>
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note right: <b>Message Refactorings:</b>\n * <i>Add Wish List</i> \n * <i>Add Wish Template</i> \n * <i>Bundle Requests</i> \n * <i>Make Request Conditional</i> \n * <i>Externalize Context Representation</i>
+
+Endpoint *- -> Operation 
+Operation *- -> RequestMessagePayload 
+Operation *- -> ResponseMessagePayload
+' RequestMessage *- - InParameters
+' ResponseMessage*- - OutParameters
+
+@enduml
+
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+class Endpoint <<(C,#57d4ff)basicConcept>> {
+ Address location
+ MAPDecorator role
+}
+note left: <b>Endpoint Refactorings:</b>\n * <i>Rename Endpoint</i> \n * <i>Merge Endpoints</i> \n * <i>Segregate Commands from Queries </i>
+
+
+
+class Operation <<(C,#57d4ff)basicConcept>> {
+ String name
+ MAPDecorator responsibility
+}
+note left: <b>Operation Refactorings:</b>\n * <i>Extract Endpoint</i> \n * <i>Move Operation</i> \n * <i>Rename Operation</i> \n * <i>Split Operation</i> \n * <i>Merge Operations</i> 
+
+
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note left: <b>Message Refactorings:</b>\n * <i>Introduce Data Transfer Object</i> \n * <i>Extract Information Holder</i> \n * <i>Inline Information Holder</i> \n * <i>Introduce Pagination</i> \n * <i>Rename Representation Element</i>
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note right: <b>Message Refactorings:</b>\n * <i>Add Wish List</i> \n * <i>Add Wish Template</i> \n * <i>Bundle Requests</i> \n * <i>Make Request Conditional</i> \n * <i>Externalize Context Representation</i>
+
+Endpoint *- -> Operation 
+Operation *- -> RequestMessagePayload 
+Operation *- -> ResponseMessagePayload
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

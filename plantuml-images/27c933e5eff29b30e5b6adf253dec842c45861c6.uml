@@ -1,0 +1,33 @@
+@startuml
+!include default.iuml
+
+package "'WishTemplateSolutionSketch' Aggregate" {
+    class SampleWishTemplate <<Value Object>> {
+        boolean aValueDesired
+        boolean aStringDesired
+        NestedOutputTemplate[0..1] innerPayloadDesired
+    }
+    class NestedOutputTemplate <<Value Object>> {
+        boolean aFlagDesired
+        boolean aSecondStringDesired
+    }
+    class SampleOutput <<Value Object>> {
+        int aValue
+        String[0..1] aString
+        NestedOutput innerPayload
+    }
+    class NestedOutput <<Value Object>> {
+        boolean aFlag
+        String aSecondString
+    }
+    class SampleAPI <<Service>> {
+        SampleOutput getPartialData(AnyType input, SampleWishTemplate desiredOutput)
+    }
+}
+
+SampleWishTemplate --> NestedOutputTemplate : innerPayloadDesired
+SampleOutput --> NestedOutput : innerPayload
+SampleAPI --> SampleOutput : getPartialData
+SampleAPI --> SampleWishTemplate : getPartialData
+
+@enduml

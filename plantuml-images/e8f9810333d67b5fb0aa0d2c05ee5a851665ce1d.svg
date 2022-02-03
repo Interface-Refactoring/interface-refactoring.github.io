@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="349px" preserveAspectRatio="none" style="width:556px;height:349px;background:#F3F6F6;" version="1.1" viewBox="0 0 556 349" width="556px" zoomAndPan="magnify"><defs/><g><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="190" x="110" y="303"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="115" y="327.8467">Aggressive Obsolescence</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="192" x="7" y="99"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="12" y="123.8467">Eternal Lifetime Guarantee</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="193" x="108.5" y="209"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="113.5" y="233.8467">Limited Lifetime Guarantee</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="134" x="241" y="99"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="246" y="123.8467">Two In Production</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="115" x="250.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="255.5" y="29.8467">N In Production</text><path d="M97.7485,139.3012 C94.7606,154.7128 93.4457,176.1177 104,191 C109.1853,198.3116 115.9769,204.1822 123.5901,208.895 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="123.5901,208.895,118.043,200.7568,119.3388,206.2633,113.8323,207.559,123.5901,208.895" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="105" y="178.9951">Limit the lifetime of the API</text><path d="M205,249.0625 C205,264.8519 205,287.1792 205,302.962 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="205,302.962,209,293.962,205,297.962,201,293.962,205,302.962" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="206" y="280.9951">Offer even fewer guarantees to clients</text><path d="M306.338,139.2752 C304.068,154.8788 298.6987,176.5621 286,191 C279.6696,198.1975 271.6544,204.0789 263.1418,208.8596 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="263.1418,208.8596,272.9477,207.9402,267.5014,206.4112,269.0304,200.9649,263.1418,208.8596" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="241" x="303" y="170.9951">Transition from multiple versions to</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="227" x="314" y="187.292">one with a clearly defined lifetime</text><path d="M308,45.0625 C308,60.8519 308,83.1792 308,98.962 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="308,98.962,312,89.962,308,93.962,304,89.962,308,98.962" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="309" y="76.9951">Reduce the number of versions</text><!--MD5=[1c79c93b14d0c13390864cce6350e843]
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Eternal Lifetime Guarantee" as EternalLifetimeGuarantee
+state "Limited Lifetime Guarantee" as LimitedLifetimeGuarantee
+state "Two In Production" as TwoInProduction
+state "N In Production" as NInProduction
+
+EternalLifetimeGuarantee - -> LimitedLifetimeGuarantee : Limit the lifetime of the API
+
+LimitedLifetimeGuarantee - -> AggressiveObsolescence : Offer even fewer guarantees to clients
+
+TwoInProduction - -> LimitedLifetimeGuarantee : Transition from multiple versions to \n one with a clearly defined lifetime
+
+NInProduction - -> TwoInProduction : Reduce the number of versions
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

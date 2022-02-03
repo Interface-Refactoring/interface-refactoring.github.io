@@ -1,0 +1,711 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduce Data Transfer Object - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Wrap Representation Structure">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Introduce Data Transfer Object">
+<meta property="og:url" content="/refactorings/introducedatatransferobject">
+
+
+  <meta property="og:description" content="also known as: Wrap Representation Structure">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-03T20:27:01+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/introducedatatransferobject">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells / Drivers</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Introduce Data Transfer Object</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Introduce Data Transfer Object</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#smells--drivers">Smells / Drivers</a></li><li><a href="#instructions-steps">Instructions (Steps)</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List</a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template</a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests</a></li>
+        
+          <li><a href="/refactorings/externalizecontextrepresentation">Externalize Context Representation</a></li>
+        
+          <li><a href="/refactorings/extractendpoint">Extract Endpoint</a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination</a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations</a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation</a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint</a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation</a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation</a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells / Drivers</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/refactorings/hints">Hints and Samples</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/about">About</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduce Data Transfer Object">
+    <meta itemprop="description" content="also known as: Wrap Representation Structure">
+    <meta itemprop="datePublished" content="2022-02-03T20:27:01+01:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Introduce Data Transfer Object
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i>Updated:</strong>
+        
+        <time datetime="2021-11-08T00:00:00+01:00">November 8, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <div class="notice--warning"><strong><i class="fas fa-tools">&nbsp;</i>Note:</strong> This is a preview release and subject to change. Feedback welcome! <a href="/about/">Contact Information</a> and  <a href="/assets/IRC-FromCodeRefactoringToApiRefactoringCCIS2021.pdf">Background (PDF)</a> 
+      </div>
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Wrap Representation Structure</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API offers one or more endpoints that return data elements from their operations. For example, the API of a customer relationship management service might contain an endpoint that returns detailed information about customers and the interactions with them. The structure of these responses might have been derived from the API implementation classes and data structures, with possibly deeply nested structures of elements. This could mean that the API implementation uses an <a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping" target="_blank">Object-Relational</a> Mapper (ORM) to manage the data and returns the ORM classes in the response messages.</p>
+
+<div class="notice--primary">
+
+  <p>As an API provider, I want to encapsulate my internal data structures so that I can freely change them without breaking backwards compatibility for my clients. In domain-driven design terms, I want to keep the integration-level “published language” separate from the application-level “ubiquitous language”.</p>
+
+</div>
+
+<h2 id="stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#modifyability">#modifyability</a></dt>
+  <dd>API providers want the freedom to change API implementation details without revealing these changes to clients.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#developer-experience">#developer-experience</a></dt>
+  <dd>API clients want to navigate to the data they require with minimum effort. This should take as few coding steps (such as statements and expressions) as possible.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The following excerpt shows a prototypical implementation of a Java Spring Boot endpoint that fetches an entity from a database repository and directly returns it as the response:</p>
+
+<pre><code class="language-java">@GetMapping(value = "/{id}")
+public ResponseEntity&lt;MyEntity&gt; getMyEntity(
+        @ApiParam(value = "the entity's unique id") 
+            @PathVariable MyEntityId id) {
+
+    MyEntity myEntity = myEntityRepository.getMyEntity(id);
+    if (myEntity == null) {
+        throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Entity Not Found");
+    }
+    return ResponseEntity.ok(myEntity);
+}
+</code></pre>
+
+<p>The <code>MyEntity</code> class is also used in the object-relational mapping (here: Java Persistence API, JPA):</p>
+
+<pre><code class="language-java">@Entity
+@Table(name = "my_entities")
+public class MyEntity {
+  ...
+}
+</code></pre>
+
+<p>The refactoring is eligible for any API operation that uses an implementation type (for example, a domain class or a database entity) in their response message. Note that the implementation type can also be nested somewhere within the response message structure.</p>
+
+<h2 id="smells--drivers">Smells / Drivers</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-smells-drivers#leaky-encapsulation">Leaky encapsulation</a></dt>
+  <dd>Domain layer classes and classes defined in the persistence layer are directly exposed in the API. Such leaky or even completely missing encapsulation of API internal data structures makes an API harder to evolve because it introduces coupling and harms backwards compatibility.</dd>
+  <dt><a href="/refactorings/by-smells-drivers#tight-coupling-of-data-contract">Tight coupling of data contract</a></dt>
+  <dd>Anything that is exposed will be used according to <a href="https://www.hyrumslaw.com/" target="_blank">Hyrum’s Law</a>. Hence, leaky encapsulations cause undesired coupling which in turn may slow down development and decrease <a href="/refactorings/by-stakeholder-concerns/#modifyability">#modifyability</a> and #flexibility.</dd>
+</dl>
+
+<h2 id="instructions-steps">Instructions (Steps)</h2>
+
+<ol>
+  <li>Create a new data-centric class (or equivalent abstraction in non-object oriented languages) that mirrors the attributes of the current response message. <em>Data Transfer Objects</em> (DTOs) are typically implemented as immutable value objects with structural, value-based equality.</li>
+  <li>Depending on the implementation framework, additional serialization logic or configuration might be needed. An example is the JSON-to-Java data binding offered by libraries such as <a href="https://github.com/FasterXML/jackson-databind" target="_blank">Jackson</a>.</li>
+  <li>Write unit tests for the DTOs and the mapping logic. If the code is generated by the framework, such tests might be unnecessary (or already provided by the framework).</li>
+  <li>Adjust the implementation of the operation to create an instance of the DTO and fill it with the necessary data.</li>
+  <li>Return the DTO from the API operation, adjusting any method return types if necessary.</li>
+  <li>Adapt and run the tests to make sure the structure of the message was not changed accidentally.</li>
+  <li>Update the API change in the external documentation if it is visible there.</li>
+  <li>Align sample data in API documentation or tutorials to the new structure.</li>
+</ol>
+
+<p>A variant of this refactoring is to wrap domain type(s) already implemented in the API in a new DTO instead of creating an entirely new one with copies of all attributes; the attribute values then have to be mapped to and from the new DTO. This is an acceptable solution if all that is needed is a way to return additional data. However, it resolves fewer of the underlying coupling/information hiding issues, and the wrapper also changes the response message structure.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>In the initial position sketch, <code>MyEntity</code> was returned directly; a <code>MyEntityDto</code> is returned instead now:</p>
+
+<pre><code class="language-java">@GetMapping(value = "/{id}")
+public ResponseEntity&lt;MyEntityDto&gt; getMyEntity(
+        @ApiParam(value = "the entity's unique id") 
+            @PathVariable MyEntityId id) {
+
+    MyEntity myEntity = myEntityRepository.getMyEntity(id);
+    if (myEntity == null) {
+        throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Entity Not Found");
+    }
+    MyEntityDto myEntityDto = MyEntityDto.toDto(myEntity);
+    return ResponseEntity.ok(myEntityDto);
+}
+</code></pre>
+
+<p>Now that the internal implementation has been decoupled from the response entity, the DTO can also be used to transfer additional data such as <a href="https://www.microservice-api-patterns.org/patterns/structure/elementStereotypes/LinkElement" target="_blank">Links</a> or <a href="https://www.microservice-api-patterns.org/patterns/structure/elementStereotypes/MetadataElement" target="_blank">Metadata</a>. If the internal implementation changes, the DTO can implement more complex mapping logic to maintain backwards compatibility.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The <a href="https://www.jhipster.tech/" target="_blank">JHipster</a> application generator has an option to generate the Spring Boot code with DTOs. Enabling this results in the following change in the service class:</p>
+
+<pre><code class="language-diff">-    public Optional&lt;Customer&gt; findOne(Long id) {
++    public Optional&lt;CustomerDTO&gt; findOne(Long id) {
+         log.debug("Request to get Customer : {}", id);
+-        return customerRepository.findById(id);
++        return customerRepository.findById(id).map(customerMapper::toDto);
+     }
+</code></pre>
+
+<p>The <code>CustomerDTO</code> is a simple Java bean with attributes, getters, and setters. For the mapping from entity to DTO and vice-versa, JHipster uses <a href="https://mapstruct.org/" target="_blank">MapStruct</a>, an annotation processor that frees the developer from writing trivial mapping code:</p>
+
+<pre><code class="language-java">@Mapper(componentModel = "spring", uses = {})
+public interface CustomerMapper extends EntityMapper&lt;CustomerDTO, Customer&gt; {}
+</code></pre>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Do not over-eagerly apply this refactoring to all API operations, but rather use it when its value is higher than its cost (a general advice that makes sense in a lot of cases). A good reason might be that the implementation is changing, but this change should not be reflected in the response message structure.</p>
+
+<p>DTO classes and mappings are often straightforward to create, so various libraries and code generation tools exist to automate this task. In the Java ecosystem, for example, <a href="https://projectlombok.org/features/Data" target="_blank">Lombok</a> is a further option to MapStruct mentioned above. The recently introduced <a href="https://openjdk.java.net/jeps/395" target="_blank">Java Records</a> also addresses this topic. When using code generation, make sure you know what’s going on behind the scenes and that surprises could be waiting for you (for example, see the third bullet item in <a href="https://www.jhipster.tech/using-dtos/#how-dtos-work-in-jhipster" target="_blank">How DTOs work in JHipster</a>).</p>
+
+<p>When receiving DTOs, be a <a href="https://martinfowler.com/bliki/TolerantReader.html" target="_blank">Tolerant Reader</a> by making “minimum assumptions about the structure” and only consuming the data you need. This has the advantage that your code will not be affected if unused parts of the DTO change.</p>
+
+<p>Another motivation for the refactoring can be that additional (meta-)data has to be returned, for example when applying <a href="/refactorings/introducepagination">Introduce Pagination</a>.</p>
+
+<p>There is a potential risk of introducing memory leaks in API implementations where developers allocate and release memory manually (but also if garbage collection takes place). Marshalling and unmarshalling of request and response data is often handled by frameworks (example JSON to Java and Java to JSON in Jackson when using Spring); caching might take place. Unit tests usually will not catch memory bugs; this requires dedicated reliability tests.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>The DTOs and their mapping logic are usually placed in a <a href="https://martinfowler.com/eaaCatalog/serviceLayer.html" target="_blank">Service Layer</a> [<a href="#ref-PoEAA">Fowler 2002</a>].</p>
+
+<p>Domain Driven Design (DDD) offers additional techniques and patterns on how to structure your domain classes. See this <a href="https://socadk.github.io/design-practice-repository/activities/DPR-TacticDDD.html" target="_blank">brief introduction to Tactic DDD</a>.</p>
+
+<p>Step 4 of the <a href="https://socadk.github.io/design-practice-repository/activities/SDPR-StepwiseServiceDesign.html" target="_blank">Stepwise Service Design</a> in [<a href="#ref-DPR:2021">Zimmermann and Stocker 2021</a>] advises to “foresee a Remote Facade that exposes Data Transfer Objects (DTOs) in the request and response messages of its API operations to decouple the (published) languages of frontends and backends and to optimize the message exchange over the network w.r.t exchange frequency and message size”. The Remote Facade that is mentioned in the quote helps to “translate coarse-grained methods onto the underlying fine-grained objects”. Here, this means that the DTO can be used to reformat the data in such a way that clients can easily interact with it.</p>
+
+<p>Martin Fowler describes the code-level refactoring <em>Introduce Parameter Object</em> in “Refactoring”[<a href="#ref-Fowler2018">Fowler 2018</a>]. The Refactoring.Guru website features this refactoring <a href="https://refactoring.guru/introduce-parameter-object" target="_blank">here</a>.</p>
+
+<h1 id="references">References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-PoEAA" class="csl-entry">
+
+    <p>Fowler, Martin. 2002. <em>Patterns of Enterprise Application Architecture</em>. Boston, MA, USA: Addison-Wesley Longman Publishing Co., Inc.</p>
+
+  </div>
+
+  <div id="ref-Fowler2018" class="csl-entry">
+
+    <p>———. 2018. <em>Refactoring: Improving the Design of Existing Code</em>. 2nd ed. Addison-Wesley Signature Series (Fowler). Boston, MA: Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-DPR:2021" class="csl-entry">
+
+    <p>Zimmermann, Olaf, and Mirko Stocker. 2021. <em>Design Practice Reference - Guides and Templates to Craft Quality Software in Style</em>. LeanPub. <a href="https://leanpub.com/dpr">https://leanpub.com/dpr</a>.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/inlineinformationholder" class="pagination--pager" title="Inline Information Holder
+">Previous</a>
+    
+    
+      <a href="/refactorings/introducepagination" class="pagination--pager" title="Introduce Pagination
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

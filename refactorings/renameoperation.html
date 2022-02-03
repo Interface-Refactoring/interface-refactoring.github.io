@@ -1,0 +1,709 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Rename Operation - Interface Refactoring Catalog</title>
+<meta name="description" content="Context and Motivation">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Rename Operation">
+<meta property="og:url" content="/refactorings/renameoperation">
+
+
+  <meta property="og:description" content="Context and Motivation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-03T20:27:01+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/renameoperation">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells / Drivers</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Rename Operation</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Rename Operation</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#smells--drivers">Smells / Drivers</a></li><li><a href="#instructions-steps">Instructions (Steps)</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#example">Example</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List</a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template</a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests</a></li>
+        
+          <li><a href="/refactorings/externalizecontextrepresentation">Externalize Context Representation</a></li>
+        
+          <li><a href="/refactorings/extractendpoint">Extract Endpoint</a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination</a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations</a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation</a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint</a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation</a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation</a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells / Drivers</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/refactorings/hints">Hints and Samples</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/about">About</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Rename Operation">
+    <meta itemprop="description" content="Context and Motivation">
+    <meta itemprop="datePublished" content="2022-02-03T20:27:01+01:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Rename Operation
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i>Updated:</strong>
+        
+        <time datetime="2021-09-27T00:00:00+02:00">September 27, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <div class="notice--warning"><strong><i class="fas fa-tools">&nbsp;</i>Note:</strong> This is a preview release and subject to change. Feedback welcome! <a href="/about/">Contact Information</a> and  <a href="/assets/IRC-FromCodeRefactoringToApiRefactoringCCIS2021.pdf">Background (PDF)</a> 
+      </div>
+
+      <section class="page__content" itemprop="text">
+        <h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API endpoint, for instance an HTTP resource, has been developed, tested, and deployed. The name of one of the operations of the endpoint does not represent its semantics well; there is a mismatch between operation name and performed operation. It is difficult to comprehend.</p>
+
+<div class="notice--primary">
+
+  <p>As an API provider, I want to express the responsibilities of an operation in its name so that client developers, API developers, and non-technical stakeholders (end users, product managers) understand the API — and each other in conversations about the API.</p>
+
+</div>
+
+<h2 id="stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#maintainability">#maintainability</a></dt>
+  <dd>APIs should be changed as much as required and as little as possible, and ripple effects be avoided. Expressive operation names help with orientation during API evolution. The source code and documentation on client and provider side using a particular name have to be updated if this name changes.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#understandability">#understandability</a> (including <a href="/refactorings/by-stakeholder-concerns/#explainability">#explainability</a> and <a href="/refactorings/by-stakeholder-concerns/#learnability">#learnability</a>)</dt>
+  <dd>Both API client developers and API maintainers should be able to grasp what an API is supposed to do (and actually does) easily. It should be straightforward to teach API usage. Educated guesses and implicit assumptions are likely to cause misunderstandings that lead to technical risk and defects later on.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The initial design before the refactotring, specified in the <a href="https://microservice-api-patterns.github.io/MDSL-Specification/" target="_blank">Microservice Domain-Specific Language (MDSL)</a> notation, is as follows:</p>
+
+<pre><code class="language-mdsl">endpoint type GenericEndpointOfUnknownRole
+exposes 
+  operation hardToGraspName 
+    expecting payload "SomeRequestMessage" 
+</code></pre>
+
+<p>It is unlikely that <code>GenericEndpointOfUnknownRole</code>, <code>hardToGraspName</code>, and <code>SomeRequestMessage</code> are part of the vocabulary of the application <em>domain</em> (such as finance, e-commerce, or distributed control system) that the API deals with.</p>
+
+<p>This refactoring deals with a single operation.</p>
+
+<h2 id="smells--drivers">Smells / Drivers</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-smells-drivers#curse-of-knowledge">Curse of knowledge</a></dt>
+  <dd>The operation name is easy to comprehend — but only for the developers of the API implementation on the provider side. On the contrary, client developers miss required context information.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></dd>
+</dl>
+
+<!-- -->
+
+<dl>
+  <dt><a href="/refactorings/by-smells-drivers#role-and-or-responsibility-diffusion">Role and/or responsibility diffusion</a></dt>
+  <dd>The operation does something, but the effects of the operation execution are not clear. For instance, it is not specified whether it reads and/or writes provider-side data and application state. The domain model abstractions/concepts that it works with remain fuzzy. Precision might be harmed and ambiguities introduced.</dd>
+  <dt><a href="/refactorings/by-smells-drivers#sloppy-or-ill-motivated-naming-conventions">Sloppy or ill-motivated naming conventions</a></dt>
+  <dd>Knowing something that nobody else knows might be seen as a pragmatic approach to achieving job security; obscuring operation names might be part of such a strategy. However, the attitude driving such naming decisions can be considered unprofessional (or even unethical); API design and documentation should be seen as a service provided to the client community (and other stakeholders). Another example of good intentions gone wrong is trying to be funny when naming program(ming) artifacts; endpoint and operation names are not the most suited places for humor or irony because they distract from the facts.</dd>
+</dl>
+
+<h2 id="instructions-steps">Instructions (Steps)</h2>
+
+<ol>
+  <li>Rename the operation in the abstract API contract and any technical API descriptions (for instance, its <a href="https://www.openapis.org/" target="_blank">OpenAPI specification</a>).</li>
+  <li>Refactor on code level; for instance, apply Rename Element/Method in a Java IDE. Optionally, implement a new stub that merely redirects clients to the new endpoint operation (in HTTP, this can be achieved with <a href="https://en.wikipedia.org/wiki/URL_redirection" target="_blank">URL redirection</a> and status code <code>301</code>).</li>
+  <li>Adjust the test cases and run them (to achieve/stay with a “green build”).</li>
+  <li>Update all supporting documentation such as API reference and guides, examples, and tutorials. Check and update security rules if necessary.</li>
+  <li>Inform all known API clients about the change, ideally with detailed instructions how to migrate. Code snippets that can be copy-pasted easily will be appreciated by the client maintainers.</li>
+</ol>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The following abstract, domain-independent <a href="https://microservice-api-patterns.github.io/MDSL-Specification/servicecontract" target="_blank">MDSL</a> sketch outlines how to improve the naming (<code>DomainNounAndRDDRoleStereotype</code>, <code>verbFromDomainLanguage</code>, <code>DomainLevelTransferObject1</code>) on an abstract, conceptual level:</p>
+
+<pre><code class="language-mdsl">endpoint type DomainNounAndRDDRoleStereotype
+exposes 
+  operation verbFromDomainLanguage 
+    expecting payload "DomainLevelTransferObject1" 
+    delivering payload "DomainLevelTransferObject2"
+</code></pre>
+
+<p>Note that two similar refactorings were applied as well, <a href="/refactorings/renameendpoint">Rename Endpoint</a> and <a href="/refactorings/renamerepresentationelement">Rename Representation Element</a>.</p>
+
+<h2 id="example">Example</h2>
+
+<p>In a publication management system, the remote service layer of a Web application might expose a <em>Community API</em> for <em>Backend Integration</em>, two foundation patterns in the Microservice API Patterns language. It might look like as follows:<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></p>
+
+<pre><code class="language-cml">Service JabrefAPI {
+    @PaperId add(@PublicationEntryDTO newEntry);
+</code></pre>
+
+<p>Renaming the rather generic names yields this API design:</p>
+
+<pre><code class="language-cml">Service PublicationManagementFacade {
+    // a state creation/state transition operation (DTO = Data Transfer Object)
+    @PaperId addPublicationToArchive(@PublicationEntryDTO publicationInformation);
+</code></pre>
+
+<p>Endpoint name, operation name, and parameter name are now free of technical jargon (except for the pattern names <code>Facade</code> and <code>DTO</code>, with the <a href="https://ozimmer.ch/index/2020/10/30/DrivenByTLAs.html" target="_blank">acronym</a> being explained in the comment).</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Consider consulting the following artifacts (before and after the refactoring):</p>
+
+<ul>
+  <li>Naming conventions on organization, unit, project level<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup></li>
+  <li>Glossaries and the ubiquitous language established by a <a href="https://socadk.github.io/design-practice-repository/artifact-templates/DPR-DomainModel.html" target="_blank">domain model</a> (for instance, some community members advise that <code>BankAccountAggregate</code> is a bad choice of name while others recommend this domain-pattern pairing convention)</li>
+  <li>Coding guidelines, both general and language-specific</li>
+</ul>
+
+<p>Avoid special characters such as underscore <code>_</code> in operation names because middleware and tools might not handle them correctly. The same holds for natural language-specific characters such as German “Umlaute”.<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup></p>
+
+<p>Be careful with metaphors when naming things. Some might not be understood by parts of the target audience, others might cause unwanted reactions.<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote" rel="footnote">5</a></sup> Apply the ones that you do choose consistently and do not mix them wildly.<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote" rel="footnote">6</a></sup> Ask yourself: Would the current name also work in another domain? In how many projects/APIs can this name be found?</p>
+
+<p>Note that this refactoring is not straightforward to apply in HTTP resource APIs due to the REST principle “uniform interface”: One cannot rename PUT to something that has domain semantics.<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote" rel="footnote">7</a></sup> <a href="/refactorings/renameendpoint">Rename Endpoint</a> might be more suited in such cases because it deals with URIs.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>This refactoring reverts itself. In code refactoring, there is <a href="https://refactoring.guru/rename-method" target="_blank"><em>Rename Method</em></a> [<a href="#ref-Fowler2018">Fowler 2018</a>].</p>
+
+<p><a href="moveoperation">Move Operation</a> is another operation-level refactoring.</p>
+
+<p>The hints in “The Art of Readable Code” [<a href="#ref-Boswell:2011">Dustin Boswell 2011</a>] also apply to API naming.</p>
+
+<h1 id="references">References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Boswell:2011" class="csl-entry">
+
+    <p>Dustin Boswell, Trevor Foucher. 2011. <em>The Art of Readable Code</em>. O’Reilly Media, Inc.</p>
+
+  </div>
+
+  <div id="ref-Fowler2018" class="csl-entry">
+
+    <p>Fowler, Martin. 2018. <em>Refactoring: Improving the Design of Existing Code</em>. 2nd ed. Addison-Wesley Signature Series (Fowler). Boston, MA: Addison-Wesley.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The term “curse of knowledge” originates from technical writing (see for instance hint 5 in <a href="https://ozimmer.ch/authoring/2020/04/24/TechWritingAdvice.html" target="_blank">“Technical Writing Tips and Tricks”</a> and the video lecture by Steven Pinker referenced in that post). <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>The notation in this example is CML, the tactic domain-driven design language supported by <a href="https://contextmapper.org/docs/language-reference/" target="_blank">Context Mapper</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>If you cannot locate such conventions, use this opportunity to establish them. Rename consistently and document the rationale for your naming decisions. For instance, start operation names with verbs and then let a noun from the domain vocabulary follow. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>As a test, do <code>ä</code>, <code>ö</code>, <code>ü</code> render properly when you read this? <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Baseball fans, for example, know what a “curveball” and a “pitcher” are, but this sport is not as global as others. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>What happens if an elephant enters a room as a visitor or crosses a bridge? Should the flyweight pattern be applied then? Or does it make sense to build a factory in this case? What will observers think about this strategy? <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p>This is inherent and one reason the Web works: You do not want to recompile your browser when there is a breaking change in a website. <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/renameendpoint" class="pagination--pager" title="Rename Endpoint
+">Previous</a>
+    
+    
+      <a href="/refactorings/renamerepresentationelement" class="pagination--pager" title="Rename Representation Element
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

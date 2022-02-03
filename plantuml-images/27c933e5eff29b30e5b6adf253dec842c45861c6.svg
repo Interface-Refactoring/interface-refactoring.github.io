@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="405px" preserveAspectRatio="none" style="width:629px;height:405px;background:#F3F6F6;" version="1.1" viewBox="0 0 629 405" width="629px" zoomAndPan="magnify"><defs/><g><!--MD5=[2428a92a4f5b5ceaba360cbcf2c8ee91]
+cluster 'WishTemplateSolutionSketch' Aggregate--><polygon fill="#F3F6F6" points="16,6,347,6,354,28.2969,612,28.2969,612,398,16,398,16,6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="354" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="325" x="20" y="20.9951">'WishTemplateSolutionSketch' Aggregate</text><!--MD5=[a7bef0bcee414287bb25b5941195b402]
+class SampleWishTemplate--><rect codeLine="4" fill="#FFFFFF" height="99.4844" id="SampleWishTemplate" style="stroke:#A80036;stroke-width:1.5;" width="357" x="25.5" y="154"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="151" y="171.9951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="168" x="120" y="188.292">SampleWishTemplate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="26.5" x2="381.5" y1="196.5938" y2="196.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="31.5" y="213.5889">boolean aValueDesired</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="31.5" y="229.8857">boolean aStringDesired</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="345" x="31.5" y="246.1826">NestedOutputTemplate[0..1] innerPayloadDesired</text><!--MD5=[dfb6a37d2068371a82a8d28c3309315c]
+class NestedOutputTemplate--><rect codeLine="9" fill="#FFFFFF" height="83.1875" id="NestedOutputTemplate" style="stroke:#A80036;stroke-width:1.5;" width="227" x="90.5" y="307"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="151" y="324.9951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="183" x="112.5" y="341.292">NestedOutputTemplate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="91.5" x2="316.5" y1="349.5938" y2="349.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="96.5" y="366.5889">boolean aFlagDesired</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="96.5" y="382.8857">boolean aSecondStringDesired</text><!--MD5=[d8ae69c994aab9f91c01d801193f7b9c]
+class SampleOutput--><rect codeLine="13" fill="#FFFFFF" height="99.4844" id="SampleOutput" style="stroke:#A80036;stroke-width:1.5;" width="202" x="401" y="154"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="449" y="171.9951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="111" x="446.5" y="188.292">SampleOutput</text><line style="stroke:#A80036;stroke-width:1.5;" x1="402" x2="602" y1="196.5938" y2="196.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="407" y="213.5889">int aValue</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="407" y="229.8857">String[0..1] aString</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="190" x="407" y="246.1826">NestedOutput innerPayload</text><!--MD5=[4af667ad0e233c0def13e51fc828df26]
+class NestedOutput--><rect codeLine="18" fill="#FFFFFF" height="83.1875" id="NestedOutput" style="stroke:#A80036;stroke-width:1.5;" width="157" x="423.5" y="307"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="449" y="324.9951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="110" x="447" y="341.292">NestedOutput</text><line style="stroke:#A80036;stroke-width:1.5;" x1="424.5" x2="579.5" y1="349.5938" y2="349.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="429.5" y="366.5889">boolean aFlag</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="429.5" y="382.8857">String aSecondString</text><!--MD5=[3beee51fa5f9183e8dbfd3c36dd969d1]
+class SampleAPI--><rect codeLine="22" fill="#FFFFFF" height="66.8906" id="SampleAPI" style="stroke:#A80036;stroke-width:1.5;" width="580" x="24" y="33"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="279.5" y="50.9951">«Service»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="82" x="273" y="67.292">SampleAPI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="25" x2="603" y1="75.5938" y2="75.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="568" x="30" y="92.5889">SampleOutput getPartialData(AnyType input, SampleWishTemplate desiredOutput)</text><path d="M204,253.3125 C204,270.7891 204,290.2832 204,306.982 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="204,306.982,208,297.982,204,301.982,200,297.982,204,306.982" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="205" y="284.9951">innerPayloadDesired</text><path d="M502,253.3125 C502,270.7891 502,290.2832 502,306.982 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="502,306.982,506,297.982,502,301.982,498,297.982,502,306.982" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="503" y="284.9951">innerPayload</text><path d="M359.5096,100.1797 C381.8956,116.2548 409.3343,135.9581 434.136,153.7679 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="434.136,153.7679,429.1587,145.2693,430.0746,150.8515,424.4924,151.7674,434.136,153.7679" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="409" y="131.9951">getPartialData</text><path d="M287.3721,100.1797 C274.2738,116.2548 258.2193,135.9581 243.7077,153.7679 " fill="none" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="243.7077,153.7679,252.4937,149.3174,246.866,149.8917,246.2918,144.2641,243.7077,153.7679" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="273" y="131.9951">getPartialData</text><!--MD5=[00ab4426cbaa6a207d12df7bbb5407f2]
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+!include default.iuml
+
+package "'WishTemplateSolutionSketch' Aggregate" {
+    class SampleWishTemplate <<Value Object>> {
+        boolean aValueDesired
+        boolean aStringDesired
+        NestedOutputTemplate[0..1] innerPayloadDesired
+    }
+    class NestedOutputTemplate <<Value Object>> {
+        boolean aFlagDesired
+        boolean aSecondStringDesired
+    }
+    class SampleOutput <<Value Object>> {
+        int aValue
+        String[0..1] aString
+        NestedOutput innerPayload
+    }
+    class NestedOutput <<Value Object>> {
+        boolean aFlag
+        String aSecondString
+    }
+    class SampleAPI <<Service>> {
+        SampleOutput getPartialData(AnyType input, SampleWishTemplate desiredOutput)
+    }
+}
+
+SampleWishTemplate - -> NestedOutputTemplate : innerPayloadDesired
+SampleOutput - -> NestedOutput : innerPayload
+SampleAPI - -> SampleOutput : getPartialData
+SampleAPI - -> SampleWishTemplate : getPartialData
+
+@enduml
+
+@startuml
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+!pragma layout smetana
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam lengthAdjust spacing
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+package "'WishTemplateSolutionSketch' Aggregate" {
+    class SampleWishTemplate <<Value Object>> {
+        boolean aValueDesired
+        boolean aStringDesired
+        NestedOutputTemplate[0..1] innerPayloadDesired
+    }
+    class NestedOutputTemplate <<Value Object>> {
+        boolean aFlagDesired
+        boolean aSecondStringDesired
+    }
+    class SampleOutput <<Value Object>> {
+        int aValue
+        String[0..1] aString
+        NestedOutput innerPayload
+    }
+    class NestedOutput <<Value Object>> {
+        boolean aFlag
+        String aSecondString
+    }
+    class SampleAPI <<Service>> {
+        SampleOutput getPartialData(AnyType input, SampleWishTemplate desiredOutput)
+    }
+}
+
+SampleWishTemplate - -> NestedOutputTemplate : innerPayloadDesired
+SampleOutput - -> NestedOutput : innerPayload
+SampleAPI - -> SampleOutput : getPartialData
+SampleAPI - -> SampleWishTemplate : getPartialData
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
