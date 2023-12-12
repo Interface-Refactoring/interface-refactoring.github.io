@@ -1,0 +1,712 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Extract Endpoint - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Split Endpoint">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Extract Endpoint">
+<meta property="og:url" content="/refactorings/extractendpoint">
+
+
+  <meta property="og:description" content="also known as: Split Endpoint">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-12T17:33:34+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/extractendpoint">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Extract Endpoint</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Extract Endpoint</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions-steps">Instructions (Steps)</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#example">Example</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/externalizecontextrepresentation">Externalize Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractendpoint">Extract Endpoint </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Extract Endpoint">
+    <meta itemprop="description" content="also known as: Split Endpoint">
+    <meta itemprop="datePublished" content="2023-12-12T17:33:34+01:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Extract Endpoint
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-05-09T00:00:00+02:00">May 9, 2023</time>
+      </span>
+    
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+          <div class="notice--warning"><strong><i class="fas fa-tools">&nbsp;</i>Note:</strong> This is a preview release and subject to change. Feedback welcome! <a href="/about/">Contact Information</a> and  <a href="/assets/IRC-FromCodeRefactoringToApiRefactoringCCIS2021.pdf">Background (PDF)</a></div>
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Split Endpoint</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>The drivers for this refactoring are very similar to those of <a href="/refactorings/moveoperation">Move Operation</a>: One or more API endpoints, for instance, HTTP resources, have been developed, tested, and deployed. One of these endpoints contains multiple operations (for instance, HTTP PUTs, POSTs, and so on). These operations work with multiple domain concepts. Their functional and technical responsibilities differ in terms of stakeholder groups (users, developers, …) and addressed quality concerns, data processing versus data storage character, read and/or write access needs, and required access control and data protection. As a consequence, the endpoint serves multiple roles in the API architecture.</p>
+
+<p class="notice--primary">As the API provider, I want to focus the responsibilities of an endpoint on a single role so that a) API clients serving a particular stakeholder group understand the API design intuitively and b) the release roadmap and scaling of the endpoint can be optimized for each group of stakeholders and clients.</p>
+
+<h2 id="stakeholder-concerns-including-quality-attributes-and-design-forces">Stakeholder Concerns (including Quality Attributes and Design Forces)</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#scalability">#scalability</a> and <a href="/refactorings/by-stakeholder-concerns/#reliability">#reliability</a></dt>
+  <dd>When co-located in a single endpoint and deployed jointly, operations share the same execution context and resources and might therefore influence each other. For instance, if one of them is long-running or causes an API provider-internal error, its siblings might suffer from quality-of-service degradations too.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#single-responsibility-principle">#single-responsibility-principle</a> and <a href="/refactorings/by-stakeholder-concerns/#independent-deployability">#independent-deployability</a></dt>
+  <dd>Architectural principles can guide the selection of refactoring. Some are affected positively, some are affected negatively. The <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">Purposeful, style-Oriented, Isolated, channel-Neutral, and T-shaped (POINT)</a> principles for API design fall in this category; extracting an endpoint can improve <strong>P</strong>, <strong>O</strong>, and <strong>I</strong> (but might harm <strong>T</strong> when looking at a single endpoint and not an entire API).</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#security">#security</a></dt>
+  <dd>With multiple operations co-located within a single endpoint, it can be challenging to enforce fine-grained access control policies. Refactoring this endpoint into multiple specialized ones allows for more granular control over access permissions and authorization rules. The security requirements of the data handled by the endpoint may also differ, so separating operations can make it easier to apply data protection measures.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The as is-design for this interface refactoring looks as follows (notation: <a href="https://microservice-api-patterns.github.io/MDSL-Specification/">MDSL</a>):</p>
+
+<pre><code class="language-mdsl">endpoint type SomeEndpoint
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+    
+   operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+</code></pre>
+
+<p>The refactoring targets are an API endpoint (for instance, an HTTP resource identified with a URI) and one of its operations (for instance, an HTTP verb/method supported by the resource).</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#role-and-or-responsibility-diffusion">Role and/or responsibility diffusion</a></em></dt>
+  <dd>The endpoint is both an <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a> and a <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/ProcessingResource">Processing Resource</a>. An Information Holder exposes different types of data, for instance, both master data and operational data. The endpoint operations have rather diverse functional and technical responsibilities. Hence, it is hard to explain the endpoint purpose.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#responsibility-mishmash">Responsibility mishmash</a></em></dt>
+  <dd>The operations in the endpoint deal with multiple, not necessarily related domain concepts. Consequently, the endpoint has more than one reason to change during its evolution. It serves multiple stakeholder groups and/or its implementation is developed and maintained by multiple teams.</dd>
+</dl>
+
+<h2 id="instructions-steps">Instructions (Steps)</h2>
+
+<p><em>Extract Endpoint</em> is similar to <a href="/refactorings/moveoperation">Move Operation</a>, but creates a new endpoint (rather than adding to an existing endpoint):</p>
+
+<ol>
+  <li>Remove the operation from the <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> of the source endpoint.</li>
+  <li>Check the general security policies and the client rights management (source, target). For example, authorization rules that use endpoint existence and names to determine whether a client application and end-user are permitted to perform an operation might have to be adjusted.</li>
+  <li>Refactor at the code level. For instance, create an additional REST controller when working with Java and HTTP in Spring and move the implementation of the chosen operation.</li>
+  <li>Create an <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> for the new endpoint that only exposes the extracted operation.</li>
+  <li>Test whether the source endpoint still meets its now reduced <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> (both in terms of functional and non-functional characteristics).</li>
+  <li>Evaluate whether the roles and responsibilities of the two endpoints are well-separated and that the refactoring resulted in endpoints with higher cohesion.</li>
+  <li>Inform all API clients about the change (in which version will it be introduced?) and provide migration information (or support the transition on a technical level, for instance, with an <a href="https://en.wikipedia.org/wiki/URL_redirection#HTTP_status_codes_3xx">HTTP redirect</a>).</li>
+</ol>
+
+<p>If necessary, repeat these steps with the remaining operations until the roles and responsibilities of the endpoint have been clarified and the smells removed.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>This simple and abstract MDSL sketch specifies the result of the refactoring at an abstract level:</p>
+
+<pre><code class="language-mdsl">endpoint type SomeEndpoint
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+
+endpoint type ExtractedNewEndpoint    
+exposes
+operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+</code></pre>
+
+<p>Note that this sketch does not show signs of bad smells in terms of semantics or qualities yet; the following example does.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Sometimes it makes sense to separate commands from queries (see <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>). This is a particular case of endpoint extraction. Hence, the following example can be seen as an example of both <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> and <em>Extract Endpoint</em>. It starts from a Domain-Driven Design (DDD) featuring a single Aggregate [<a href="#ref-Evans:2003">Evans 2003</a>]:</p>
+
+<pre><code class="language-cml">Aggregate PublicationEndpoint {
+    Service PublicationManagementFacade {
+        // a state creation/state transition operation:
+        @PaperId add(@PublicationEntryDTO newEntry);
+        
+        // retrieval operations:
+        @PublicationArchive dumpPublicationArchive();
+        Set&lt;@PublicationEntryDTO&gt;lookupPublicationsFromAuthor(String writer);
+        String renderAsBibtex(@PaperId paperId);
+        
+        // computation operations (stateless):
+        String convertToBibtex(@PublicationEntryDTO entry); 
+    }
+}
+</code></pre>
+
+<p>The notation in the above snippet is <a href="https://contextmapper.org/docs/language-reference/">Context Mapper Domain-Specific Language (CML)</a>). CML supports both tactic and strategic DDD [<a href="#ref-DPR:2021">Zimmermann and Stocker 2021</a>].</p>
+
+<p>This single publication management Aggregate (and API endpoint) can be split into two ones, leading to this design:</p>
+
+<pre><code class="language-cml">Aggregate PublicationCommandsEndpoint {
+    Service PublicationManagementCommandFacade {
+        // a state creation/state transition operation:
+        @PaperId add(@PublicationEntryDTO newEntry);
+        
+        // computation operations (stateless):
+        String convertToBibtex(@PublicationEntryDTO entry); 
+    }
+}
+
+Aggregate PublicationQueriesEndpoint {
+    Service PublicationManagementQueryFacade {
+        // retrieval operations:
+        @PublicationArchive dumpPublicationArchive();
+        Set&lt;@PublicationEntryDTO&gt;lookupPublicationsFromAuthor(String writer);
+        String renderAsBibtex(@PaperId paperId);
+    }
+}
+</code></pre>
+
+<p>Note that this design violates principles such as single responsibility and high cohesion, low coupling because Bibtex-related operations appear in both endpoints. It might make sense to apply <a href="/refactorings/moveoperation">Move Operation</a> on <code>convertToBibtex</code> next or add a third endpoint that exposes the two BibTeX-related operations.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>When applying this refactoring, API designers have to make sure that:</p>
+
+<ul>
+  <li>Concurrent access to business logic and database from two presentation layers a.k.a. API endpoints do not cause issues such as lost updates, phantom reads, deadlocks, etc.</li>
+  <li>Performance and independent deployability improve as desired (loose coupling of the original and new endpoint). Extracting an endpoint to focus on a single role redistributes the existing responsibilities and logic across multiple endpoints. This redistribution could affect the performance of the API, especially if there are increased interdependencies or additional network calls are introduced. Proper load testing and performance analysis should be conducted to ensure that the refactored API can handle the expected workload and provide satisfactory response times.</li>
+  <li>Maintainability does not suffer because of design erosion, duplication of published language, and so on. The refactored endpoints may have dependencies on other services or resources within the system. It is essential to carefully manage and coordinate these dependencies to ensure that the refactored endpoints can operate independently and reliably.</li>
+</ul>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>This refactoring is reverted by <a href="/refactorings/mergeendpoints">Merge Endpoints</a>. <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> describes endpoint extraction for a particular reason. <a href="/refactorings/moveoperation">Move Operation</a> has a similar purpose and nature, but does not create a new endpoint.</p>
+
+<p>In code refactoring, there is <em>Extract Method</em> [<a href="#ref-Fowler2018">Fowler 2018</a>].</p>
+
+<p>A <a href="https://martinfowler.com/bliki/StranglerFigApplication.html">Strangler Fig Application</a> is an approach to enhance an existing system with new features without replacing it <em>immediately</em>. Such an approach may benefit from this refactoring (both applied to the strangled legacy system and the strangling new implementation); a service-based system comprising multiple endpoints is generally easier to update incrementally (and replace eventually) than a more monolithic one. See this <a href="https://shopify.engineering/refactoring-legacy-code-strangler-fig-pattern">Refactoring Legacy Code with the Strangler Fig Pattern</a> blog post for a more detailed, step-by-step explanation.</p>
+
+<h1 id="references">References</h1>
+
+<p>Evans, Eric. 2003. <em>Domain-Driven Design: Tacking Complexity in the Heart of Software</em>. Addison-Wesley.</p>
+
+<p>Fowler, Martin. 2018. <em>Refactoring: Improving the Design of Existing Code</em>. 2nd ed. Addison-Wesley Signature Series (Fowler). Boston, MA: Addison-Wesley.</p>
+
+<p>Zimmermann, Olaf, and Mirko Stocker. 2021. <em>Design Practice Reference - Guides and Templates to Craft Quality Software in Style</em>. LeanPub. <a href="https://leanpub.com/dpr">https://leanpub.com/dpr</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/externalizecontextrepresentation" class="pagination--pager" title="Externalize Context Representation
+">Previous</a>
+    
+    
+      <a href="/refactorings/extractinformationholder" class="pagination--pager" title="Extract Information Holder
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

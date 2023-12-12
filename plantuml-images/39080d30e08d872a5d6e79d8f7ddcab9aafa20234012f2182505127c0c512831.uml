@@ -1,0 +1,34 @@
+@startuml
+
+skinparam backgroundcolor transparent
+
+class Message <<(F,#57d4ff)basicConcept>> {
+ ArrayOfStrings protocolHeaders
+ MessagePayload messagePayload
+}
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement requestContext
+  AnyRepresentationElement otherPayload
+}
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement responseContext
+  AnyRepresentationElement otherPayload 
+}
+Message *--> RequestMessagePayload 
+Message *--> ResponseMessagePayload
+' RequestMessage *-- InParameters
+' ResponseMessage*-- OutParameters
+
+class ContextRepresentation <<(P,#57d4ff) pattern>> {
+clientInformation // location, version, technology  
+securityCredentials // authentication token, sessionID
+qualityOfServiceProperties // priority, caching policy, correlationID
+desiredResponseFormat // e.g., wish list of requested data elements
+
+String renderAs(IANAMediaType contentRepresentationFormat)
+}
+
+RequestMessagePayload *--> ContextRepresentation
+ResponseMessagePayload *--> ContextRepresentation
+@enduml

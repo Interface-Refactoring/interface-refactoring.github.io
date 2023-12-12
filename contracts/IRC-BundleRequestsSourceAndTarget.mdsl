@@ -1,0 +1,35 @@
+API description RequestBundleExample
+
+data type YesOrNo D<bool>
+data type QueryExpression D<string>
+data type CustomerDTO {"name":D<string>, "contacts":D<string>*}
+
+data type CustomerOperation {
+     "createCustomer":CustomerDTO
+	|"updateCustomer":CustomerDTO
+	|"lookupCustomers":QueryExpression // criteria id not included
+}
+
+data type CustomerOperationResponse {
+	 "id":ID<int>
+	|"ok":YesOrNo
+	|"results":CustomerDTO*
+}
+
+endpoint type CustomerRelationshipManagement serves as MASTER_DATA_HOLDER
+exposes 
+  operation createCustomer with responsibility STATE_CREATION_OPERATION
+    expecting payload CustomerDTO 
+    delivering payload "id":ID<int>
+    
+  operation updateCustomer with responsibility STATE_TRANSITION_OPERATION
+    expecting payload CustomerDTO 
+    delivering payload "ok":YesOrNo
+
+  operation lookupCustomers with responsibility RETRIEVAL_OPERATION
+    expecting payload "criteria":QueryExpression 
+    delivering payload "results":CustomerDTO*
+    
+  operation sendBulkRequest 
+    expecting payload <<Request_Bundle>> "operations":CustomerOperation+ 
+    delivering payload "results":CustomerOperationResponse+

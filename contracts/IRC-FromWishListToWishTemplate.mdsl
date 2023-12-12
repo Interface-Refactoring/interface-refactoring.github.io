@@ -1,0 +1,9 @@
+API description WL2WTSketch
+
+
+endpoint type SomeEndpoint serves as "SomeRole"
+exposes
+  operation performRoleSome_Role 
+     expecting payload {"parameters":P , <<Wish_List>> "desiredElements":MD<string>*} 
+  	 delivering payload {"element1", "element2" /* as defined in "desiredElements" */}
+

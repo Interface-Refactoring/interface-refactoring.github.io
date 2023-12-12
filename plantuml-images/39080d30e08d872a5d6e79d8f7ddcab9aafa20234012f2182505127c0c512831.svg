@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="440px" preserveAspectRatio="none" style="width:640px;height:440px;background:#00000000;" version="1.1" viewBox="0 0 640 440" width="640px" zoomAndPan="magnify"><defs/><g><!--MD5=[bea5b0d46523efab5ea1c1d339f396f0]
+class Message--><rect codeLine="4" fill="#FFFFFF" height="83.1875" id="Message" style="stroke:#A80036;stroke-width:1.5;" width="249" x="195" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="263.5" y="24.9951">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70" x="284.5" y="41.292">Message</text><line style="stroke:#A80036;stroke-width:1.5;" x1="196" x2="443" y1="49.5938" y2="49.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="216" x="201" y="66.5889">ArrayOfStrings protocolHeaders</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="237" x="201" y="82.8857">MessagePayload messagePayload</text><!--MD5=[2266c51e2e890c8bcebcea740afba0fd]
+class RequestMessagePayload--><rect codeLine="9" fill="#FFFFFF" height="83.1875" id="RequestMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="295" x="7" y="150"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="98.5" y="167.9951">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="196" x="56.5" y="184.292">RequestMessagePayload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="301" y1="192.5938" y2="192.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="272" x="13" y="209.5889">ParameterTreeElement requestContext</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="13" y="225.8857">AnyRepresentationElement otherPayload</text><!--MD5=[e93d480bc88e1c582484fbb697036f76]
+class ResponseMessagePayload--><rect codeLine="13" fill="#FFFFFF" height="83.1875" id="ResponseMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="296" x="337.5" y="150"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="112" x="429.5" y="167.9951">«basicConcept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="209" x="381" y="184.292">ResponseMessagePayload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="338.5" x2="632.5" y1="192.5938" y2="192.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="284" x="343.5" y="209.5889">ParameterTreeElement responseContext</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="343.5" y="225.8857">AnyRepresentationElement otherPayload</text><!--MD5=[a52300c9ae38d3c7fd30044bf67f62de]
+class ContextRepresentation--><rect codeLine="22" fill="#FFFFFF" height="140.0781" id="ContextRepresentation" style="stroke:#A80036;stroke-width:1.5;" width="485" x="77" y="293"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="68" x="285.5" y="310.9951">«pattern»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="183" x="228" y="327.292">ContextRepresentation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="78" x2="561" y1="335.5938" y2="335.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="329" x="83" y="352.5889">clientInformation // location, version, technology</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="369" x="83" y="368.8857">securityCredentials // authentication token, sessionID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="444" x="83" y="385.1826">qualityOfServiceProperties // priority, caching policy, correlationID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="473" x="83" y="401.4795">desiredResponseFormat // e.g., wish list of requested data elements</text><line style="stroke:#A80036;stroke-width:1.5;" x1="78" x2="561" y1="408.7813" y2="408.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="436" x="83" y="425.7764">String renderAs(IANAMediaType contentRepresentationFormat)</text><!--MD5=[2ba68376009fc7c87515ca6d8527f34e]
+link Message to RequestMessagePayload--><path codeLine="17" d="M262.655,98.0732 C262.655,98.0732 228.42,127.33 212.41,141.01 " fill="none" id="Message-RequestMessagePayload" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="202.12,149.81,211.5592,146.9989,205.9194,146.5597,206.3586,140.9199,202.12,149.81" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="205.9194" x2="212" y1="146.5597" y2="141.36"/><polygon fill="#A80036" points="271.78,90.28,264.6198,91.1349,262.655,98.0732,269.8152,97.2183,271.78,90.28" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d9e75889b65248dee53ee9c1298b146d]
+link Message to ResponseMessagePayload--><path codeLine="18" d="M376.6591,98.0449 C376.6591,98.0449 411.13,127.33 427.24,141.01 " fill="none" id="Message-ResponseMessagePayload" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="437.59,149.81,433.3165,140.9366,433.7779,146.5746,428.1399,147.036,437.59,149.81" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="433.7779" x2="427.685" y1="146.5746" y2="141.39"/><polygon fill="#A80036" points="367.51,90.28,369.4963,97.2122,376.6591,98.0449,374.6729,91.1127,367.51,90.28" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[659a4a45a49efafc9d6c921ae73aaaa2]
+link RequestMessagePayload to ContextRepresentation--><path codeLine="31" d="M202.3925,241.6966 C202.3925,241.6966 229.48,269.53 242.98,283.39 " fill="none" id="RequestMessagePayload-ContextRepresentation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="252.26,292.93,248.8462,283.6917,248.7715,289.3481,243.1151,289.2734,252.26,292.93" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="248.7715" x2="243.2" y1="289.3481" y2="283.615"/><polygon fill="#A80036" points="194.02,233.1,195.3407,240.1891,202.3925,241.6966,201.0718,234.6075,194.02,233.1" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[81537a6dbc28d314e9c303d1f8e7801f]
+link ResponseMessagePayload to ContextRepresentation--><path codeLine="32" d="M437.3409,241.6706 C437.3409,241.6706 410.06,269.53 396.49,283.39 " fill="none" id="ResponseMessagePayload-ContextRepresentation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="387.14,292.93,396.2962,289.3018,390.6396,289.3589,390.5825,283.7024,387.14,292.93" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="390.6396" x2="396.24" y1="289.3589" y2="283.645"/><polygon fill="#A80036" points="445.74,233.1,438.6836,234.5856,437.3409,241.6706,444.3973,240.185,445.74,233.1" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2868b0c7ce96df74b4350dcfe4208d2f]
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+skinparam backgroundcolor transparent
+
+class Message <<(F,#57d4ff)basicConcept>> {
+ ArrayOfStrings protocolHeaders
+ MessagePayload messagePayload
+}
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement requestContext
+  AnyRepresentationElement otherPayload
+}
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement responseContext
+  AnyRepresentationElement otherPayload 
+}
+Message *- -> RequestMessagePayload 
+Message *- -> ResponseMessagePayload
+' RequestMessage *- - InParameters
+' ResponseMessage*- - OutParameters
+
+class ContextRepresentation <<(P,#57d4ff) pattern>> {
+clientInformation // location, version, technology  
+securityCredentials // authentication token, sessionID
+qualityOfServiceProperties // priority, caching policy, correlationID
+desiredResponseFormat // e.g., wish list of requested data elements
+
+String renderAs(IANAMediaType contentRepresentationFormat)
+}
+
+RequestMessagePayload *- -> ContextRepresentation
+ResponseMessagePayload *- -> ContextRepresentation
+@enduml
+
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+skinparam backgroundcolor transparent
+
+class Message <<(F,#57d4ff)basicConcept>> {
+ ArrayOfStrings protocolHeaders
+ MessagePayload messagePayload
+}
+
+class RequestMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement requestContext
+  AnyRepresentationElement otherPayload
+}
+class ResponseMessagePayload <<(C,#57d4ff)basicConcept>> {
+  ParameterTreeElement responseContext
+  AnyRepresentationElement otherPayload 
+}
+Message *- -> RequestMessagePayload 
+Message *- -> ResponseMessagePayload
+
+class ContextRepresentation <<(P,#57d4ff) pattern>> {
+clientInformation // location, version, technology  
+securityCredentials // authentication token, sessionID
+qualityOfServiceProperties // priority, caching policy, correlationID
+desiredResponseFormat // e.g., wish list of requested data elements
+
+String renderAs(IANAMediaType contentRepresentationFormat)
+}
+
+RequestMessagePayload *- -> ContextRepresentation
+ResponseMessagePayload *- -> ContextRepresentation
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

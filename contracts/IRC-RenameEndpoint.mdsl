@@ -1,0 +1,15 @@
+API description RenameEndpointSketch 
+
+// the most simple version of "Rename Endpoint"
+
+// source:
+endpoint type OldCrypticName
+exposes 
+  operation operation1 
+    expecting payload "SomeRequestMessage" 
+    
+// target:
+endpoint type NewExpressiveName
+exposes 
+  operation operation1 
+    expecting payload "SomeRequestMessage" 
