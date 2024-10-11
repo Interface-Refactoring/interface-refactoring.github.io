@@ -1,0 +1,798 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduce Version Mediator - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Add Compatibility Gateway, Add Tolerant Proxy, Support Virtual Version">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Introduce Version Mediator">
+<meta property="og:url" content="/refactorings/introduceversionmediator">
+
+
+  <meta property="og:description" content="also known as: Add Compatibility Gateway, Add Tolerant Proxy, Support Virtual Version">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/introduceversionmediator">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Introduce Version Mediator</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Introduce Version Mediator</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduce Version Mediator">
+    <meta itemprop="description" content="also known as: Add Compatibility Gateway, Add Tolerant Proxy, Support Virtual Version">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Introduce Version Mediator
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-10-06T00:00:00+02:00">October 6, 2023</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2023
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Add Compatibility Gateway, Add Tolerant Proxy, Support Virtual Version</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API runs in production. One of its supported versions will be retired soon, but existing clients still use it. One or more breaking changes have been introduced in subsequent, active versions.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></p>
+
+<p class="notice--primary">As an API client, I want to continue to call a deprecated API for some time, and I expect the provider to support me with a temporary solution for doing so. The behavior of this solution should be identical to those of the API that I have been using so far.</p>
+
+<p>We will call the API version that will go out of service the “old” API and its successor “new” API.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#flexibility">#flexibility</a> and <a href="/refactorings/by-stakeholder-concerns/#evolvability">#evolvability</a></dt>
+  <dd>To evolve an API, providers must have the flexibility to refactor, redesign, and adapt an API over time. Ideally, this happens without breaking compatibility, but this is not always realistic.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#developer-experience">#developer-experience</a></dt>
+  <dd>Breaking changes in APIs and pressure to upgrade may frustrate client developers, especially if they must migrate to a newer version on short notice. For instance, cloud application developers sometimes have to react rather quickly to changes introduced by their public providers.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#maintainability">#maintainability</a></dt>
+  <dd>Fewer components and/or code paths that handle deprecated behavior make an API and its implementation easier to maintain for the provider.</dd>
+</dl>
+
+<p>See “Interface Evolution Patterns — Balancing Compatibility and Extensibility across Service Life Cycles” [<a href="#ref-LuebkeZimmermannEtAl2019">Lübke et al. 2019</a>] for a general discussion of desired qualities, their conflicts, and related trade-offs.</p>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>This architectural refactoring affects the following API elements:</p>
+
+<ul>
+  <li>An endpoint and at least one of its operations (with their roles and responsibilities)</li>
+  <li>Representation elements in request and response messages of these operations with their names, roles, and types (including information about value ranges, optionality, and cardinality)</li>
+  <li>API clients and the remote communication proxies they use</li>
+</ul>
+
+<p>See Figure 1 for a visualization of the initial position.</p>
+
+<p><img src="/refactorings/images/VersionMediator_Initial.png" alt="Introduce Version Mediator: Initial Position Sketch. Client communicates with Version 1 of an API Endpoint" /></p>
+
+<p>Figure 1: Introduce Version Mediator: Initial Position Sketch. Client communicates with Version 1 of an API Endpoint</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#evolution-strategy-does-not-meet-client-expectations">Evolution strategy does not meet client expectations</a></em></dt>
+  <dd>The API provider has decided to commit a short lifetime of an API version only, or has announced to retire one or more active versions soon. This has caused a negative reaction in the API client community (the related refactorings <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> and <a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a> explain this smell further).</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#resistance-to-change-caused-by-uncertainty">Resistance to change caused by uncertainty</a></em></dt>
+  <dd>One or more breaking change of the API have happened, or the lifetime guarantee has been softened.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> However, clients are unwilling or unable to migrate to the latest version immediately. They might fear the effort and risk of the migration or they might lack confidence and trust in the new version.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#large-and-or-partially-unknown-user-base">Large and/or partially unknown user base</a></em></dt>
+  <dd>API providers are not in control of their users and lack information about them. The less information and control a provider has, the higher the risk of impacting clients negatively (or losing them) when making breaking changes in upgrades.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Add a new endpoint to the API for the “new” API version. Derive its contract from the “old” one and adjust the “old” endpoint to <em>mediate</em> “old” operations and their representation elements to “new” ones with mapping rules.</p>
+
+<p>When establishing the mapping rules for the operations whose “old” and “new” versions are incompatible, start with the request messages:</p>
+
+<ol>
+  <li>Identify and mark the fields that remain unchanged and do not require a mapping.</li>
+  <li>Define a mapping rule for fields that are <em>renamed</em> only and can be mapped one-to-one (pass-through).</li>
+  <li>Find the fields that change their type, and define a mapping rule to implement the type change:
+    <ul>
+      <li>If a previously <em>optional</em> field becomes mandatory, define a mapping rule that leverages a <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/DataEnricher.html">Content Enricher</a> a.k.a. Data Enricher to define a default value (filler). No mapping action is required for the opposite case (mandatory fields becoming optional).</li>
+      <li>Mark the fields that change <em>cardinality</em>, for instance from atomic to list/set (and vice versa).</li>
+      <li>Do the same for other basic <em>type changes</em>, such as from numeric to strings.</li>
+    </ul>
+  </li>
+  <li>Find the fields that are <em>added</em> in the new version. Add a Content Enricher to support “old” clients. Define a default value or make the newcomer optional (to preserve compatibility).</li>
+  <li>Mark the fields that <em>disappear</em> in the new version. Add a <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/ContentFilter.html">Content Filter</a> to mediate requests from “old” clients (and log the fact that some data is no longer processed, having double-checked that this makes sense).</li>
+  <li>Find places where two (or more) “old” fields map to one “new” field. For each such place, define a mapping rule realizing an <a href="https://www.enterpriseintegrationpatterns.com/Aggregator.html">Aggregation</a> strategy. Define a <a href="https://www.enterpriseintegrationpatterns.com/Sequencer.html">Splitter</a> rule for the opposite case, one “old” field mapping to two or more “new” fields. These two cases can also occur in combination (which actually can be seen as the default/catch case); a <a href="https://www.enterpriseintegrationpatterns.com/BroadcastAggregate.html">Scatter-Gather</a> rule can handle them.</li>
+</ol>
+
+<p>Continue with the response messages and define similar rules for them, including error cases. If a representation element in a response used to be a single <a href="https://api-patterns.org/patterns/structure/representationElements/AtomicParameter">Atomic Parameter</a> but now is set- or list-valued, a Content Filter can select a single element to return. However, the “old” client and the mediator might suffer from information loss through this filtering. Additional patterns such as <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> might be able to provide additional (meta-)information in such situations.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup></p>
+
+<p>Include any custom request and response headers in the mapping for requests and responses.</p>
+
+<p>Secure the mediator endpoint exactly as the updated main endpoint.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>A rule-based Compatibility Mediator implements the compatibility mappings, either as plain code or declaratively, and acts as a gateway between “old” clients and the “new” provider. Figure 2 shows this solution.</p>
+
+<p><img src="/refactorings/images/VersionMediator_Target.png" alt="Introduce Version Mediator: Target Solution Sketch. Client communication is mapped to a new endpoint via a Compatibility Mediator." /></p>
+
+<p>Figure 2: Introduce Version Mediator: Target Solution Sketch. Client communication is mapped to a new endpoint via a Compatibility Mediator.</p>
+
+<p>The mediator should be a transitional, interim solution preserving a good client developer experience and giving clients more time to adopt the “new” API.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The fictitious insurance firm Lakeside Mutual could expose the following Customer Core microservice (notation: MDSL):</p>
+
+<pre><code class="language-mdsl">API description LakesideMutual version "v1.0.0"
+
+data type CustomerDTO1 {"name":D&lt;string&gt;}
+
+endpoint type CustomerCoreOriginalContract
+exposes 
+  operation createCustomerMasterData
+    expecting payload "customerData": CustomerDTO1
+    delivering payload "customerId": ID&lt;int&gt;
+  operation readCustomerMasterData 
+    expecting payload "customerId": ID&lt;int&gt;
+    delivering payload "customerData": CustomerDTO1
+
+API provider LakesideMutualAPI
+  offers CustomerCoreOriginalContract
+  at endpoint location "http://some.original.address"
+  via protocol HTTP binding resource Home
+
+API client CustomerRelationshipManagementApplication
+  consumes CustomerCoreOriginalContract
+  via protocol HTTP 
+</code></pre>
+
+<p>Lakeside Mutual could then update its Customer Core interface (for instance, after a merger with another company):</p>
+
+<pre><code class="language-mdsl">API description LakesideMutual version "v2.0.0"
+
+data type CustomerDTO1 {
+  "name":D&lt;string&gt;, "zipString":D&lt;string&gt;, 
+  "toBeSunset":MD&lt;bool&gt;}
+
+data type CustomerDTO2 {
+  "firstName":D&lt;string&gt;, "lastName":D&lt;string&gt;, 
+  "zipCode": D&lt;int&gt;, "newKey":ID&lt;int&gt;} 
+// not featuring all deviations here (as defined 
+// in Steps 1 to 6 in "Instructions") 
+   
+endpoint type CustomerCoreRevisedContract
+exposes 
+  operation createCustomerMasterData
+    expecting payload "customerData": CustomerDTO2
+    delivering payload "customerId": ID&lt;int&gt;
+  operation readCustomerMasterData 
+    expecting payload "customerId": ID&lt;int&gt;
+    delivering payload "customerData": CustomerDTO2
+   
+API client CustomerRelationshipManagementApplication
+  // will no longer work:
+  consumes CustomerCoreOriginalContract
+  via protocol HTTP 
+</code></pre>
+
+<p>Support for the “old” contract can be modeled as a mediation gateway in MDSL (which does not imply that a visible API gateway is deployed; the mediation can happen in the background):</p>
+
+<pre><code class="language-mdsl">API gateway Version1ToVersion2Mediator
+  offers CustomerCoreOriginalContract
+    at endpoint location "http://some.new.address"
+    via protocol HTTP binding resource Home
+  consumes CustomerCoreRevisedContract 
+    from LakesideMutualAPI
+    via protocol HTTP
+  mediates from CustomerDTO1 to CustomerDTO2 
+    element zipString to zipCode
+    // not featuring element-level mapping rules here
+</code></pre>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>The user story and the smells motivating this refactoring mention scenarios in which it may be applied; it is also important to know when not to use a particular design.</p>
+
+<p>To decide when not to apply this refactoring, analyze whether the roles of an endpoint, responsibilities of an operation, and/or semantics of a <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Element</a> change. Such changes require more than a rule-based mediator; in such situations, this refactoring is less suited.</p>
+
+<p>As a general rule for any communication party (API client and provider), apply <a href="https://en.wikipedia.org/wiki/Robustness_principle">Postel’s Law</a> and be liberal when consuming messages and conservative when producing them.</p>
+
+<p>Having decided to apply this refactoring, make sure to:</p>
+
+<ul>
+  <li>Catch and handle mapping errors, both at specification time and at runtime.</li>
+  <li>Test all combinations of the “old” versus “new” clients and provider that appear in the refactored system landscape; up to four (two times two) cases might occur. Add test data for all steps/situations from the step descriptions further up that may occur. Include mapping errors in the tests (for instance, set-valued responses that the introduced Content Filters realizing the Version Mediator are not prepared to process).</li>
+  <li>Monitor the performance of the Compatibility Mediator (in particular, when it is realized as a mapping rule engine) and end-to-end latency (as the number of request/response messages is doubled).</li>
+  <li>Do not prolong the lifetime of the intermediary/the temporary mediation endpoint; for instance, do not place a second gateway in front of the gateway to cope with a future change of a different kind.</li>
+</ul>
+
+<p>A domain-specific language, either embedded in a general-purpose language or explicit, might be an appropriate choice for expressing the mapping rules. Many application integration tools provide such languages (often proprietary). <a href="https://microservice-api-patterns.github.io/MDSL-Specification/">MDSL</a> is a technology-independent contract language that supports mediation rules.</p>
+
+<p>An <a href="https://microservices.io/patterns/apigateway.html">API Gateway</a> may play the role of a Version Mediator. An example of such gateway usage can be found in the blog post <a href="https://konghq.com/blog/api-gateway-request-transformation/">“8 Common API Gateway Request Transformation Policies”</a>. LinkedIn also uses an API Gateway in their new <a href="https://engineering.linkedin.com/blog/2022/-under-the-hood--how-we-built-api-versioning-for-linkedin-market">Marketing APIs</a> that support request mapping to mediate between API versions.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>An application of <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> may trigger this refactoring. And <a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a> might have to be applied before this one so that clients can learn about versions and their (in-)compatibilities.</p>
+
+<p>The Enterprise Integration Patterns category <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/MessageTransformationIntro.html">Message Transformation</a> provides partial solutions; the patterns Content Enricher and Content Filter are used to realize the Compatibility Mediator (which effectively is a special-purpose <a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/ContentBasedRouter.html">Content-Based Router</a>).</p>
+
+<p>For an example of Enterprise Service Bus product capabilities and integration services, refer to Scenario 4/Figure 7 in <a href="https://www.oracle.com/technical-resources/articles/middleware/soa-ind-soa-esb.html">“Enterprise Service Bus”</a> by Jürgen Kress et al. This technical article, available on a vendor site, positions the pattern, presents usage scenarios, and suggests selection criteria.</p>
+
+<p>In object-oriented programming, the <em>Adapter</em> design pattern [<a href="#ref-Gamma:1995">Gamma et al. 1995</a>] provides a different view on the interface of a class so that it can be used by clients that cannot work with the original interface easily. Note that there is also a <em>Mediator</em> pattern, whose goal is different (decouple objects from each other).</p>
+
+<p>Also related are:</p>
+
+<ul>
+  <li>Data mapping and Enterprise Application Integration (EAI) tools such as Apache Camel, possibly complemented with a data mapper such as <a href="https://github.com/dobrynya/nomin">Nomin</a> as featured in <a href="https://github.com/gysel/camel-jobs">“An integration job engine for Apache Camel”</a> as well as expression languages such as the <a href="https://www.baeldung.com/spring-expression-language">Spring Expression Language (SPeL)</a> or XPath and its JSON pendants</li>
+  <li>An API Versioning/Evolution DSL described in “Continuous API Evolution in Heterogeneous Enterprise Software Systems” [<a href="#ref-Knoche2021">Knoche and Hasselbring 2021</a>]</li>
+  <li>Extract-Transform-Load (ETL) tools in the Data Warehouse and Information Management communities</li>
+</ul>
+
+<p>Smart proxies in service middleware operating on change-aware contracts are emerging [<a href="#ref-Knoche2021">Knoche and Hasselbring 2021</a>].</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Gamma:1995" class="csl-entry">
+
+    <p>Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides. 1995. <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Knoche2021" class="csl-entry">
+
+    <p>Knoche, Holger, and Wilhelm Hasselbring. 2021. “Continuous API Evolution in Heterogenous Enterprise Software Systems.” In <em>18th IEEE International Conference on Software Architecture, ICSA 2021, Stuttgart, Germany, March 22-26, 2021</em>, 58–68. IEEE. <a href="https://doi.org/10.1109/ICSA51549.2021.00014">https://doi.org/10.1109/ICSA51549.2021.00014</a>.</p>
+
+  </div>
+
+  <div id="ref-LuebkeZimmermannEtAl2019" class="csl-entry">
+
+    <p>Lübke, Daniel, Olaf Zimmermann, Cesare Pautasso, Uwe Zdun, and Mirko Stocker. 2019. “Interface Evolution Patterns: Balancing Compatibility and Extensibility Across Service Life Cycles.” In <em>Proceedings of the 24th European Conference on Pattern Languages of Programs</em>. EuroPLop ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3361149.3361164">https://doi.org/10.1145/3361149.3361164</a>.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>which should, but cannot always be avoided; sometimes, it is better to break an existing client and cause work for its developers/maintainers rather than pretending that nothing has changed and letting some hard-to-catch bugs creep in <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>while this should generally be avoided, this is not always possible; the provider might have good reasons to do it <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Such cases should be avoided if at all possible, for instance, by providing the “old” and the “new” version of the operation in parallel in the “new” API. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/introduceversionidentifier" class="pagination--pager" title="Introduce Version Identifier
+">Previous</a>
+    
+    
+      <a href="/refactorings/makerequestconditional" class="pagination--pager" title="Make Request Conditional
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,4457 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Interface Refactoring Catalog</title>
+<meta name="description" content="The Interface Refactoring Catalog is a collection of interface and other architectural refactorings.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Interface Refactoring Catalog">
+<meta property="og:url" content="/refactorings/by-stakeholder-concerns/">
+
+
+  <meta property="og:description" content="The Interface Refactoring Catalog is a collection of interface and other architectural refactorings.">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/by-stakeholder-concerns/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--archive wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current"></li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title"></h1>
+    
+    <h1 id="refactorings-by-stakeholder-concerns">Refactorings by Stakeholder Concerns</h1>
+
+<!-- feel free to undo: -->
+<p>Click on the table entries for quick access. We also have a <a href="/refactorings/by-smells-drivers/">Refactorings by Smells</a> index.</p>
+
+<ul class="taxonomy__index">
+
+  
+  <li>
+    <a href="#agility">
+      <strong>
+      
+        Agility
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#auditability">
+      <strong>
+      
+        Auditability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#client-information-needs">
+      <strong>
+      
+        Client
+      
+        Information
+      
+        Needs
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#cohesion">
+      <strong>
+      
+        Cohesion
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        3
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#compatibility">
+      <strong>
+      
+        Compatibility
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#cost">
+      <strong>
+      
+        Cost
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#coupling">
+      <strong>
+      
+        Coupling
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        4
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#data-access-characteristics">
+      <strong>
+      
+        Data
+      
+        Access
+      
+        Characteristics
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#data-currentness">
+      <strong>
+      
+        Data
+      
+        Currentness
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#data-parsimony">
+      <strong>
+      
+        Data
+      
+        Parsimony
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#data-privacy">
+      <strong>
+      
+        Data
+      
+        Privacy
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#developer-experience">
+      <strong>
+      
+        Developer
+      
+        Experience
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        7
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#development-velocity">
+      <strong>
+      
+        Development
+      
+        Velocity
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#evolvability">
+      <strong>
+      
+        Evolvability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        5
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#explainability">
+      <strong>
+      
+        Explainability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        5
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#flexibility">
+      <strong>
+      
+        Flexibility
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        6
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#green-software">
+      <strong>
+      
+        Green
+      
+        Software
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        4
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#independent-deployability">
+      <strong>
+      
+        Independent
+      
+        Deployability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#information-hiding">
+      <strong>
+      
+        Information
+      
+        Hiding
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#interoperability">
+      <strong>
+      
+        Interoperability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#learnability">
+      <strong>
+      
+        Learnability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        5
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#maintainability">
+      <strong>
+      
+        Maintainability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        9
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#modifiability">
+      <strong>
+      
+        Modifiability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#offline-support">
+      <strong>
+      
+        Offline
+      
+        Support
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#performance">
+      <strong>
+      
+        Performance
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        8
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#reliability">
+      <strong>
+      
+        Reliability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#resource-utilization">
+      <strong>
+      
+        Resource
+      
+        Utilization
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#scalability">
+      <strong>
+      
+        Scalability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        3
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#security">
+      <strong>
+      
+        Security
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        5
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#simplicity">
+      <strong>
+      
+        Simplicity
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        2
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#single-responsibility-principle">
+      <strong>
+      
+        Single
+      
+        Responsibility
+      
+        Principle
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        3
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#stability">
+      <strong>
+      
+        Stability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#testability">
+      <strong>
+      
+        Testability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#understandability">
+      <strong>
+      
+        Understandability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        7
+      </span>
+    </a>
+  </li>
+
+  
+  <li>
+    <a href="#usability">
+      <strong>
+      
+        Usability
+      </strong>
+      <span class="taxonomy__count">
+        
+        
+        1
+      </span>
+    </a>
+  </li>
+
+</ul>
+
+<p>This index lists refactorings by the stakeholder concerns they address (<a href="#" onclick="expandAll()">Show</a> / <a href="#" onclick="collapseAll()">Hide</a> all details):</p>
+
+<h2 id="agility">Agility </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Read operations and write operations may evolve at different speeds. For example, data analytics queries may often change, driven by client demand and insights just gained, while commands to modify master data might only change with major releases, if at all.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="auditability">Auditability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>In multiprotocol scenarios, end-to-end security guarantees can only be given and enforced when the information in protocol headers is aggregated and correlated somehow. System and process assurance auditors appreciate if all relevant compliance information can be found in a single place (that is adequately protected) [@Julisch:2011].</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="client-information-needs">Client Information Needs </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>APIs are often used by multiple clients with different information needs, which makes it difficult for their providers to offer one-size-fits-all solutions.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/addwishtemplate">Add Wish Template</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>As motivated in <a href="/refactorings/addwishlist">Add Wish List</a>, APIs are often used by multiple clients with differing information needs, which makes it difficult for providers to offer one-size-fits-all solutions. Some clients may require overviews of information elements, for instance list of identifiers, others may require a few or all of the data fields/attributes of these elements that the API is able to provide.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="cohesion">Cohesion </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API providers strive for low coupling and high cohesion in their endpoint, operation, and message designs.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>See <a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)">Wikipedia entry</a> and <a href="https://www.sebokwiki.org/wiki/Cohesion_(glossary)">SEBoK v. 2.4</a> for explanation of this general term.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeoperations">Merge Operations</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Cohesive design elements (here: API operations in an endpoint) belong together naturally because they share certain properties. In an API design context, the security rules that apply are an example of such a property. Cohesion is desirable because it makes the system easier to understand and maintain. ISO/IEC/IEEE 24765 [@ISO24765:2017] defines cohesion as “manner and degree to which the tasks performed by a single software module are related to one another.”</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="compatibility">Compatibility </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Explicit versions, possibly introducing breaking changes, might appear costly and anti-agile or not RESTful at first glance. However, fixing bugs caused by not knowing about versioning mismatches is often expensive.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="cost">Cost </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Less code to be maintained over time means less maintenance costs. Sometimes, a planned (or managed) obsolescence approach is followed. <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> also discusses this concern.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Effort comes with cost. Operational and capital expenditure, including budget for training, evolution (including documentation), and operations increase as lifetime guarantees are extended.</p>
+</span>
+        </li>
+      
+    
+  </ul>
+
+<h2 id="coupling">Coupling </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Systems and components evolve at different speeds. Hence, they should not depend on each other unless this is justified in the business requirements. Data dependencies often introduce unwanted coupling that is difficult to detect and resolve.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API providers strive for low coupling and high cohesion in their endpoint, operation, and message designs.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>See <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">Wikipedia entry</a> and pattern summary of <a href="https://www.cloudcomputingpatterns.org/loose_coupling/">Loose Coupling</a>.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeoperations">Merge Operations</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>In our context, coupling is a measure of how closely connected and dependent on each other endpoints and their operations are. The coupling may concern the data exchanged and/or the operation call sequencing. See Wikipedia entry for <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">Coupling</a> and <a href="https://www.cloudcomputingpatterns.org/loose_coupling/">Loose Coupling</a> pattern for general explanations.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="data-access-characteristics">Data Access Characteristics </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducepagination">Introduce Pagination</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>In principle, the client wants to access all data elements, but not all have to be received at once or every time. For example, older posts to a social media site might be less relevant than recent ones and can be retrieved separately.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API clients might use caching and do not want to retrieve data they already have.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="data-currentness">Data Currentness </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Data returned by an API might age at different rates. In the e-commerce shop scenario, for instance, the master data of customers (e.g., names, shipping addresses) will change less frequently than transactional data (such as orders). API clients might want to cache some of the data retrieved, which is harder if faster-changing data is embedded in slower-changing data.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="data-parsimony">Data Parsimony </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Overall response time, throughput, client-side and server-side processing time are qualities that concern API clients and their providers. Unused data that is prepared, transported, and processed wastes resources and ought to be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="data-privacy">Data Privacy </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Read and write operations might have different protection needs. Few user roles, for instance, are usually authorized to update master data; many or all user roles may read it. If there are two separate endpoints for read and write access, it might be easier to fine-tune the <a href="https://whatis.techtarget.com/definition/Confidentiality-integrity-and-availability-CIA">Confidentiality, Integrity, and Availability (CIA)</a> rules and related compliance controls. See the <a href="https://owasp.org/www-project-api-security/">OWASP API Security Top 10</a> for risks and related advice on API security.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="developer-experience">Developer Experience </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/bundlerequests">Bundle Requests</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Bulk/batch uploads might be prepared by iterating through a data set and then sending API operation calls for each entry in the set. It might be easier to prepare a single technical request message (for instance, a JSON array) that contains several business-, domain-, or application-level requests instead of having to manage the state (running, succeeded, failed) of all individual requests on the client side.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Accessing protocol headers is different from accessing message payload; different local APIs and/or platform-specific libraries have to be used. Consolidating information in the payload reduces the learning and implementation effort.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>An API that provides clients all the required data with as few requests as possible may be easier to use than an API where the client has to issue many requests and requires complex state management on the client side to keep track of multiple API calls. See the blog post <a href="https://ozimmer.ch/patterns/2023/03/20/DXChecklist.html">API Design Review Checklist: Questions Concerning the Developer Experience (DX)</a> for hints on improving the developer experience.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API clients want to navigate the required data with minimum effort, taking as few coding steps (expressed as statements and expressions) as possible.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Since <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifiers</a> can be placed in protocol headers (in most protocols) or in the message payload, additional learning and decision making is required. Accessing protocol headers differs from accessing payload in terms of code to be written, tool and library support, and portability.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Breaking changes in APIs and pressure to upgrade may frustrate client developers, especially if they must migrate to a newer version on short notice. For instance, cloud application developers sometimes have to react rather quickly to changes introduced by their public providers.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Knowing when and how long to cache which data might be challenging for API clients and providers. Permanent or temporary storage is required. These valid concerns have to be balanced with the desire for performance.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="development-velocity">Development Velocity </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Read operations and write operations may evolve at different speeds. For example, data analytics queries may often change, driven by client demand and insights just gained, while commands to modify master data might only change with major releases, if at all.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="evolvability">Evolvability </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>The information needs of clients and users vary over time, and an API and its provider-side implementation should not have to be adjusted every time something changes in its clients. Maintaining several variations of the same operation for different clients is possible but increases the maintenance effort and coordination needs, which in turn might constrain the flexibility of the API provider.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Systems and components evolve at different speeds. Hence, they should not depend on each other unless this is justified in the business requirements. Data dependencies often introduce unwanted coupling that is difficult to detect and resolve.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API providers want the freedom to change the API implementation without revealing such changes to clients. Such information hiding [@Parnas:1972] is crucial for the independent evolvability of API providers and clients.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>To evolve an API, providers must have the flexibility to refactor, redesign, and adapt an API over time. Ideally, this happens without breaking compatibility, but this is not always realistic.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Operations that follow the <em>single responsibility principle</em> are easier to maintain and evolve, for instance, because their API provider only has a single reason to change their request and response message structure and content when evolving the API. Changing an operation that does many things is unnecessarily complex if the change only affects certain aspects of the operation; unexpected side effects may occur. For example, deprecating the operation is more complicated if it has multiple stakeholders.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="explainability">Explainability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Fewer endpoints might be easier to understand and maintain — if they are cohesive and do not contain too many operations. The refactorings <a href="/refactorings/moveoperation">Move Operation</a> and <a href="/refactorings/renameoperation">Rename Operation</a> explain the quality attributes <a href="concern://maintainability">maintainability</a> and <a href="concern://understandability">understandability</a> further.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeoperations">Merge Operations</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (not just refactorings) [@StockerZimmermann2021]. APIs should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is to determine which parts of the system should be changed. An API whose endpoints have clearly identified roles helps developers to quickly understand the API.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/renameendpoint">Rename Endpoint</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>A good name expresses what an endpoint has to offer, which helps clients decide whether and how to use it. <a href="/refactorings/renameoperation">Rename Operation</a> has more explanations of this quality.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renameoperation">Rename Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>All stakeholders involved in development and operations should be able to grasp what an API is supposed to do (and actually does) with ease; it should be straightforward to teach API usage. On the contrary, educated guesses and implicit assumptions are likely to cause misunderstandings that lead to technical risk and defects later on.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>A well-chosen name expresses what a representation element (such as a JSON object with its properties) has to offer, which helps clients decide whether and how to use it. The named element has a single meaning and purpose.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="flexibility">Flexibility </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>The information needs of clients and users vary over time, and an API and its provider-side implementation should not have to be adjusted every time something changes in its clients. Maintaining several variations of the same operation for different clients is possible but increases the maintenance effort and coordination needs, which in turn might constrain the flexibility of the API provider.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/addwishtemplate">Add Wish Template</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Client information needs change over time, but an API and its implementation should not have to be updated every time a client does. Maintaining multiple variants of the same operation for different clients is possible, but increases maintenance cost and coordination effort, which in turn can limit the flexibility of the API provider.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>To evolve an API, providers must have the flexibility to refactor, redesign, and adapt an API over time. Ideally, this happens without breaking compatibility, but this is not always realistic.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Not having to maintain different versions in parallel makes the provider team more flexible, but limits the options client developers have. Again, <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> features this quality as well.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Keeping the read and write operations of an endpoint together is easy to understand and brings functional endpoint <a href="concern://cohesion">cohesion</a>. A separation of these types of operations increases the ability to change them independently from each other; this can then happen more flexibly and more frequently.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>The more lifetime guarantees are given and the longer the committed time spans are, the less freedom remains with respect to changing product vision and corresponding API designs (for instance, the role of an API in the organization).</p>
+</span>
+        </li>
+      
+    
+  </ul>
+
+<h2 id="green-software">Green Software </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Overall response time, throughput, client-side and server-side processing time are qualities that concern API clients and their providers. Unused data that is prepared, transported, and processed wastes resources and ought to be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Assembling, transferring, and processing a response utilizes resources both on the provider and client side. These resources should not be wasted but handled with care and respect for the environment and the energy consumed. Bandwidth and computing power are examples of valuable and costly resources.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Both API clients as well as providers are interested in keeping the latency and bandwidth usage low and using as few resources as possible.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Response, throughput, and processing times concern API clients and providers. Unused data that is prepared, transported, and processed wastes resources, which should be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="independent-deployability">Independent Deployability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Endpoints can be deployed and then scaled separately, which is one of the defining tenets of microservices-based systems [@Zimmermann:2017]. The fewer operations an endpoint exposes, the easier it is to optimize the scaling for those operations.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Architectural principles such as single responsibility and independent deployability can guide the selection of refactoring. Some are affected positively, others negatively. The <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">POINT</a> principles for API design (purposeful, style-oriented, isolated, channel-neutral, and T-shaped) belong to this category; moving an operation to another endpoint can improve <strong>P</strong>, <strong>O</strong>, and <strong>I</strong> (but might harm <strong>T</strong> when looking at a single endpoint and not an entire API). Some principles might be style-defining (for instance, statelessness of interactions in REST), which makes it even more important to adhere and stick to them during design and evolution.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="information-hiding">Information Hiding </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API providers want the freedom to change the API implementation without revealing such changes to clients. Such information hiding [@Parnas:1972] is crucial for the independent evolvability of API providers and clients.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="interoperability">Interoperability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Less protocol-specific functionality means fewer changes are required when one protocol is replaced by another.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="learnability">Learnability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Accessing protocol headers is different from accessing message payload; different local APIs and/or platform-specific libraries have to be used. Consolidating information in the payload reduces the learning and implementation effort.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeoperations">Merge Operations</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (not just refactorings) [@StockerZimmermann2021]. APIs should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is to determine which parts of the system should be changed. An API whose endpoints have clearly identified roles helps developers to quickly understand the API.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/renameendpoint">Rename Endpoint</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>The more expressive and meaningful a name is, the easier it is to navigate through the code base, for instance when searching for them while fixing bugs and adding features. <a href="/refactorings/moveoperation">Move Operation</a> has more explanations of this quality.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renameoperation">Rename Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>All stakeholders involved in development and operations should be able to grasp what an API is supposed to do (and actually does) with ease; it should be straightforward to teach API usage. On the contrary, educated guesses and implicit assumptions are likely to cause misunderstandings that lead to technical risk and defects later on.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>A well-chosen name expresses what a representation element (such as a JSON object with its properties) has to offer, which helps clients decide whether and how to use it. The named element has a single meaning and purpose.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="maintainability">Maintainability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/addwishtemplate">Add Wish Template</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Client information needs change over time, but an API and its implementation should not have to be updated every time a client does. Maintaining multiple variants of the same operation for different clients is possible, but increases maintenance cost and coordination effort, which in turn can limit the flexibility of the API provider.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (besides quality refactorings [@StockerZimmermann2021]). It should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is determining which system parts should be changed. The impact of the major and minor changes on other parts should be kept at a minimum, but it is worth communicating when such changes occur.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Fewer components and/or code paths that handle deprecated behavior make an API and its implementation easier to maintain for the provider.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (not just refactorings) [@StockerZimmermann2021]. APIs should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is to determine which parts of the system should be changed. An API whose endpoints have clearly separated concerns and distinguished roles helps developers to quickly understand the API.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Reducing the number of versions that run in production and reducing their lifetime guarantees reduces the maintenance effort. See <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> for more explanations.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/renameoperation">Rename Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>APIs should be changed as much as required and as little as possible, and ripple effects be avoided; source code and documentation on client and provider side using a particular name have to be updated if this name changes. Expressive operation names help with orientation during API evolution. Debugging and trouble shooting is also easier if logs and error reports contain meaninfgul names.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>The more expressive and meaningful a name (for instance, the key in a key-value pair) is, the easier it is to search and navigate the code base, for instance, when fixing bugs and adding features during API evolution. <a href="/refactorings/splitoperation">Split Operation</a> covers this quality in more detail.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Operations that follow the <em>single responsibility principle</em> are easier to maintain and evolve, for instance, because their API provider only has a single reason to change their request and response message structure and content when evolving the API. Changing an operation that does many things is unnecessarily complex if the change only affects certain aspects of the operation; unexpected side effects may occur. For example, deprecating the operation is more complicated if it has multiple stakeholders.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>During their lifetimes, API versions have to be supported and evolved. Security patches are applied, bugs are fixed, and so on. The effort for such activities might not be proportional to the guaranteed lifetime but certainly is related and somewhat coupled to it. Related (sub-)concerns are compatibility and extensibility.</p>
+</span>
+        </li>
+      
+    
+  </ul>
+
+<h2 id="modifiability">Modifiability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Less protocol-specific functionality means fewer changes are required when one protocol is replaced by another.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>API providers want the freedom to change the API implementation without revealing such changes to clients. Such information hiding [@Parnas:1972] is crucial for the independent evolvability of API providers and clients.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="offline-support">Offline Support </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>When the connection is unstable or if one wants to build offline functionality into an app, one large request is often better than many small ones.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="performance">Performance </h2>
+<ul>
+    
+      
+      
+        <li><a href="/refactorings/addwishlist">Add Wish List</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Overall response time, throughput, client-side and server-side processing time are qualities that concern API clients and their providers. Unused data that is prepared, transported, and processed wastes resources and ought to be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/addwishtemplate">Add Wish Template</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Response time and throughput are qualities that concern both API clients serving end users and API providers (also explained in <a href="/refactorings/addwishlist">Add Wish List</a>). Preparing, transporting, and processing data but not using it on the client side wastes resources and ought to be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/bundlerequests">Bundle Requests</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Transferring many small requests may stress network and communication endpoints preparing requests and consuming them (for instance, on HTTP or TCP/IP level).</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Assembling, transferring, and processing a response utilizes resources both on the provider and client side. These resources should not be wasted but handled with care and respect for the environment and the energy consumed. Bandwidth and computing power are examples of valuable and costly resources.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Both API clients as well as providers are interested in keeping the latency and bandwidth usage low and using as few resources as possible.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducepagination">Introduce Pagination</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Transferring all <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> at once can lead to huge response messages that burden receiving clients and the underlying infrastructure (i.e., network and application frameworks as well as databases) with a high workload. For instance, single-page applications that receive several megabytes of JSON might freeze until all contained JSON objects have been decoded.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Response, throughput, and processing times concern API clients and providers. Unused data that is prepared, transported, and processed wastes resources, which should be avoided.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Computationally expensive workloads such as loading data from data stores, filtering, and formatting it, and high data volumes may make certain operations expensive. Such complex query operations should not slow down cheaper operations exposed by the same endpoint (for example, atomic updates of single attribute values).</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="reliability">Reliability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Independent endpoints that do not share the same execution context and resources can be deployed independently; operations co-located in a single endpoint, however, share their deployment characteristics. For instance, if a long-running operation causes an API provider-internal error, its sibling operations might suffer from quality-of-service degradations as well. [@Nygard:2018] uses the term stability: “A robust system keeps processing transactions, even when transient impulses, persistent stresses, or component failures disrupt normal processing.”</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>When co-located in a single endpoint and deployed jointly, operations might influence each other. For instance, if one of these operations is long-running or causes a provider-internal error, its siblings might suffer from quality-of-service degradation too.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="resource-utilization">Resource Utilization </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/introducepagination">Introduce Pagination</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Transferring all <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> at once can lead to huge response messages that burden receiving clients and the underlying infrastructure (i.e., network and application frameworks as well as databases) with a high workload. For instance, single-page applications that receive several megabytes of JSON might freeze until all contained JSON objects have been decoded.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="scalability">Scalability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Endpoints can be deployed and then scaled separately, which is one of the defining tenets of microservices-based systems [@Zimmermann:2017]. The fewer operations an endpoint exposes, the easier it is to optimize the scaling for those operations.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>When co-located in a single endpoint and deployed jointly, operations might influence each other. For instance, if one of these operations is long-running or causes a provider-internal error, its siblings might suffer from quality-of-service degradation too.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Computationally expensive workloads such as loading data from data stores, filtering, and formatting it, and high data volumes may make certain operations expensive. Such complex query operations should not slow down cheaper operations exposed by the same endpoint (for example, atomic updates of single attribute values).</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="security">Security </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>In multiprotocol scenarios, end-to-end security guarantees can only be given and enforced when the information in protocol headers is aggregated and correlated somehow. System and process assurance auditors appreciate if all relevant compliance information can be found in a single place (that is adequately protected) [@Julisch:2011].</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/extractinformationholder">Extract Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Not all API clients have the same access privileges. More fine-grained data <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operations</a> make it easier to enforce related controls and rules, avoiding the risk that restricted data “slips through” accidentally. To revisit the e-commerce scenario, what if the shop software also includes public ratings of products that show the name and picture of the rating customer? Here, only limited and carefully selected information about the customer should be returned.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>With multiple operations co-located within a single endpoint, it can be challenging to enforce fine-grained access control policies. Refactoring this endpoint into multiple specialized ones allows for more granular control over access permissions and authorization rules. The security requirements for the data an API endpoint exposes may also differ; hence, separating operations can make it easier to apply data protection measures that ensure confidentiality.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Read and write operations might have different protection needs. Few user roles, for instance, are usually authorized to update master data; many or all user roles may read it. If there are two separate endpoints for read and write access, it might be easier to fine-tune the <a href="https://whatis.techtarget.com/definition/Confidentiality-integrity-and-availability-CIA">Confidentiality, Integrity, and Availability (CIA)</a> rules and related compliance controls. See the <a href="https://owasp.org/www-project-api-security/">OWASP API Security Top 10</a> for risks and related advice on API security.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Access restrictions of an API can be implemented on different levels: whole API, per endpoint, individual operations, or even depending on the executed control flow paths in the implementation of operations or the data accessed. Securing an operation that does many things is complex. The access control list must include the superset of all involved participants; changing it has a significant impact.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="simplicity">Simplicity </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/makerequestconditional">Make Request Conditional</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Knowing when and how long to cache which data might be challenging for API clients and providers. Permanent or temporary storage is required. These valid concerns have to be balanced with the desire for performance.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Keeping the read and write operations of an endpoint together is easy to understand and brings functional endpoint <a href="concern://cohesion">cohesion</a>. A separation of these types of operations increases the ability to change them independently from each other; this can then happen more flexibly and more frequently.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="single-responsibility-principle">Single Responsibility Principle </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Architectural principles are affected positively or negatively when APIs are refectored. Here, the <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">Purposeful, style-Oriented, Isolated, channel-Neutral, and T-shaped (POINT)</a> principles for API design apply; extracting an endpoint can improve <strong>P</strong>, <strong>O</strong>, and <strong>I</strong> (but might harm <strong>T</strong> when looking at a single endpoint and not an entire API).</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Architectural principles such as single responsibility and independent deployability can guide the selection of refactoring. Some are affected positively, others negatively. The <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">POINT</a> principles for API design (purposeful, style-oriented, isolated, channel-neutral, and T-shaped) belong to this category; moving an operation to another endpoint can improve <strong>P</strong>, <strong>O</strong>, and <strong>I</strong> (but might harm <strong>T</strong> when looking at a single endpoint and not an entire API). Some principles might be style-defining (for instance, statelessness of interactions in REST), which makes it even more important to adhere and stick to them during design and evolution.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>An API that offers endpoints with operations that follow the <em>single responsibility principle</em> is easier to understand for clients because operations are focused and do not offer extra capabilities that not all clients use. The API provider team also benefits from a lower complexity of the implementation.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="stability">Stability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/extractoperation">Extract Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Independent endpoints that do not share the same execution context and resources can be deployed independently; operations co-located in a single endpoint, however, share their deployment characteristics. For instance, if a long-running operation causes an API provider-internal error, its sibling operations might suffer from quality-of-service degradations as well. [@Nygard:2018] uses the term stability: “A robust system keeps processing transactions, even when transient impulses, persistent stresses, or component failures disrupt normal processing.”</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="testability">Testability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Test cases have to cover all, and all combinations of, the many things the operation is in charge of. Testing such an operation is more complex than testing a single-responsibility operation.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="understandability">Understandability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeendpoints">Merge Endpoints</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>Fewer endpoints might be easier to understand and maintain — if they are cohesive and do not contain too many operations. The refactorings <a href="/refactorings/moveoperation">Move Operation</a> and <a href="/refactorings/renameoperation">Rename Operation</a> explain the quality attributes <a href="concern://maintainability">maintainability</a> and <a href="concern://understandability">understandability</a> further.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/mergeoperations">Merge Operations</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (not just refactorings) [@StockerZimmermann2021]. APIs should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is to determine which parts of the system should be changed. An API whose endpoints have clearly identified roles helps developers to quickly understand the API.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/moveoperation">Move Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>There are many reasons to change an API (not just refactorings) [@StockerZimmermann2021]. APIs should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is to determine which parts of the system should be changed. An API whose endpoints have clearly separated concerns and distinguished roles helps developers to quickly understand the API.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/renameendpoint">Rename Endpoint</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>A good name expresses what an endpoint has to offer, which helps clients decide whether and how to use it. <a href="/refactorings/renameoperation">Rename Operation</a> has more explanations of this quality.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renameoperation">Rename Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>All stakeholders involved in development and operations should be able to grasp what an API is supposed to do (and actually does) with ease; it should be straightforward to teach API usage. On the contrary, educated guesses and implicit assumptions are likely to cause misunderstandings that lead to technical risk and defects later on.</p>
+</span>
+        </li>
+      
+    
+      
+      
+        <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>A well-chosen name expresses what a representation element (such as a JSON object with its properties) has to offer, which helps clients decide whether and how to use it. The named element has a single meaning and purpose.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/splitoperation">Split Operation</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>An API that offers endpoints with operations that follow the <em>single responsibility principle</em> is easier to understand for clients because operations are focused and do not offer extra capabilities that not all clients use. The API provider team also benefits from a lower complexity of the implementation.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+
+<h2 id="usability">Usability </h2>
+<ul>
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+        <li><a href="/refactorings/inlineinformationholder">Inline Information Holder</a>&nbsp;
+          <span class="collapsible">
+            <span class="click-to-expand">(Show Details <i class="fas fa-chevron-down"></i>)</span>
+            <span class="click-to-collapse">(Hide Details <i class="fas fa-chevron-up"></i>)</span>
+          </span>
+          <span><p>An API that provides clients all the required data with as few requests as possible may be easier to use than an API where the client has to issue many requests and requires complex state management on the client side to keep track of multiple API calls. See the blog post <a href="https://ozimmer.ch/patterns/2023/03/20/DXChecklist.html">API Design Review Checklist: Questions Concerning the Developer Experience (DX)</a> for hints on improving the developer experience.</p>
+</span>
+        </li>
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+  </ul>
+
+
+  </div>
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

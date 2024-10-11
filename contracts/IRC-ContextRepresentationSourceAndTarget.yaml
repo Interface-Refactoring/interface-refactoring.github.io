@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: EncapsulateContextRepresentationSketch
+  version: "1.0"
+servers: []
+tags:
+- name: SampleService
+  externalDocs:
+    description: The role of this endpoint is not specified.
+    url: ""
+- name: SampleServiceTarget
+  externalDocs:
+    description: The role of this endpoint is not specified.
+    url: ""
+paths:
+  /SampleService:
+    post:
+      tags:
+      - SampleService
+      description: unspecified operation responsibility
+      operationId: sampleOperationInitial
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                regularRequestPayload:
+                  type: string
+      responses:
+        "200":
+          description: sampleOperationInitial successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+  /SampleServiceTarget:
+    post:
+      tags:
+      - SampleServiceTarget
+      description: unspecified operation responsibility
+      operationId: sampleOperationTarget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qosControl:
+                  $ref: '#/components/schemas/RequestContext'
+                regularRequestPayload:
+                  type: string
+      responses:
+        "200":
+          description: sampleOperationTarget successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    RequestContext:
+      type: object
+      properties:
+        apiKey:
+          type: integer
+          format: int32
+        sessionId:
+          type: integer
+          format: int32
+          nullable: true
+        qosPropertiesThatShouldNotGoToProtocolHeader:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValuePair'
+    KeyValuePair:
+      minItems: 1
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          property:
+            type: string

@@ -1,0 +1,708 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduce Version Identifier - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Apply Semantic API Versioning, Make Version Explicit (in Messages), Provide Compatibility Metadata">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Introduce Version Identifier">
+<meta property="og:url" content="/refactorings/introduceversionidentifier">
+
+
+  <meta property="og:description" content="also known as: Apply Semantic API Versioning, Make Version Explicit (in Messages), Provide Compatibility Metadata">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/introduceversionidentifier">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Introduce Version Identifier</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Introduce Version Identifier</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduce Version Identifier">
+    <meta itemprop="description" content="also known as: Apply Semantic API Versioning, Make Version Explicit (in Messages), Provide Compatibility Metadata">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Introduce Version Identifier
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2024-10-07T00:00:00+02:00">October 7, 2024</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2024
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Apply Semantic API Versioning, Make Version Explicit (in Messages), Provide Compatibility Metadata</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API has been deployed to a production environment and is used by clients. The provider is evolving the API with new or improved functionality. Existing clients might have to be adjusted when a new version is released.</p>
+
+<p class="notice--primary">As an API provider, I want to indicate versions and their compatibility properties explicitly at design time and runtime so that clients can react accordingly to changes that affect them during API evolution.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#maintainability">#maintainability</a></dt>
+  <dd>There are many reasons to change an API (besides quality refactorings [<a href="#ref-StockerZimmermann2021">Stocker and Zimmermann 2021</a>]). It should be changed as much as required and as little as possible, and ripple effects be avoided. One of the first steps in related maintenance tasks is determining which system parts should be changed. The impact of the major and minor changes on other parts should be kept at a minimum, but it is worth communicating when such changes occur.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#compatibility">#compatibility</a></dt>
+  <dd>Explicit versions, possibly introducing breaking changes, might appear costly and anti-agile or not RESTful at first glance. However, fixing bugs caused by not knowing about versioning mismatches is often expensive.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#developer-experience">#developer-experience</a></dt>
+  <dd>Since <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifiers</a> can be placed in protocol headers (in most protocols) or in the message payload, additional learning and decision making is required. Accessing protocol headers differs from accessing payload in terms of code to be written, tool and library support, and portability.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The entire API or individual parts, such as endpoints, operations, or message parts can be versioned. Here, we primarily target endpoint versioning.</p>
+
+<p>All clients invoke operations exposed by a single, unversioned endpoint. Figure 1 shows this rather simple Initial Position Sketch.</p>
+
+<p><img src="/refactorings/images/IntroduceVersionIdentifier_Initial.png" alt="Introduce Version Identifier: Initial Position Sketch. An API provider has deployed an API with a single endpoint that clients use." /></p>
+
+<p>Figure 1: Introduce Version Identifier: Initial Position Sketch. An API provider has deployed an API with a single endpoint that clients use.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#tacit-semantic-changes-up-to-incompatibilities-creep-in">Tacit semantic changes up to incompatibilities creep in</a></em></dt>
+  <dd>While the technical API contract remains unchanged, the meaning of the received or returned data might change over time. Such semantic mismatches between older and newer versions should be documented in the <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> and examples and then caught during testing, ideally in an automated fashion. Implicit versioning an applying the Tolerant Reader pattern [<a href="#ref-Daigneau:2011">Daigneau 2011</a>] might hide such changes and their impact for quite some time.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#resistance-to-change-caused-by-uncertainty">Resistance to change caused by uncertainty</a></em></dt>
+  <dd>API providers may hesitate to implement necessary changes due to a lack of clarity in their strategy for evolving the API. Clients might be reluctant to upgrade to new versions because they are unable to assess the imposed changes on their side.</dd>
+</dl>
+
+<p>See “Interface Evolution Patterns — Balancing Compatibility and Extensibility across Service Life Cycles” [<a href="#ref-LuebkeZimmermannEtAl2019">Lübke et al. 2019</a>] for other smells related to API versioning and countermeasures.</p>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>The introduction and continued use of explicit an <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> has to be planned, executed, and sustained:</p>
+
+<ol>
+  <li>Decide on scope and naming conventions for the <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a>, for instance, following the <a href="https://semver.org/">Semantic Versioning</a> specification when assigning and communicating version numbers (currently standing at Version 2.0.0).<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></li>
+  <li>Define an evolution roadmap, selecting one or more lifecycle management strategies to define the lifetime of the version; see the related refactorings <a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy</a> and <a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy</a>.</li>
+  <li>Decide where to place the <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> for each API element to be versioned. For instance, possible locations are endpoint address, message payload, and protocol header.</li>
+  <li>Put the version-enhanced endpoint addresses in the API implementation code or update the message construction code, depending on where the <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> has been added.</li>
+  <li>Update the API documentation with the new <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a>(s) and meta-information about the meaning of this version information (for instance, consequences of certain version numbers regarding compatibility).</li>
+</ol>
+
+<p>The pattern description of <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> provides more information about versioning scopes, identifier placement (location), and compatibility considerations [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>].</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>Once a <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> has been introduced, clients can choose which version of an endpoint they want to work with (assuming that multiple versions are supported, as described in the <a href="https://api-patterns.org/patterns/evolution/TwoInProduction">Two in Production</a> pattern). Figure 2 illustrates this new, more flexible setup.</p>
+
+<p><img src="/refactorings/images/IntroduceVersionIdentifier_Target.png" alt="Introduce Version Identifier: Target Solution Sketch. The API provider has introduced a [Version Identifier](https://api-patterns.org/patterns/evolution/VersionIdentifier) to the API, allowing clients to choose which version of an endpoint they want to work with." /></p>
+
+<p>Figure 2: Introduce Version Identifier: Target Solution Sketch. The API provider has introduced a <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> to the API, allowing clients to choose which version of an endpoint they want to work with.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>Depending on the chosen location of the <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a>, clients enact their usage decision in the message payload or a header (see section “Instructions” above). In HTTP, it may be part of the endpoint address (relative URI path):</p>
+
+<pre><code>GET /customers/1234
+Accept: text/json+customer; version=1.0
+...
+</code></pre>
+
+<p>or</p>
+
+<pre><code>GET /v2/customers/1234
+...
+</code></pre>
+
+<p>The API Stylebook compiled by “API Handyman” Arnaud Lauret points at many additional examples in its design topic <a href="http://apistylebook.com/design/topics/versioning">“Updates and Versioning”</a>.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Before and when applying this refactoring, make sure to:</p>
+
+<ul>
+  <li>Involve API clients in the decisions about and planning of API evolution (assuming that they are known and willing to participate).</li>
+  <li>Stay backward-compatible whenever possible, but do not hesitate to upgrade the major version when necessary.</li>
+  <li>Provide migration aids such as change logs, code snippets, and mappings of identifiers and parameters from old to new versions.</li>
+  <li>Be aware of design challenges caused by automatic routing. For example, <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifiers</a> in encrypted message payloads might not be visible to intermediaries and, therefore, can not be used for routing purposes.</li>
+</ul>
+
+<p>“Interface Evolution Patterns — Balancing Compatibility and Extensibility across Service Life Cycles” provides further hints. For example, “stick to a standardized and consistent versioning strategy, e.g., decide which objects to version consistently (operations, data types, etc.) or which versioning schema to use (e.g., <a href="https://api-patterns.org/patterns/evolution/SemanticVersioning">Semantic Versioning</a>)” [<a href="#ref-LuebkeZimmermannEtAl2019">Lübke et al. 2019</a>].</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>Other refactorings dealing with API evolution are <a href="/refactorings/introduceversionmediator">Introduce Version Mediator</a>, <em>Tighten Evolution Strategy</em>, and <em>Relax Evolution Strategy</em>.</p>
+
+<p>The evolution patterns in Zimmermann et al. [<a href="#ref-PatternsForAPIDesign:2022">2022</a>] cover versioning. For instance, there is a pattern called <a href="https://api-patterns.org/patterns/evolution/SemanticVersioning">Semantic Versioning</a>. The concept of <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/ServiceLevelAgreement">Service Level Agreement</a> (SLA) is captured in pattern form as well; an SLA pertains to a single or multiple versions and should specify and reference those versions explicitly.</p>
+
+<p>Arnaud Lauret’s book on Web API design covers the topic [<a href="#ref-Lauret:2019">Lauret 2019</a>], and the blog post <a href="https://nordicapis.com/5-ways-to-version-apis/">“5 Ways to Version APIs “</a> also discusses options with pros and cons.</p>
+
+<p>James Higginbotham provides advice regarding <a href="https://tyk.io/when-and-how-do-you-version-your-api/">“When and How Do You Version Your API?</a>.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Daigneau:2011" class="csl-entry">
+
+    <p>Daigneau, Robert. 2011. <em>Service Design Patterns: Fundamental Design Solutions for SOAP/WSDL and RESTful Web Services</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Lauret:2019" class="csl-entry">
+
+    <p>Lauret, Arnaud. 2019. <em>The Design of Web APIs</em>. Manning.</p>
+
+  </div>
+
+  <div id="ref-LuebkeZimmermannEtAl2019" class="csl-entry">
+
+    <p>Lübke, Daniel, Olaf Zimmermann, Cesare Pautasso, Uwe Zdun, and Mirko Stocker. 2019. “Interface Evolution Patterns: Balancing Compatibility and Extensibility Across Service Life Cycles.” In <em>Proceedings of the 24th European Conference on Pattern Languages of Programs</em>. EuroPLop ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3361149.3361164">https://doi.org/10.1145/3361149.3361164</a>.</p>
+
+  </div>
+
+  <div id="ref-StockerZimmermann2021" class="csl-entry">
+
+    <p>Stocker, Mirko, and Olaf Zimmermann. 2021. “From Code Refactoring to API Refactoring: Agile Service Design and Evolution.” In <em>Service-Oriented Computing</em>, edited by Johanna Barzen, 174–93. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-87568-8_11">https://doi.org/10.1007/978-3-030-87568-8_11</a>.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Note that the Semantic Versioning specification has a <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> and applies <a href="https://api-patterns.org/patterns/evolution/SemanticVersioning">Semantic Versioning</a> itself. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/introducepagination" class="pagination--pager" title="Introduce Pagination
+">Previous</a>
+    
+    
+      <a href="/refactorings/introduceversionmediator" class="pagination--pager" title="Introduce Version Mediator
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

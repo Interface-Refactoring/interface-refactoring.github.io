@@ -1,0 +1,731 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Make Request Conditional - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Introduce Request Conditions, Cache Responses">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Make Request Conditional">
+<meta property="og:url" content="/refactorings/makerequestconditional">
+
+
+  <meta property="og:description" content="also known as: Introduce Request Conditions, Cache Responses">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/makerequestconditional">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Make Request Conditional</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Make Request Conditional</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Make Request Conditional">
+    <meta itemprop="description" content="also known as: Introduce Request Conditions, Cache Responses">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Make Request Conditional
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2024-10-07T00:00:00+02:00">October 7, 2024</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2024
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Introduce Request Conditions, Cache Responses</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API endpoint provides data that changes rarely, and thus, some clients request and receive the same data frequently. Preparing and retransmitting data already available to the clients is unnecessary and wasteful.</p>
+
+<p class="notice--primary">As an API provider, I want to be able to tell clients that they already have the most recent version of certain data so that I do not have to send this data again.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a>, <a href="/refactorings/by-stakeholder-concerns/#green-software">#green-software</a></dt>
+  <dd>Response, throughput, and processing times concern API clients and providers. Unused data that is prepared, transported, and processed wastes resources, which should be avoided.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#data-access-characteristics">#data-access-characteristics</a></dt>
+  <dd>API clients might use caching and do not want to retrieve data they already have.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#developer-experience">#developer-experience</a>, <a href="/refactorings/by-stakeholder-concerns/#simplicity">#simplicity</a></dt>
+  <dd>Knowing when and how long to cache which data might be challenging for API clients and providers. Permanent or temporary storage is required. These valid concerns have to be balanced with the desire for performance.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>Figure 1 shows the initial position sketch for this refactoring. The client requests some data from the API. Later, the client wants to ensure that the data is still up to date and sends a second request for the same data.</p>
+
+<p><img src="/refactorings/images/MakeRequestConditional_Initial.png" alt="Make Request Conditional: Initial Solution Sketch: In the first message exchange (1--2), the endpoint returns one or more [Data Elements](https://api-patterns.org/patterns/structure/elementStereotypes/DataElement). Later on (3), the client requests the data from the endpoint again. Because nothing has changed, the provider returns the same data (4) as in the previous response." /></p>
+
+<p>Figure 1: Make Request Conditional: Initial Solution Sketch: In the first message exchange (1–2), the endpoint returns one or more <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>. Later on (3), the client requests the data from the endpoint again. Because nothing has changed, the provider returns the same data (4) as in the previous response.</p>
+
+<p>This refactoring targets a single API operation and its request and response messages.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#high-latency-poor-response-time">High latency/poor response time</a></em></dt>
+  <dd>Load on the API provider is unnecessarily high because the same data is processed and transferred many times over.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#spike-load">Spike load</a></em></dt>
+  <dd>Regular requests for large amounts of data can cause Periodic Workload or Unpredictable Workload [<a href="#ref-Fehling:2014">Fehling et al. 2014</a>] for CPU and memory, for instance, when a relatively large JSON object representing the requested data has to be constructed (on the provider side) and read (on the client side).</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#polling-proliferation">Polling proliferation</a></em></dt>
+  <dd>Clients that participate in long-running conversations and API call orchestrations ping the server for the current status of processing (“are you done?”). They do so more often than the provider-side state advances.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Instead of transmitting the same data repeatedly, the request can be conditional. Condition information is exchanged as metadata to allow the communication participants to determine whether the client already has the latest data version.</p>
+
+<ol>
+  <li>Decide for one of the two variants of the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Request</a> pattern: data can a) be <em>timestamped</em> or b) responses be <em>fingerprinted</em> (by calculating a hash code of the response body) [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>].</li>
+  <li>Adjust the API specification and implementation to include a conditional <a href="https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement">Metadata Element</a> in both request and response messages. The request metadata should be optional so that it can be omitted in initial requests; optionality also brings backward compatibility. For the response message, check if the transport protocol provides a special status for this case and consider using it (such as HTTP status code <code>304 Not Modified</code>).</li>
+  <li>In the API implementation, evaluate the condition – for example, by comparing the previously mentioned timestamps or fingerprints/hashes – and respond with an appropriate message.</li>
+  <li>Create additional unit or integration tests for the API implementation that validate combinations of metadata presence or absence (with changed and unchanged data).</li>
+  <li>If several operations in the API use <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Requests</a>, investigate whether your framework offers a way to implement this functionality in a generic way.</li>
+  <li>Adjust the API client implementations that you oversee (for instance, API usage examples) to utilize the new feature: send conditions and keep previously received data. Adjust the API tests as well.</li>
+  <li>Document the changes, for example, in a changelog data release notes, and release a new API version.</li>
+</ol>
+
+<p>This refactoring can be applied incrementally, for instance, to a single operation or a group of operations. Backwards compatibility is preserved by making the condition metadata optional in the request.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>Comparing the solution in Figure 2 to the initial position sketch, we see that follow-up requests return a special response message indicating that the data has not changed. The client can then continue to use the data it has already received.</p>
+
+<p><img src="/refactorings/images/MakeRequestConditional_Target.png" alt="Make Request Conditional: Target Solution Sketch: The first exchange (1--2) is the same as in the initial position. In the second request though, the client includes the condition metadata (3) in its request, which in turn allows the provider to respond with a special &quot;not modified&quot; message (4) if the data has not changed." /></p>
+
+<p>Figure 2: Make Request Conditional: Target Solution Sketch: The first exchange (1–2) is the same as in the initial position. In the second request though, the client includes the condition metadata (3) in its request, which in turn allows the provider to respond with a special “not modified” message (4) if the data has not changed.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The Customer Core microservice of the Lakeside Mutual sample application implements conditional requests in its <a href="https://github.com/Microservice-API-Patterns/LakesideMutual/blob/master/customer-core/src/main/java/com/lakesidemutual/customercore/interfaces/configuration/WebConfiguration.java"><code>WebConfiguration</code></a> class. Classes annotated with <code>@Configuration</code> can be used to customize the configuration of the Spring MVC framework. The fingerprint-based variant of <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Request</a> is applied in its request and response messages:</p>
+
+<pre><code class="language-java">@Configuration
+public class WebConfiguration implements WebMvcConfigurer {
+    ...
+
+    /**
+     * This is a filter that generates an ETag value based
+     * on the content of the response. This ETag is compared
+     * to the If-None-Match header of the request. If these
+     * headers are equal, the response content is not sent,
+     * but rather a 304 "Not Modified" status instead.
+     * 
+     * By marking the method as @Bean, Spring can call this
+     * method and inject the dependency into other components, 
+     * following the inversion of control principle.
+     * */
+    @Bean
+    public Filter shallowETagHeaderFilter() {
+        return new ShallowEtagHeaderFilter();
+    }
+}
+</code></pre>
+
+<p>The <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/ShallowEtagHeaderFilter.html"><code>ShallowEtagHeaderFilter</code></a> class is already included in the Spring Framework. Because it is implemented as a filter applied to all requests and responses, the implementation of the individual operations does not have to be adjusted. A consequence of this implementation, and the reason why it is called “shallow” <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag">ETag</a>, is that responses are still assembled, hashed and replaced with a <code>304 Not Modified</code> response if the hash matches the ETag header.</p>
+
+<p>Alternatively, a <a href="https://api-patterns.org/patterns/evolution/VersionIdentifier">Version Identifier</a> could be introduced in the (meta)data to avoid having to retrieve and hash the entire data. This is also supported by <a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#conditional">Spring Data REST</a> for classes that have an <code>@Version</code> property:</p>
+
+<pre><code class="language-java">@Entity
+public class CustomerAggregateRoot implements RootEntity {
+
+    @Version
+    Long version; 
+
+    @EmbeddedId
+    private CustomerId id;
+
+    ...
+}
+</code></pre>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Before and when making requests conditional, ask yourself:</p>
+
+<ul>
+  <li>How does the additional overhead to calculate the hashes, or the extra storage used by timestamps and versioning numbers compare to the expected savings?</li>
+  <li>Does the condition cover all the data returned in the response? For example, when the data contains nested structures, a change in a contained element must be detected. Otherwise, clients might work with stale data.</li>
+  <li>How does a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Request</a> count towards a <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/RateLimit">Rate Limit</a> [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>]?</li>
+</ul>
+
+<p>Be careful when combining <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Requests</a> with a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> or <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a>. The data might not have changed, but the client could request different parts of it. In this case, the cached data is unlikely to be sufficient.</p>
+
+<p>Do not mindlessly start caching all API responses on the client side. Cache design is hard to get right. For instance, knowing when to invalidate cache entries is not trivial [<a href="#ref-Karlton:2009">Karlton 2009</a>].</p>
+
+<p>The <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Request</a> pattern and this refactoring assume that the server is responsible for evaluating the condition. However, it may make sense for the client to evaluate the condition in order to avoid sending a request to the server. For example, a client could consult the HTTP <code>Expires</code> header to decide whether the data retrieved from the server is still current [<a href="#ref-rfc9111">Fielding, Nottingham, and Reschke 2022</a>]. This doesn’t guarantee that the client has the latest data, but depending on the use case, that may not be a problem.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>The online presentation of the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest">Conditional Request</a> pattern coverage presents an <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/ConditionalRequest#sec:ConditionalRequest:Example">example leveraging the Spring framework</a>.</p>
+
+<p>An operation that returns nested data holders that change more or less often than the containing data can prevent this refactoring from being applied. In that case, applying the <a href="/refactorings/extractinformationholder">Extract Information Holder</a> refactoring first to separate the nested data holders from the containing data can help. Chapter 7 of Zimmermann et al. [<a href="#ref-PatternsForAPIDesign:2022">2022</a>] provides a comprehensive introduction to API quality.</p>
+
+<p>Our catalog includes an <a href="/refactorings/introduceversionidentifier">Introduce Version Identifier</a> refactoring that focuses on versioning endpoints, not <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>.</p>
+
+<p>Conditional requests in Hypertext Transfer Protocol (HTTP/1.1) are defined by RFC 7232 [<a href="#ref-rfc7232">Fielding and Reschke 2014</a>].</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Fehling:2014" class="csl-entry">
+
+    <p>Fehling, Christoph, Frank Leymann, Ralph Retter, Walter Schupeck, and Peter Arbitter. 2014. <em>Cloud Computing Patterns: Fundamentals to Design, Build, and Manage Cloud Applications</em>. Springer. <a href="https://doi.org/10.1007/978-3-7091-1568-8">https://doi.org/10.1007/978-3-7091-1568-8</a>.</p>
+
+  </div>
+
+  <div id="ref-rfc9111" class="csl-entry">
+
+    <p>Fielding, Roy T., Mark Nottingham, and Julian Reschke. 2022. “HTTP Caching.” Request for Comments. RFC 9111; RFC Editor. <a href="https://doi.org/10.17487/RFC9111">https://doi.org/10.17487/RFC9111</a>.</p>
+
+  </div>
+
+  <div id="ref-rfc7232" class="csl-entry">
+
+    <p>Fielding, Roy T., and Julian Reschke. 2014. “Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests.” Request for Comments. RFC 7232; RFC Editor. <a href="https://doi.org/10.17487/RFC7232">https://doi.org/10.17487/RFC7232</a>.</p>
+
+  </div>
+
+  <div id="ref-Karlton:2009" class="csl-entry">
+
+    <p>Karlton, Phil. 2009. “Two Hard Things.” 2009. <a href="https://martinfowler.com/bliki/TwoHardThings.html">https://martinfowler.com/bliki/TwoHardThings.html</a>.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/introduceversionmediator" class="pagination--pager" title="Introduce Version Mediator
+">Previous</a>
+    
+    
+      <a href="/refactorings/mergeendpoints" class="pagination--pager" title="Merge Endpoints
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

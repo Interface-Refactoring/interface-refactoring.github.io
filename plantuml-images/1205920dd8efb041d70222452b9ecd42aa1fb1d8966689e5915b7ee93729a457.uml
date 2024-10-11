@@ -1,0 +1,62 @@
+@startuml
+
+class API {
+}
+note left: <b>API Refactorings:</b>\n • Tighten Evolution Strategy \n • Relax Evolution Strategy
+
+class Endpoint {
+ Address location
+ APIPattern role
+}
+note left: <b>Endpoint Refactorings:</b>\n • Rename Endpoint \n • Merge Endpoints \n • <i>Segregate Commands from Queries</i>
+
+class "Communication Participant" as CommunicationParticipant {
+}
+
+CommunicationParticipant -left-> Endpoint
+
+class "API Client" as APIClient {
+}
+note left: <b>Client Refactorings:</b>\n — Split Application Frontend
+
+
+class "API Provider" as APIProvider {
+}
+note bottom: <b>Backend Refactorings:</b>\n — Split Application Backend
+
+
+APIClient -[hidden]right-> APIProvider
+
+APIClient -up-|> CommunicationParticipant
+APIProvider -up-|> CommunicationParticipant
+
+note "<b>Evolution Refactorings:</b>\n • <i>Introduce Version Identifier</i>\n • <i>Introduce Version Mediator</i>" as EvolutionRefactoringNote
+
+class Operation {
+ String name
+ APIPattern responsibility
+}
+note left: <b>Operation Refactorings:</b>\n • <i>Extract Operation</i> \n • Move Operation \n • <i>Rename Operation</i> \n • <i>Split Operation</i> \n • <i>Merge Operations</i> 
+
+EvolutionRefactoringNote -left- Endpoint
+
+class "Response Message Payload" as ResponseMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note bottom: <b>Message Refactorings 1/2:</b>\n • <i>Introduce Data Transfer Object</i> \n • <i>Extract Information Holder</i> \n • <i>Inline Information Holder</i> \n • <i>Introduce Pagination</i> \n • <i>Rename Representation Element</i>
+
+class "Request Message Payload" as RequestMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note bottom: <b>Message Refactorings 2/2:</b>\n • <i>Add Wish List</i> \n • Add Wish Template \n • Bundle Requests \n • <i>Encapsulate Context Representation</i> \n • <i>Make Request Conditional</i>
+
+API *-- Endpoint
+Endpoint *-- Operation 
+Operation *-- RequestMessagePayload 
+Operation *-- ResponseMessagePayload
+' RequestMessage *-- InParameters
+' ResponseMessage*-- OutParameters
+
+@enduml

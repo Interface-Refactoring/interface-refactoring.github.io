@@ -1,0 +1,767 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Extract Information Holder - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Extract Resource Representation, Provide Information Holder Link, Share Load, Split Load">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Extract Information Holder">
+<meta property="og:url" content="/refactorings/extractinformationholder">
+
+
+  <meta property="og:description" content="also known as: Extract Resource Representation, Provide Information Holder Link, Share Load, Split Load">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/extractinformationholder">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Extract Information Holder</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Extract Information Holder</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Extract Information Holder">
+    <meta itemprop="description" content="also known as: Extract Resource Representation, Provide Information Holder Link, Share Load, Split Load">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Extract Information Holder
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2024-10-07T00:00:00+02:00">October 7, 2024</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2024
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Extract Resource Representation, Provide Information Holder Link, Share Load, Split Load</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API operation returns multiple related, possibly deeply nested data structures to provide clients with a rich dataset in a single response. We call such data elements <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entities</a> [<a href="#ref-ZimmermannStockerEtAl2020">Zimmermann et al. 2020</a>]. For example, in an e-commerce application, the request for the profile of a customer might also return their complete purchasing history. This API is very convenient for clients requiring all the information simultaneously. However, it might not be appropriate for all use cases; some API clients might want to retrieve selected purchasing data through subsequent individual requests when they need it.</p>
+
+<p class="notice--primary">As an API client, I prefer to retrieve related data elements step-by-step over having to process large structured data sets appearing in a single response message so that I can process individual responses and the data in them quickly and on demand.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a>, <a href="/refactorings/by-stakeholder-concerns/#green-software">#green-software</a></dt>
+  <dd>Assembling, transferring, and processing a response utilizes resources both on the provider and client side. These resources should not be wasted but handled with care and respect for the environment and the energy consumed. Bandwidth and computing power are examples of valuable and costly resources.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#evolvability">#evolvability</a>, <a href="/refactorings/by-stakeholder-concerns/#coupling">#coupling</a></dt>
+  <dd>Systems and components evolve at different speeds. Hence, they should not depend on each other unless this is justified in the business requirements. Data dependencies often introduce unwanted coupling that is difficult to detect and resolve.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#data-currentness">#data-currentness</a></dt>
+  <dd>Data returned by an API might age at different rates. In the e-commerce shop scenario, for instance, the master data of customers (e.g., names, shipping addresses) will change less frequently than transactional data (such as orders). API clients might want to cache some of the data retrieved, which is harder if faster-changing data is embedded in slower-changing data.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#security">#security</a></dt>
+  <dd>Not all API clients have the same access privileges. More fine-grained data <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operations</a> make it easier to enforce related controls and rules, avoiding the risk that restricted data “slips through” accidentally. To revisit the e-commerce scenario, what if the shop software also includes public ratings of products that show the name and picture of the rating customer? Here, only limited and carefully selected information about the customer should be returned.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The API implementation shown in Figure 1 returns <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> that contain further nested data.</p>
+
+<p><img src="/refactorings/images/ExtractInformationHolder_Initial.png" alt="Extract Information Holder: Initial Position Sketch: An API provider responds to a request from a client (1) with a message (2) that contains several, possibly nested, [Data Elements](https://api-patterns.org/patterns/structure/elementStereotypes/DataElement). The client does not require all the received data." /></p>
+
+<p>Figure 1: Extract Information Holder: Initial Position Sketch: An API provider responds to a request from a client (1) with a message (2) that contains several, possibly nested, <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>. The client does not require all the received data.</p>
+
+<p>The refactoring targets response messages in API operations that return rich data representation elements.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#god-endpoint">God endpoint</a></em></dt>
+  <dd>The endpoint offering this operation might have to access many data sources or backend systems to assemble the response. Derived from the “God Class” smell in object-oriented design, the term describes a class or an object that controls numerous other system parts [<a href="#ref-Riel:1996">Riel 1996</a>]. Many such dependencies on external systems and data make the API implementation harder to operate and evolve.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#data-lifetime-mismatches">Data lifetime mismatches</a></em></dt>
+  <dd>Conflating <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> with different lifetimes makes caching, especially cache invalidation, harder. This may happen when slow-changing master data contains fast-changing transactional data (for example, in an <a href="https://api-patterns.org/patterns/responsibility/informationHolderEndpointTypes/OperationalDataHolder">Operational Data Holder</a>), but also if transactional data that is often refreshed by clients contains embedded master data that infrequently changes.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#overfetching">Overfetching</a></em></dt>
+  <dd>Clients throw away parts of the received data because the API design follows a one-size-fits-all approach, and the provider includes all data in responses that any present or future client might be interested in. For example, in an e-commerce API, product procurement information might only interest a few clients, while most want to learn about current prices and items in stock.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#sell-what-is-on-the-truck">Sell what is on the truck</a></em></dt>
+  <dd>Implementation data is exposed just because it is there, without any client-side use case.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>As a preparation for the refactoring, make sure that the following preconditions are met:</p>
+
+<ol>
+  <li>Decide on which parts of the message to extract. See the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> and <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a> patterns for advice [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>].</li>
+  <li>Ensure the API offers a dedicated <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a> for the data that is currently embedded and will be extracted. If this is not already the case, apply the <a href="/refactorings/splitoperation">Split Operation</a> refactoring first. An <a href="/refactorings/extractoperation">Extract Operation</a> or <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> refactoring might also be appropriate to avoid the <a href="/refactorings/by-smells-drivers/#god-endpoint">god endpoint</a> smell.</li>
+  <li>(Optional) If the API operation does not already use a dedicated Data Transfer Object (DTO), apply the <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring to decouple the API response message from the internal data model. The presence of a DTO allows changing the response message structure without affecting the internal data model. Depending on how deep the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> is nested in the response data structure, the <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring may have to be applied several times. You might be using a programming language or framework where this step is not required. In that case, you can just skip it as long as you have a means to modify the response message structure.</li>
+</ol>
+
+<p>Replace an <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> with a <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a> in the following steps:</p>
+
+<ol>
+  <li>Add a <a href="https://api-patterns.org/patterns/structure/elementStereotypes/LinkElement">Link Element</a> to the response message that points clients to a <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a> in an <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a>. This link realizes/applies the <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a> pattern; when a DTO is present, it is placed in it.</li>
+  <li>Adjust the tests to the new response structure and run them to observe the changed responses.</li>
+  <li>(Optional) Deprecate or remove the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> in the original response message.</li>
+  <li>Clean up the implementation code. For example, services, utilities, or repositories previously used to retrieve the embedded data might not be required anymore here; hence, they should either be moved or removed.</li>
+  <li>Check security policies to ensure that clients can access the linked data.</li>
+  <li>Adjust API clients under your control to issue additional API calls to retrieve the data available at the endpoint referenced in the new <a href="https://api-patterns.org/patterns/structure/elementStereotypes/LinkElement">Link Element</a> as needed.</li>
+  <li>Update <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> [<a href="#ref-LübkeZimmermannEtAl2019">Lübke et al. 2019a</a>], version number, sample code, tutorials, etc., as required. API directories and gateways might have to be updated as well.</li>
+</ol>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The client can use the <a href="https://api-patterns.org/patterns/structure/elementStereotypes/LinkElement">Link Element</a> returned in response to the initial request to retrieve the related data in a follow-up call, as shown in Step 3 in Figure 2.</p>
+
+<p><img src="/refactorings/images/ExtractInformationHolder_Target.png" alt="Extract Information Holder: Target Solution Sketch: An API client requests (1) a resource from a provider, which responds with a message (2) containing a [Linked Information Holder](https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder). The client can then request (3) this data when it needs this data. The provider responds (4) with a [Data Element](https://api-patterns.org/patterns/structure/elementStereotypes/DataElement) that was embedded in the response in the Initial Position Sketch." /></p>
+
+<p>Figure 2: Extract Information Holder: Target Solution Sketch: An API client requests (1) a resource from a provider, which responds with a message (2) containing a <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a>. The client can then request (3) this data when it needs this data. The provider responds (4) with a <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Element</a> that was embedded in the response in the Initial Position Sketch.</p>
+
+<p>To reap the full benefits of this refactoring, backward compatibility has to be given up. In the first step, the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> could be marked as deprecated to give the clients time to adjust. At a time defined and announced when applying the refactoring, the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> is removed from the message payload. The <a href="https://api-patterns.org/patterns/evolution/LimitedLifetimeGuarantee">Limited Lifetime Guarantee</a> pattern in Lübke et al. [<a href="#ref-LuebkeZimmermannEtAl2019">2019b</a>] describes this lifecycle management strategy in detail.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The following <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> shows an endpoint to retrieve a <code>CustomerProfileDTO</code>, which includes the <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> <code>PurchaseOrderDTOs</code>.</p>
+
+<pre><code class="language-mdsl">API description ECommerceAPI
+
+data type CustomerProfileId {"id": ID&lt;string&gt;}
+
+data type CustomerProfileDTO {
+  "id": CustomerProfileId,
+  "name": Data&lt;string&gt;,
+  &lt;&lt;Embedded_Entity&gt;&gt; "purchaseHistory": PurchaseOrderDTO*
+} 
+
+data type PurchaseOrderDTO "DTODesignToBeContinued" 
+
+endpoint type CustomerProfileEndpoint 
+serves as INFORMATION_HOLDER_RESOURCE
+exposes 
+  operation getCustomerProfile 
+    with responsibility RETRIEVAL_OPERATION
+    expecting payload CustomerProfileId
+    delivering payload CustomerProfileDTO
+    
+API provider ECommerceAPIProvider
+  offers CustomerProfileEndpoint
+
+API client ECommerceClient
+  consumes CustomerProfileEndpoint
+</code></pre>
+
+<p>This example uses the MDSL notation introduced in Zimmermann et al. [<a href="#ref-PatternsForAPIDesign:2022">2022</a>].</p>
+
+<p>Having applied the refactoring, the client will now receive a link (notice the <code>purchaseHistory</code> link in <code>CustomerProfileDTO</code>):</p>
+
+<pre><code class="language-mdsl">
+data type CustomerProfileDTO {
+  "id": CustomerProfileId,
+  "name": Data&lt;string&gt;,
+---  &lt;&lt;Embedded_Entity&gt;&gt; "purchaseHistory": PurchaseOrderDTO*
++++  &lt;&lt;Linked_Information_Holder&gt;&gt; 
++++    "purchaseHistory": Link&lt;string&gt;
+} 
+
+data type PurchaseOrderDTO "DTODesignToBeContinued"
+
++++ endpoint type PurchaseHistoryEndpoint
++++ serves as INFORMATION_HOLDER_RESOURCE
++++ exposes
++++   operation getPurchaseHistory
++++     with responsibility RETRIEVAL_OPERATION
++++     expecting payload CustomerProfileId
++++     delivering payload PurchaseOrderDTO*
+    
+API provider ECommerceAPIProvider
+  offers CustomerProfileEndpoint 
++++   offers PurchaseHistoryEndpoint
+</code></pre>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Comparing the Target Solution Sketch from Figure 2 with the Initial Position Sketch shown in Figure 1 shows that the first resource now accesses fewer repositories to assemble the response message. This enables further architectural refactorings such as <a href="/refactorings/splitapplicationbackend">Split Application Backend</a>.</p>
+
+<p>Monitor the API to maintain and challenge the rationale for pattern usage. If most or all client calls follow the given <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a>, consider embedding the target element in the original representation again using the <a href="/refactorings/inlineinformationholder">Inline Information Holder</a> refactoring. A deeper discussion of the benefits and liabilities of the two patterns involved in this refactoring and its inverse, <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> and <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a>, can be found in the pattern texts in Zimmermann et al. [<a href="#ref-PatternsForAPIDesign:2022">2022</a>].</p>
+
+<p>For the specific question of whether it is preferable to exchange several small messages or a few larger ones, please refer to our article <a href="https://www.informit.com/articles/article.aspx?p=3153211">What is the Right Service Granularity in APIs?</a></p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>The inverse API refactoring is <a href="/refactorings/inlineinformationholder">Inline Information Holder</a>.</p>
+
+<p>If there is no operation to retrieve the linked data yet, the <a href="/refactorings/splitoperation">Split Operation</a> refactoring can be used to create one.</p>
+
+<p>After a <em>Split Operation</em> refactoring, <a href="/refactorings/extractinformationholder">Extract Information Holder</a> can be used to further “split” the response messages of the operations.</p>
+
+<p>The <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> and <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> patterns (and related <a href="/refactorings/addwishlist">Add Wish List</a> and <a href="/refactorings/addwishtemplate">Add Wish Template</a> refactorings) offer alternative solutions to the problem of how an API client can inform the API provider at runtime about the data it is interested in.</p>
+
+<p>Context Mapper [<a href="#ref-Kapferer-Zimmermann-CM-ARs:2020">Kapferer and Zimmermann 2020</a>], a modeling framework and Domain-specific Language (DSL) for Domain-Driven Design (DDD), implements a refactoring called <a href="https://contextmapper.org/docs/ar-split-aggregate-by-entities/">Split Aggregate by Entity</a>. A DDD Aggregate [<a href="#ref-Evans:2003">Evans 2003</a>] establishes a transactional boundary around a group of Entities that are persisted together; a data-centric Aggregate could be exposed via an <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resources</a> on the API level. Splitting such an Aggregate therefore can be seen to correspond to splitting or extracting parts from an API-level <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a>.</p>
+
+<p>As another example not related to APIs but Web application frontend design, consider the difference between single and multi-page websites. All information is available on a single page regardless of whether it is relevant to each reader. In a multi-page design, the home page gives an overview, and additional information is provided via hyperlinks that can be followed on demand.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Evans:2003" class="csl-entry">
+
+    <p>Evans, Eric. 2003. <em>Domain-Driven Design: Tacking Complexity in the Heart of Software</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Kapferer-Zimmermann-CM-ARs:2020" class="csl-entry">
+
+    <p>Kapferer, Stefan, and Olaf Zimmermann. 2020. “Domain-Driven Service Design.” In <em>Service-Oriented Computing</em>, edited by Schahram Dustdar, 189–208. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-64846-6_11">https://doi.org/10.1007/978-3-030-64846-6_11</a>.</p>
+
+  </div>
+
+  <div id="ref-LübkeZimmermannEtAl2019" class="csl-entry">
+
+    <p>Lübke, Daniel, Olaf Zimmermann, Cesare Pautasso, Uwe Zdun, and Mirko Stocker. 2019a. “Interface Evolution Patterns: Balancing Compatibility and Extensibility Across Service Life Cycles.” In <em>Proceedings of the 24th European Conference on Pattern Languages of Programs</em>. EuroPLop ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3361149.3361164">https://doi.org/10.1145/3361149.3361164</a>.</p>
+
+  </div>
+
+  <div id="ref-LuebkeZimmermannEtAl2019" class="csl-entry">
+
+    <p>———. 2019b. “Interface Evolution Patterns: Balancing Compatibility and Extensibility Across Service Life Cycles.” In <em>Proceedings of the 24th European Conference on Pattern Languages of Programs</em>. EuroPLop ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3361149.3361164">https://doi.org/10.1145/3361149.3361164</a>.</p>
+
+  </div>
+
+  <div id="ref-Riel:1996" class="csl-entry">
+
+    <p>Riel, Arthur J. 1996. <em>Object-Oriented Design Heuristics</em>. Reading, MA: Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-ZimmermannStockerEtAl2020" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Cesare Pautasso, and Uwe Zdun. 2020. “Introduction to Microservice API Patterns (MAP).” In <em>Joint Post-Proceedings of the First and Second International Conference on Microservices (Microservices 2017/2019)</em>, edited by Luı́s Cruz-Filipe, Saverio Giallorenzo, Fabrizio Montesi, Marco Peressotti, Florian Rademacher, and Sabine Sachweh, 78:4:1–17. OpenAccess Series in Informatics (OASIcs). Dagstuhl, Germany: Schloss Dagstuhl–Leibniz-Zentrum fuer Informatik. <a href="https://doi.org/10.4230/OASIcs.Microservices.2017-2019.4">https://doi.org/10.4230/OASIcs.Microservices.2017-2019.4</a>.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/encapsulatecontextrepresentation" class="pagination--pager" title="Encapsulate Context Representation
+">Previous</a>
+    
+    
+      <a href="/refactorings/extractoperation" class="pagination--pager" title="Extract Operation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

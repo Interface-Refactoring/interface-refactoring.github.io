@@ -1,0 +1,742 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduce Pagination - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Paginate Responses, Slice Response Message">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Introduce Pagination">
+<meta property="og:url" content="/refactorings/introducepagination">
+
+
+  <meta property="og:description" content="also known as: Paginate Responses, Slice Response Message">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/introducepagination">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Introduce Pagination</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Introduce Pagination</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduce Pagination">
+    <meta itemprop="description" content="also known as: Paginate Responses, Slice Response Message">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Introduce Pagination
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-10-06T00:00:00+02:00">October 6, 2023</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2023
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Paginate Responses, Slice Response Message</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API operation returns a large sequence of <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>. For example, such a sequence may enumerate posts in a social media site or list products in an e-commerce shop. The API clients are interested in all <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> in the sequence but have reported that processing a large amount of data at once is challenging for them.</p>
+
+<p class="notice--primary">As the API provider, I want to return data sets in manageable chunks so that clients are not overwhelmed by a huge amount of data arriving at once.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a>, <a href="/refactorings/by-stakeholder-concerns/#resource-utilization">#resource-utilization</a></dt>
+  <dd>Transferring all <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> at once can lead to huge response messages that burden receiving clients and the underlying infrastructure (i.e., network and application frameworks as well as databases) with a high workload. For instance, single-page applications that receive several megabytes of JSON might freeze until all contained JSON objects have been decoded.</dd>
+</dl>
+
+<pre><code class="language-{=html}">&lt;!-- --&gt;
+</code></pre>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#data-access-characteristics">#data-access-characteristics</a></dt>
+  <dd>In principle, the client wants to access all data elements, but not all have to be received at once or every time. For example, older posts to a social media site might be less relevant than recent ones and can be retrieved separately.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The API provider currently returns an extensive sequence of <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> in the response messages of the operation. Figure 1 shows this initial position sketch.</p>
+
+<p><img src="/refactorings/images/IntroducePagination_Initial.png" alt="Introduce Pagination: Initial Position Sketch. The client's request (1) is met by a large sequence of data elements (2)." /></p>
+
+<p>Figure 1: Introduce Pagination: Initial Position Sketch. The client’s request (1) is met by a large sequence of data elements (2).</p>
+
+<p>This refactoring targets an API <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a> and its request and response messages.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#high-latency-poor-response-time">High latency/poor response time</a></em></dt>
+  <dd>Responses take a long time to arrive at the client because a lot of data has to be assembled and transmitted. This might be evident in a provider-side log file analysis or client-side performance metrics.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#overfetching">Overfetching</a></em></dt>
+  <dd>A client may not need all data (at once or at all) and truncate an overly large dataset. Since this truncation happens on the client side, data was unnecessarily processed and transmitted.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#spike-load">Spike load</a></em></dt>
+  <dd>Regular requests for large amounts of data cause Periodic Workload [<a href="#ref-Fehling:2014">Fehling et al. 2014</a>] for CPU and memory, for instance, when a large JSON object has to be constructed (on the provider side) and read (on the client side). For example, the “Time-Bound Report” variant of a <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a> might lead to relatively large responses, depending on the time interval size chosen.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Decide on a variant of <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> that best fits your API: Page-Based, Offset-Based, Cursor-Based, or Time-Based Pagination. Clients request the data differently in these variants; see the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> pattern description [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>] for details on the variants and their pros and cons.</p>
+
+<ol>
+  <li>All variants involve certain metadata, so if the current response message directly returns the underlying domain model elements, possibly contained in a list, wrap the structure in a Data Transfer Object (DTO) first by applying the <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring.</li>
+  <li>Add additional response attributes to the DTO to hold the metadata required for <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> (for instance, page size, page number, and the total number of pages for the Page-Based pattern variant).</li>
+  <li>Adjust the expected parameters in the request message to give the client control over the number of results returned. Provide default values so that existing clients will continue to work.</li>
+  <li>Enhance the unit and integration tests to include and check for these additional attributes. Test with different chunk sizes. Include complete versus partial retrievals and changes to data while being paginated to the test suite.</li>
+  <li>Update <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a>, sample code, tutorials, etc., with information about the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> options (for instance, variant, metadata syntax, semantics, and session management concerns).</li>
+  <li>Increase the version number as suggested under <a href="https://api-patterns.org/patterns/evolution/SemanticVersioning">Semantic Versioning</a>. The refactoring typically results in a major update, but a minor update might be sufficient if the API provider implements the change in a backward-compatible way.</li>
+</ol>
+
+<p>When already following the API best practice of consistently returning an object as a top-level data structure, it is straightforward to implement <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> in a backward-compatible manner, returning all results as a single page if no control metadata appears in incoming requests. While this approach is backward-compatible, it does not remove any of the above smells.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>After the refactoring, the client indicates the desired amount and position in the sequence of data in their request messages (depending on the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> variant). In Figure 2, the number of elements, offset (desired first element, that is), and so on is represented by <a href="https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement">Metadata Elements</a>.</p>
+
+<p><img src="/refactorings/images/IntroducePagination_Target.png" alt="Introduce Pagination: Target Solution Sketch. After the refactoring, the client includes metadata in the request (1) that tells the provider which elements to return. In its response (2), the provider returns the desired elements, along with more metadata (for instance, the total number of elements available). This exchange can then be repeated with follow-up requests (3) and responses (4), where the client can specify the next page (or offset, cursor, depending on the chosen pattern variant)." /></p>
+
+<p>Figure 2: Introduce Pagination: Target Solution Sketch. After the refactoring, the client includes metadata in the request (1) that tells the provider which elements to return. In its response (2), the provider returns the desired elements, along with more metadata (for instance, the total number of elements available). This exchange can then be repeated with follow-up requests (3) and responses (4), where the client can specify the next page (or offset, cursor, depending on the chosen pattern variant).</p>
+
+<p>More but smaller messages are exchanged after the refactoring has been applied.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>In this example, we will add Offset-Based <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> to the Customer Core service of the Lakeside Mutual sample application. The <code>customers</code> endpoint in this service returns a list of customer representations:</p>
+
+<pre><code>$ curl http://localhost/customers
+[ {
+  "customerId" : "bunlo9vk5f",
+  "firstname" : "Ado",
+  "lastname" : "Kinnett",
+  ...
+}, {
+  "customerId" : "bd91pwfepl",
+  "firstname" : "Bel",
+  "lastname" : "Pifford",
+  ...
+} ]
+</code></pre>
+
+<p>Note that the response is a JSON array of objects. To transmit the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> metadata, we first wrap the response in a JSON object (this wrapping is usually done by introducing a DTO that encapsulates the <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>), with a <code>customers</code> property to hold the entities:</p>
+
+<pre><code>$ curl http://localhost/customers
+{
+  "customers" : [ {
+    "customerId" : "bunlo9vk5f",
+    "firstname" : "Ado",
+    "lastname" : "Kinnett",
+    ...
+  }, {
+    "customerId" : "bd91pwfepl",
+    "firstname" : "Bel",
+    "lastname" : "Pifford",
+    ...
+  } ]
+}
+</code></pre>
+
+<p>Unfortunately, this makes the response backward incompatible. Initially, the array was returned at the top level of the response, but now it is nested inside a <code>customers</code> object. Enabling such future extensibility is why API guidelines (e.g., from <a href="https://opensource.zalando.com/restful-api-guidelines/#110">Zalando</a>) recommend always returning an object as the top-level data structure in the first place.</p>
+
+<p>With the basic structure in place, we can now add HTTP query parameters (<code>limit</code>, <code>offset</code>) and return the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> metadata (<code>limit</code>, <code>offset</code>, <code>size</code>) in our response. Here is a request for the next chunk of elements (including the JSON response to it):</p>
+
+<pre><code>$ curl http://localhost/customers?limit=2&amp;offset=2
+{
+  "limit" : 2,
+  "offset" : 2,
+  "size" : 50,
+  "customers" : [ {
+    "customerId" : "qpa66qpilt",
+    "firstname" : "Devlin",
+    "lastname" : "Daly",
+    ...
+  }, {
+    "customerId" : "en2fzxutxm",
+    "firstname" : "Dietrich",
+    "lastname" : "Cordes",
+    ...
+  } ]
+}
+</code></pre>
+
+<p>See the <a href="https://github.com/Microservice-API-Patterns/LakesideMutual/blob/master/customer-core/src/main/java/com/lakesidemutual/customercore/interfaces/CustomerInformationHolder.java#L171">Lakeside Mutual repository</a> for the full Spring Boot implementation, including HATEOAS links and filtering.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>The <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> the operation returns typically have an identical structure, as in our example above. Still, <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> can also be used if the structures of the individual <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> differ from each other, as long as there is a sequence of elements that can be split up. If the structure of the response does not comprise a sequence of elements that can be split into pages, the <a href="/refactorings/extractinformationholder">Extract Information Holder</a> refactoring offers an alternative solution to reduce the amount of data transferred.</p>
+
+<p>The API implementation should ensure that the order of elements is consistent when implementing <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a>. For example, the API provider can specify an explicit <code>order by</code> when querying a relational database. Otherwise, clients might receive inconsistent or duplicate results across multiple pages.</p>
+
+<p>Keep in mind that not all API clients are part of end user applications. Backend services can also be API clients that may want to paginate the data they receive.</p>
+
+<p>If the API deployment infrastructure involves load balancers and failover/standby configurations, keep the following in mind:<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></p>
+
+<ul>
+  <li>The request for a follow-up page (Step 3 of Figure 2) could go to a different API service provider instance than the first initial request. In that case, that (second) instance would perform another database request to retrieve the second page. However, the data on that second page could have changed in the repository between the two page requests. So this only works for static data that does not change often.</li>
+  <li>Data consistency/transaction mechanism: Assuming we are dealing with highly dynamic repository data (e.g., the backend database is constantly changing), we need to either make sure that all page requests reach the same service instance that initially retrieved the data from the database (effectively making the service stateful), or develop a caching mechanism in the repository so that data changes between page requests are not causing data inconsistencies in the client.</li>
+  <li>If the service instance fails between the two page requests (assuming the service is now stateful, and we have a routing rule to reach the same instance with each page request), the provider has to notify the client that <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> has failed entirely, and the client then must retrieve the first page again.</li>
+</ul>
+
+<p>Instead of adding <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> metadata to the body of the response message, it can be transmitted in HTTP headers, as in the <a href="https://docs.github.com/en/rest/guides/traversing-with-pagination">GitHub API</a>. This can be an alternative implementation approach if the body of the response message cannot be adjusted for backward compatibility.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>The <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring prepares request and response messages to introduce the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> metadata.</p>
+
+<p>“Patterns for API Design” [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>] describes <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/Pagination">Pagination</a> and its variants in detail and points at additional information.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Fehling:2014" class="csl-entry">
+
+    <p>Fehling, Christoph, Frank Leymann, Ralph Retter, Walter Schupeck, and Peter Arbitter. 2014. <em>Cloud Computing Patterns: Fundamentals to Design, Build, and Manage Cloud Applications</em>. Springer. <a href="https://doi.org/10.1007/978-3-7091-1568-8">https://doi.org/10.1007/978-3-7091-1568-8</a>.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Thanks to Andrei Furda for suggesting this advice. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/introducedatatransferobject" class="pagination--pager" title="Introduce Data Transfer Object
+">Previous</a>
+    
+    
+      <a href="/refactorings/introduceversionidentifier" class="pagination--pager" title="Introduce Version Identifier
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

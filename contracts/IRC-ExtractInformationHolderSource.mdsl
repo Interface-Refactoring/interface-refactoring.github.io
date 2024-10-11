@@ -1,0 +1,24 @@
+API description ECommerceAPI
+
+data type CustomerProfileId {"id": ID<string>}
+
+data type CustomerProfileDTO {
+  "id": CustomerProfileId,
+  "givenName": Data<string>,
+  "familyName": Data<string>,
+  <<Embedded_Entity>> "purchaseHistory": PurchaseOrderDTO*
+} 
+
+data type PurchaseOrderDTO  { "toBeContinued" }
+
+endpoint type CustomerProfileEndpoint serves as INFORMATION_HOLDER_RESOURCE
+exposes 
+  operation getCustomerProfile with responsibility RETRIEVAL_OPERATION
+    expecting payload CustomerProfileId
+    delivering payload CustomerProfileDTO
+    
+API provider ECommerceAPIProvider
+  offers CustomerProfileEndpoint
+
+API client ECommerceClient
+  consumes CustomerProfileEndpoint

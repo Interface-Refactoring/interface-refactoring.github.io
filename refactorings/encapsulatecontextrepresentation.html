@@ -1,0 +1,725 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Encapsulate Context Representation - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Add Context Metadata to Payload, Extract QoS Information from Headers">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Encapsulate Context Representation">
+<meta property="og:url" content="/refactorings/encapsulatecontextrepresentation">
+
+
+  <meta property="og:description" content="also known as: Add Context Metadata to Payload, Extract QoS Information from Headers">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/encapsulatecontextrepresentation">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Encapsulate Context Representation</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Encapsulate Context Representation</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Encapsulate Context Representation">
+    <meta itemprop="description" content="also known as: Add Context Metadata to Payload, Extract QoS Information from Headers">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Encapsulate Context Representation
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2024-10-07T00:00:00+02:00">October 7, 2024</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2024
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Add Context Metadata to Payload, Extract QoS Information from Headers</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API endpoint and its operations have been defined. API client and provider must exchange context information about their interaction, such as the client’s location, Quality-of-Service (QoS) control data, or data used to authenticate, authorize, and bill clients. API client-provider interactions might be part of conversations within and across API endpoints, possibly involving external systems as well.</p>
+
+<p class="notice--primary">As a conversation participant, I want to consolidate all context information in a single place and keep it close to the domain data so that clients and providers can prepare and process it along with that data. This also allows switching protocols if that is required to satisfy requirements and constraints that change over time.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#developer-experience">#developer-experience</a> and <a href="/refactorings/by-stakeholder-concerns/#learnability">#learnability</a></dt>
+  <dd>Accessing protocol headers is different from accessing message payload; different local APIs and/or platform-specific libraries have to be used. Consolidating information in the payload reduces the learning and implementation effort.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#interoperability">#interoperability</a> and <a href="/refactorings/by-stakeholder-concerns/#modifiability">#modifiability</a></dt>
+  <dd>Less protocol-specific functionality means fewer changes are required when one protocol is replaced by another.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#security">#security</a> and <a href="/refactorings/by-stakeholder-concerns/#auditability">#auditability</a></dt>
+  <dd>In multiprotocol scenarios, end-to-end security guarantees can only be given and enforced when the information in protocol headers is aggregated and correlated somehow. System and process assurance auditors appreciate if all relevant compliance information can be found in a single place (that is adequately protected) [<a href="#ref-Julisch:2011">Julisch et al. 2011</a>].</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>Technical metadata such as <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/APIKey">API Keys</a>, session IDs, or other QoS properties (for example, correlation identifiers, priority levels, time-to-live information, transactional policies, bandwidth requirements, packet-loss tolerance, or latency constraints) travel exclusively in the form of protocol headers. The initial position sketch in Figure 1 shows a response message with a payload and several protocol headers.</p>
+
+<p><img src="/refactorings/images/EncapsulateContextRepresentation_Initial.png" alt="Encapsulate Context Representation: Initial Position Sketch. API client and provider exchange a message that contains context information as [Metadata Elements](https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement) in the protocol header." /></p>
+
+<p>Figure 1: Encapsulate Context Representation: Initial Position Sketch. API client and provider exchange a message that contains context information as <a href="https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement">Metadata Elements</a> in the protocol header.</p>
+
+<p>The refactoring targets request and/or response messages of one or more operations. Operations that form a conversation may or may not appear in the same API endpoint.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#tight-coupling-to-a-communication-protocol">Tight coupling to a communication protocol</a></em></dt>
+  <dd>Most of the network and communication protocols define their own header formats and fields; HTTP is an example. Some of these protocols support custom headers, and others do not. Using protocol-specific headers locks the communication participant in; this can be positive or negative, depending on context and requirements.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#quality-of-service-qos-fragmentation-and-dispersion">Quality-of-Service (QoS) fragmentation and dispersion</a></em></dt>
+  <dd>Several protocols might be used in conversations, such as HTTP, gRPC, and asynchronous messaging (AMQP). API clients and providers must go to multiple places to gather or produce all required context information, which can be error-prone, time-consuming, and cause technical debt.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<ol>
+  <li>Design a data structure, the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a>, to represent the context information.</li>
+  <li>Add this data structure to the request and/or response operations of the targeted operations, add DTOs where necessary.</li>
+  <li>Implement a client-provider message exchange that produces and consumes instances of the new data structure.</li>
+  <li>Update the <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> with information about the syntax and semantics of the new message payload part. Provide data usage examples in the documentation, including valid and invalid values (or value ranges).</li>
+  <li>Inform clients about their new options and/or liabilities to work with the new <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a>.</li>
+</ol>
+
+<p>Note that it might be required to keep the context information in its current place, e.g., in protocol headers, for backward compatibility reasons. In this case, the refactoring allows clients to choose between the old and new ways of providing context information.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>Applying these steps leads to the solution sketched in Figure 2.</p>
+
+<p><img src="/refactorings/images/EncapsulateContextRepresentation_Target.png" alt="Encapsulate Context Representation: Target Solution Sketch. In addition to protocol-specific metadata transported in protocol headers, application-level [Metadata Elements](https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement) are bundled and included in the payload of the response message." /></p>
+
+<p>Figure 2: Encapsulate Context Representation: Target Solution Sketch. In addition to protocol-specific metadata transported in protocol headers, application-level <a href="https://api-patterns.org/patterns/structure/elementStereotypes/MetadataElement">Metadata Elements</a> are bundled and included in the payload of the response message.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The following MDSL code snippet shows an API endpoint with an operation that expects context information in the headers:</p>
+
+<pre><code>data type KeyValuePair {
+  "name": ID&lt;string&gt;,
+  "property": D&lt;string&gt;
+}+
+
+endpoint type SampleService 
+  exposes 
+    operation sampleOperationInitial
+      expecting 
+        headers {
+          "apiKey":ID&lt;int&gt;, 
+          "sessionId":D&lt;int&gt;?, 
+          "otherQosProperties":
+            KeyValuePair* 
+        }
+        payload 
+          "regularRequestPayload":D&lt;string&gt;
+      delivering 
+        payload "someUnspecifiedResponseData"
+</code></pre>
+
+<p>After the context information has been encapsulated, the <code>apiKey</code>, <code>sessionId</code>, and <code>otherQosProperties</code> from the header have moved. They now appear in a Data Transfer Object called <code>RequestContext</code> that is part of the request payload:</p>
+
+<pre><code>data type RequestContext {
+  "apiKey":ID&lt;int&gt;, 
+  "sessionId":D&lt;int&gt;?, 
+  "otherQosProperties": KeyValuePair*
+}
+
+data type KeyValuePair {
+  "name": ID&lt;string&gt;,
+  "property": D&lt;string&gt; }+
+
+endpoint type SampleService 
+  exposes     
+    operation sampleOperationTarget
+      expecting 
+        payload { 
+         &lt;&lt;Context_Representation&gt;&gt; 
+           "requestContext": RequestContext,
+         &lt;&lt;Data_Element&gt;&gt; 
+           "regularRequestPayload":D&lt;string&gt;
+        }
+      delivering 
+        payload "someUnspecifiedResponseData"
+</code></pre>
+
+<p>The OpenAPI version of the source and target sketch is available <a href="/contracts/IRC-ContextRepresentationSourceAndTarget.yaml">here</a>.</p>
+
+<p>The <a href="https://api-patterns.org/patterns/structure/specialPurposeRepresentations/ContextRepresentation#sec:ContextRepresentation:Example">online example</a> for the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> pattern shows a <code>CustomerInformationHolderService</code> whose <code>getCustomerAttributes</code> operation contains an explicit <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> in its request message payload.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Before and when encapsulating context information, make sure to:</p>
+
+<ul>
+  <li>Decide whether the context has a local or global scope with respect to operation invocations in one or more API endpoints. The pattern variants discussed in Zimmermann et al. [<a href="#ref-PatternsForAPIDesign:2022">2022</a>] provide detailed information about this decision.</li>
+  <li>Decide whether request or response messages should contain a message payload-level <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> (or both). Contextualizing requests is more common; for instance, think about client location, API user data, <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> items, as well as credentials used to authenticate, authorize, and bill clients. Response contexts can also be observed in practice.</li>
+  <li>Strive for a reusable data structure design across operations (and endpoints, if possible). Prefer de-jure or de-facto industry standards over own creations to define the inner structure of the QoS information in the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> if possible. For example, RFC 7807 [<a href="#ref-rfc7807">Nottingham and Wilde 2016</a>] defines a standard way to carry problem details in HTTP response messages.</li>
+</ul>
+
+<p>It might be required but not possible to encrypt the data in protocol headers; this would be a reason why this refactoring is eligible. Suppose the payload is encrypted but contains context information used for message routing (for instance, in an API Gateway [<a href="#ref-Richardson:2018">Richardson 2018</a>]). In that case, the refactoring might cause undesired decrypt/encrypt steps in the intermediary.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>Steps 1 and 2 of this refactoring can be seen as an instance of <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>.</p>
+
+<p>See the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">API Patterns website</a> for a detailed description of the <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> pattern.</p>
+
+<p>Undoing the content encapsulation is possible, but our Interface Refactoring Catalog does not contain an explicit inverse refactoring at present.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Julisch:2011" class="csl-entry">
+
+    <p>Julisch, Klaus, Christophe Suter, Thomas Woitalla, and Olaf Zimmermann. 2011. “Compliance by Design - Bridging the Chasm Between Auditors and IT Architects.” <em>Computers and Security</em> 30 (September): 410–26. <a href="https://doi.org/10.1016/j.cose.2011.03.005">https://doi.org/10.1016/j.cose.2011.03.005</a>.</p>
+
+  </div>
+
+  <div id="ref-rfc7807" class="csl-entry">
+
+    <p>Nottingham, Mark, and Erik Wilde. 2016. “[Problem Details for HTTP APIs]{.nocase}.” Request for Comments. RFC 7807; RFC Editor. <a href="https://doi.org/10.17487/RFC7807">https://doi.org/10.17487/RFC7807</a>.</p>
+
+  </div>
+
+  <div id="ref-Richardson:2018" class="csl-entry">
+
+    <p>Richardson, Chris. 2018. <em>Microservices Patterns</em>. Manning.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/bundlerequests" class="pagination--pager" title="Bundle Requests
+">Previous</a>
+    
+    
+      <a href="/refactorings/extractinformationholder" class="pagination--pager" title="Extract Information Holder
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

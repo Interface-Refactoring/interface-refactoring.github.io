@@ -1,0 +1,655 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Interface Refactoring Catalog</title>
+<meta name="description" content="The Interface Refactoring Catalog is a collection of interface and other architectural refactorings.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Interface Refactoring Catalog">
+<meta property="og:url" content="/">
+
+
+  <meta property="og:description" content="The Interface Refactoring Catalog is a collection of interface and other architectural refactorings.">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          
+          
+
+
+        </header>
+      
+
+      
+
+      <section class="page__content" itemprop="text">
+        <h1 id="interface-refactoring-catalog">Interface Refactoring Catalog</h1>
+
+<p>Welcome to the <strong>Interface Refactoring Catalog</strong>, a collection of API refactorings and related architectural refactorings. The refactoring activities are described in a technology-neutral way for the most part, but their examples and implementation hints stem from HTTP resource API design and evolution.</p>
+
+<p><em>News (10/2024):</em> Our contribution to the EuroPLoP 2024 proceedings, “Pattern-oriented API Refactoring: Addressing Design Smells and Stakeholder Concerns”, is on its way. You can find the CC-BY-ND version of the paper <a href="/assets/PatternOrientedAPIRefactoringEuroPLoP2024.pdf">here</a>. All publications about IRC are available from the <a href="/publications">Articles and Books</a> page.</p>
+
+<p><em>News (07/2024):</em> We present(ed) the next seven refactorings in Workshop B of <a href="https://www.europlop.net/conference/">EuroPLoP 2024</a>. Stay tuned!</p>
+
+<p><em>News (12/2023):</em> Eight refactorings were workshopped at the 29th European Conference on Pattern Languages of Programs (EuroPLoP). The open-access paper, published by ACM, is available for download <a href="/assets/APIRefactoringToPatternsEuroPLoP2023.pdf">here</a>.</p>
+
+<p><em>News (12/2022):</em> The patterns featured in this catalog form the core of a new book in Vaughn Vernon’s Signature Series at Pearson, published in December 2022. Read more about this exciting news <a href="https://api-patterns.org/2022/08/02/vvonlit.html">on the API design patterns</a> website.</p>
+
+<p>The <a href="/news">news</a> posts of this site keep you updated.</p>
+
+<h2 id="refactorings-catalog-overview">Refactorings Catalog Overview</h2>
+
+<p>The following UML class diagram shows which refactorings we have collected (links to them are available on the <a href="/refactorings">Refactorings by Target</a> page):</p>
+
+<p><img src="/plantuml-images/1205920dd8efb041d70222452b9ecd42aa1fb1d8966689e5915b7ee93729a457.svg" alt="" /></p>
+
+<p><em>Figure 1: Refactorings by targeted API element; refactoring names in italics have been workshopped at EuroPLoP.</em></p>
+
+<p>You may want to start browsing via the <a href="/refactorings/by-stakeholder-concerns/">Refactorings by Stakeholder Concerns</a> or <a href="/refactorings/by-smells-drivers/">Refactorings by Smells</a> views. We advise to <a href="/hints">Test, Explain, Let Know and Learn</a> when applying the refactorings.</p>
+
+<p><em>Note:</em> This is Version 1.0 of our catalog. We might extend it in the future — or refactor it.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> The <a href="/backlog">Backlog</a> provides a preview of other potential refactorings.</p>
+
+<p>The latest <a href="https://microservice-api-patterns.github.io/MDSL-Specification/tools">MDSL Tools</a> implement most of the refactorings. See the documentation on <a href="https://microservice-api-patterns.github.io/MDSL-Specification/soad#transformations-related-to-patterns-and-refactorings">Transformations Related to Patterns and Refactorings</a> and <a href="/news/refactorings-implemented-in-mdsl/">this blog post</a> for details.</p>
+
+<h2 id="why-refactoring">Why Refactoring</h2>
+
+<p>Refactorings remove <a href="http://www.designsmells.com/">“Software Design Smells”</a> [<a href="#ref-Suryanarayana2014">Suryanarayana, Samarthyam, and Sharma 2014</a>].</p>
+
+<p><em>Refactoring</em> refers to the practice of improving a software system without changing its external/observable behavior. Think of cleaning up a piece of code or putting finishing touches on a design, like making sure all names are well-chosen or breaking up a long piece of code into several parts. The purpose of refactoring can also be the alignment of the software with a design pattern [<a href="#ref-Kerievsky2004">Kerievsky 2004</a>]. Once you start to add new features or fix bugs, you are not refactoring anymore.</p>
+
+<p>A refactoring is performed as a series of small steps that always keeps the software in a functioning state, and should be accompanied by a comprehensive suite of tests. For example, when moving a method between classes, a forwarding method that delegates calls from the original to the new class allows callers of the method to be migrated individually.</p>
+
+<h2 id="introduction-to-interface-refactoring">Introduction to Interface Refactoring</h2>
+
+<p>You are probably wondering what exactly we mean with “interface”, a term with several meanings, from the Java keyword to describe a programming language concept to the “I” in API – Application Programming Interfaces. Zooming out from a single program and putting on our systems architecture hat, other types of interfaces<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> start to appear.</p>
+
+<p>Much has been written about refactoring in programming languages — the term <a href="https://wiki.c2.com/?HistoryOfRefactoring">originates there</a>. Bill Opdyke wrote a PhD thesis on the subject [<a href="#ref-Opdyke1992">Opdyke 1992</a>], and the term has been popularized by Martin Fowler [<a href="#ref-Fowler2018">Fowler 2018</a>] — but the concept and the activity have broader appeal. Architectural refactoring [<a href="#ref-Stal2013">Stal 2013</a>] aims at improving the future evolvability of the software on the architecture level. This is also the level where this catalog is aimed at. Michael Stal gives one reason for refactoring, improving the future evolvability, but refactoring can target other non-functional requirements as well. Olaf Zimmermann [<a href="#ref-Zimmermann2015">Zimmermann 2015</a>] defines an <em>Architectural Refactoring</em> as</p>
+
+<blockquote>
+  <p>[…] a coordinated set of deliberate architectural activities that removes a particular architectural smell and improves at least one quality attribute without changing the scope and functionality of the system.</p>
+</blockquote>
+
+<p>Our research paper [<a href="#ref-StockerZimmermann2021">Stocker and Zimmermann 2021</a>] (available for download <a href="/assets/IRC-FromCodeRefactoringToApiRefactoringCCIS2021.pdf">here</a>) reports the results of a practitioner survey, defines the term “API refactoring”, and gives an outlook to the refactoring catalog presented on this website. The proposed definition is:</p>
+
+<blockquote>
+  <p>An API refactoring evolves the remote interface of a system without changing its feature set and semantics to improve at least one quality attribute.</p>
+</blockquote>
+
+<p>Many of the patterns that are the target to which we refactor are described in our <a href="https://api-patterns.org">pattern language for microservice and remote API design</a>, first published in the EuroPLoP proceedings 2017 to 2020 and finalized in <a href="https://www.informit.com/store/patterns-for-api-design-simplifying-integration-with-9780137670109">Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</a> [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>].</p>
+
+<h2 id="target-audience">Target Audience</h2>
+
+<p>With this catalog, we target software developers and architects that develop, design, and maintain software systems. The majority of refactorings focus on the remote interface of these systems, their operations, endpoints, and messages. We do not target any specific domain or technology; every system exposing an API is a potential candidate. However, most of our experience comes from architecting and modernizing multi-channel enterprise applications as well as developing cloud-native applications that serve Web and mobile front-ends and interact with other Web services through HTTP APIs. We are more than happy to integrate contributions that apply our refactorings to other technologies that require different instruction steps or come with further hints and pitfalls to avoid – <a href="/about">contact us</a>!</p>
+
+<h2 id="refactoring-template">Refactoring Template</h2>
+
+<p>Each refactoring is documented in the same form:</p>
+
+<ul>
+  <li><em>Context and Motivation</em>. Where (and under which circumstances) is this refactoring eligible? And why?</li>
+  <li><em>Stakeholder Concerns</em> (including Quality Attributes and Design Forces). Which non-functional requirements and constraints are impacted by this refactoring?</li>
+  <li><em>Initial Position Sketch</em> (including Target Element(s)). Which design model elements have to be changed, e.g., components and connectors (if modeled explicitly)? Which design problems pertain to this refactoring, and which design options are currently chosen to resolve them?</li>
+  <li><em>Smells</em>. Identify the smells that indicate a problem of the architecture or API: When and why should this AR be considered?</li>
+  <li><em>Instructions</em> (Steps). How can the AR be applied and validated? What is the right series of steps to follow?</li>
+  <li><em>Target Solution Sketch</em> (Evolution Outline). Which design options should be chosen now? How does the target solution look like? In particular, impact on API clients, what can be done to mitigate? Is there a variant of the refactoring, e.g., for backward compatibility?</li>
+  <li><em>Example(s)</em>.</li>
+  <li><em>Hints and Pitfalls to Avoid</em>.</li>
+  <li><em>Related Content</em>.</li>
+</ul>
+
+<p>Some suggested/featured content is <a href="/refactorings/introducepagination">Introduce Pagination</a>, <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> and <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a></p>
+
+<h2 id="more-information">More Information</h2>
+
+<p>A <a href="/glossary">Glossary</a> introduces terms and defines the vocabulary for the refactoring texts. The Open Group has published a chapter on <a href="https://pubs.opengroup.org/architecture/o-aa-standard/Continuous-Architectural-Refactoring.html">Continuous Architectural Refactoring</a> [<a href="#ref-OpenAgileArchitecture:2020">Open Group 2020</a>]. Refactoring can also be applied to databases, as Ambler and Sadalage [<a href="#ref-Ambler:2006">2006</a>] show in “Refactoring Databases: Evolutionary Database Design.” Yoder and Merson [<a href="#ref-Yoder:2022">2022</a>] present “Strangler Patterns” that can be used to evolve a monolith into microservices.</p>
+
+<p>For refactorings at the code level and their corresponding smells, we recommend visiting <a href="https://refactoring.guru/">Refactoring.Guru</a>. The <a href="https://kgb1001001.github.io/cloudadoptionpatterns/">Cloud Adoption Patterns</a> Website has a section on <a href="https://kgb1001001.github.io/cloudadoptionpatterns/Cloud-Adoption/Cloud-Refactoring/">Cloud Refactoring</a>. Refactoring serverless applications is covered in <a href="https://refactoringserverless.com">Refactoring to Serverless</a>. A catalog of <a href="https://hschwentner.io/domain-driven-refactorings/">Domain-Driven Refactorings</a> is also in the making.</p>
+
+<p>The broader context is explained on the website <a href="https://www.ost.ch/en/research-and-consulting-services/computer-science/ifs-institute-for-software-new/cloud-application-lab/architectural-refactoring-for-the-cloud-arc">“Architectural Refactoring for the Cloud (ARC)”</a>.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>We want to thank the participants of the Euro-PLoP 2023 Writers’ Workshop for their valuable feedback. We also thank <a href="https://au.linkedin.com/in/andreifurda">Andrei Furda</a> for his reviews of intermediate versions of the refactorings. <a href="https://www.digital-solution-architecture.com/">Daniel Lübke</a> reviewed the refactorings related to versioning and life cycle guarantees. The <a href="https://microservice-api-patterns.org/about">MAP team</a> wrote up many of the the patterns that are featured as refactoring targets.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Ambler:2006" class="csl-entry">
+
+    <p>Ambler, Scott W., and Pramodkumar J. Sadalage. 2006. <em>Refactoring Databases: Evolutionary Database Design</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Fowler2018" class="csl-entry">
+
+    <p>Fowler, Martin. 2018. <em>Refactoring: Improving the Design of Existing Code</em>. 2nd ed. Addison-Wesley Signature Series (Fowler). Boston, MA: Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Kerievsky2004" class="csl-entry">
+
+    <p>Kerievsky, Joshua. 2004. <em>Refactoring to Patterns</em>. Pearson Higher Education.</p>
+
+  </div>
+
+  <div id="ref-Opdyke1992" class="csl-entry">
+
+    <p>Opdyke, William F. 1992. <em>Refactoring Object-Oriented Frameworks</em>. USA: University of Illinois at Urbana-Champaign.</p>
+
+  </div>
+
+  <div id="ref-OpenAgileArchitecture:2020" class="csl-entry">
+
+    <p>Open Group. 2020. <em>Open Agile Architecture™: A Standard of the Open Group</em>. The Open Group Series. Van Haren.</p>
+
+  </div>
+
+  <div id="ref-Stal2013" class="csl-entry">
+
+    <p>Stal, Michael. 2013. <em>Agile Software Architecture (Chapter 3 in “Aligning Agile Processes and Software Architectures”)</em>. Morgan Kaufmann. <a href="https://doi.org/10.1016/B978-0-12-407772-0.00003-4">https://doi.org/10.1016/B978-0-12-407772-0.00003-4</a>.</p>
+
+  </div>
+
+  <div id="ref-StockerZimmermann2021" class="csl-entry">
+
+    <p>Stocker, Mirko, and Olaf Zimmermann. 2021. “From Code Refactoring to API Refactoring: Agile Service Design and Evolution.” In <em>Service-Oriented Computing</em>, edited by Johanna Barzen, 174–93. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-87568-8_11">https://doi.org/10.1007/978-3-030-87568-8_11</a>.</p>
+
+  </div>
+
+  <div id="ref-Suryanarayana2014" class="csl-entry">
+
+    <p>Suryanarayana, Girish, Ganesh Samarthyam, and Tushar Sharma. 2014. <em>Refactoring for Software Design Smells: Managing Technical Debt</em>. 1st ed. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc.</p>
+
+  </div>
+
+  <div id="ref-Yoder:2022" class="csl-entry">
+
+    <p>Yoder, Joseph W., and Paulo Merson. 2022. “Strangler Patterns.” In <em>Proceedings of the 27th Conference on Pattern Languages of Programs</em>. PLoP ’20. USA: The Hillside Group.</p>
+
+  </div>
+
+  <div id="ref-Zimmermann2015" class="csl-entry">
+
+    <p>Zimmermann, Olaf. 2015. “Architectural Refactoring: A Task-Centric View on Software Evolution.” <em>IEEE Software</em> 32 (2): 26–29. <a href="https://doi.org/10.1109/MS.2015.37">https://doi.org/10.1109/MS.2015.37</a>.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Does a discipline/practice of “meta refactoring” exist? <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Merriam-Webster: “The place at which independent and often unrelated systems meet and act on or communicate with each other”. Note the German translation of interface “Schnittstelle” means the position where something is cut apart. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

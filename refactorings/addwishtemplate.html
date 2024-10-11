@@ -1,0 +1,697 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Add Wish Template - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Add Expansion Mock Object, Reify Wish List, Turn Wish List into Wish Template">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Add Wish Template">
+<meta property="og:url" content="/refactorings/addwishtemplate">
+
+
+  <meta property="og:description" content="also known as: Add Expansion Mock Object, Reify Wish List, Turn Wish List into Wish Template">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/addwishtemplate">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Add Wish Template</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Add Wish Template</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Add Wish Template">
+    <meta itemprop="description" content="also known as: Add Expansion Mock Object, Reify Wish List, Turn Wish List into Wish Template">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Add Wish Template
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-07-13T00:00:00+02:00">July 13, 2023</time>
+      </span>
+    
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+          <div class="notice--warning"><strong><i class="fas fa-tools">&nbsp;</i>Note:</strong> This is a preview release and subject to change. Feedback welcome! <a href="/about/">Contact Information</a> and  <a href="/assets/IRC-FromCodeRefactoringToApiRefactoringCCIS2021.pdf">Background (PDF)</a></div>
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Add Expansion Mock Object, Reify Wish List, Turn Wish List into Wish Template</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>A <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> might have been introduced to let clients explicitly mark the response data they are interested in (to reduce response message size); it is considered insufficient and/or cumbersome to use.</p>
+
+<p class="notice--primary">As an API client developer, I want to express the desired response structure as a mock object so that I can be precise and selective when expressing my wishes about structured response data that I am interested in.</p>
+
+<p>This refactoring can also be applied to improve performance if a Wish List has not been used yet.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#client-information-needs">#client-information-needs</a></dt>
+  <dd>As motivated in <a href="/refactorings/addwishlist">Add Wish List</a>, APIs are often used by multiple clients with differing information needs, which makes it difficult for providers to offer one-size-fits-all solutions. Some clients may require overviews of information elements, for instance list of identifiers, others may require a few or all of the data fields/attributes of these elements that the API is able to provide.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a></dt>
+  <dd>Response time and throughput are qualities that concern both API clients serving end users and API providers (also explained in <a href="/refactorings/addwishlist">Add Wish List</a>). Preparing, transporting, and processing data but not using it on the client side wastes resources and ought to be avoided.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#maintainability">#maintainability</a>, <a href="/refactorings/by-stakeholder-concerns/#flexibility">#flexibility</a></dt>
+  <dd>Client information needs change over time, but an API and its implementation should not have to be updated every time a client does. Maintaining multiple variants of the same operation for different clients is possible, but increases maintenance cost and coordination effort, which in turn can limit the flexibility of the API provider.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>A client might request and receive nested and or flat response data via one or more operation calls:</p>
+
+<p><img src="/refactorings/images/AddWishTemplate_Initial.png" alt="Add Wish Template: Initial Position Sketch" /></p>
+
+<p>Add Wish Template: Initial Position Sketch</p>
+
+<p>Any operation with response data structures that clients want to customize is a potential target.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#underfetching">Underfetching</a></em></dt>
+  <dd>Clients may have to call multiple API operations to obtain all required data because the request messages of these operations do not offer any way to define the targeted representation elements (thus publishing parts or all of the entities of a domain model and their attributes).</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#overfetching">Overfetching</a></em></dt>
+  <dd>Clients may throw away large parts of the received data because the API design follows a one-size-fits-all approach and includes all data that any present or future client might be interested in (according to the smell description in <a href="/refactorings/addwishlist">Add Wish List</a>). Another phenomenon is “sell what is on the truck”: implementation data is exposed just because it is there, without a client-side use case.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#structured-artifact-serialized-and-therefore-strangled">Structured artifact serialized and therefore strangled</a></em></dt>
+  <dd>Some data representation that is nested is serialized into a custom string format that is hard to parse and keeps on causing surprises in testing and production. In object-oriented programming, for instance, objects that contain other objects often have to be mapped to and from text notations such as JSON. The reserved characters of the notations (for instance, curly braces <code>{}</code>and double quotes <code>"</code> in JSON) have to be escaped during serialization, which can be tedious.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Introducing a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> requires careful consideration and enforcement:</p>
+
+<ol>
+  <li>Review the structure of the response message of the operation to define the scope of the wishes to be expressed; for instance, all elements must be optional. If necessary, wrap the structure in a Data Transfer Object (DTO) by applying the <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring. If the request message already contains a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> that is supposed to be upgraded and <a href="https://en.wikipedia.org/wiki/Reification">reified</a>, review its syntax and semantics.</li>
+  <li>Copy the schema definition of the eligible part of the response message to the response message schema to create the <em>mock DTO</em> template. Define which values mark inclusion and exclusion, respectively (for example, <code>"in"</code> and <code>"out"</code> for strings and <code>1</code> and <code>0</code> for integers and lists with one or zero entries).</li>
+  <li>Optionally, change the data type of all atomic elements in the structure (such as strings and integers) to boolean. In this case, <code>true</code> marks inclusion and <code>false</code> marks exclusion. Apply these optional changes to the entire nested/hierarchical data structure recursively: in lists, turn all list elements into booleans; in Parameter Trees, process all child elements recursively.</li>
+  <li>Replace an existing flat, list-oriented <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> (if any) with the mock DTO serving as <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a>. If no such list already exists, add/append the template to the request message.</li>
+  <li>As for most, if not all, refactorings, apply the TELL steps – test, extend <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a>, let clients know, leverage logging – that are generally explained at the bottom of <a href="/refactorings/readme">this page</a>). Here, testing edge cases and combinations of input data is particularly important. For instance, test empty wishes and a representative set of tree populations such as entire nested structure requested, only top-level information requested, and only leaves requested.</li>
+</ol>
+
+<p>The revised API design is not necessarily backward-compatible. Making the template parameter optional helps preserve backward compatibility.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The hierarchical structure of the wish matches the structure of the response data. It is shown in the following figure:</p>
+
+<p><img src="/refactorings/images/AddWishTemplate_Target.png" alt="Add Wish Template: Target Solution Sketch" /></p>
+
+<p>Add Wish Template: Target Solution Sketch</p>
+
+<p>In the online description of the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> pattern, the variant that changes the response data types to boolean is sketched in a UML class diagram:</p>
+
+<p><img src="/plantuml-images/eac4b0da44743063cd968ad391331007de23c00ccd9cdeaf8b2871e0aaf1c75f.svg" alt="" /></p>
+
+<p>The template mirrors the output DTO on two nesting levels.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>A <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> for a customer response payload might look as the <code>"desiredElements":MD&lt;string&gt;*</code> in the request messages of <code>getCustomerMasterData</code> in the following example. Note that all response elements are optional, which is indicated by the question marks <code>?</code> (notation: MDSL):</p>
+
+<pre><code>operation getCustomerMasterData with responsibility RETRIEVAL_OPERATION 
+  expecting payload {"queryParameters", &lt;&lt;Wish_List&gt;&gt; "desiredElements":MD&lt;string&gt;*}  
+  delivering payload {"name":D&lt;string&gt;?, 
+      "address": {"street":D&lt;string&gt;?, "zip":D&lt;int&gt;?, "city":D&lt;string&gt;}?}
+</code></pre>
+
+<p>Listing fields or attributes of provider-side resources (in the broadest sense of the word) works fine (and is used in many APIs, both public and community- or solution-internal ones) — as long as their names are unique, and the resource structure does not cause complex navigation in nested, hierarchical name spaces. A downside of this approach is that it does not catch typos and other mistakes in field/attribute names (at least not on the client side).</p>
+
+<p>Type safety and fine-tuning of the wishes can be achieved by upgrading the flat string list to a <code>"mockCustomer"</code> <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> that mirrors the customer structure appearing in the response:</p>
+
+<pre><code>operation getCustomerMasterData with responsibility RETRIEVAL_OPERATION 
+  expecting payload {
+    "queryParameters",  
+      &lt;&lt;Wish_Template&gt;&gt; "mockCustomer": {
+        "mockName":D&lt;string&gt;?, 
+        "mockAddress":{"mockStreet":D&lt;string&gt;}?, 
+        "mockZip":D&lt;int&gt;?, 
+        "mockCity":D&lt;string&gt;}?}  
+  delivering payload {"name":D&lt;string&gt;?, 
+    "address": {"street":D&lt;string&gt;?, "zip":D&lt;int&gt;?, "city":D&lt;string&gt;?}?}
+</code></pre>
+
+<p>If such copy of the response structure is used, marker values for the basic types have to be defined in the API contract (for instance, <code>-1</code> for <code>int</code> values and <code>""</code> empty strings and lists). Alternatively, all basic types can be made optional or changed to boolean type:</p>
+
+<pre><code>      &lt;&lt;Wish_Template&gt;&gt; "inclusionMarkers": {
+        "includeName":D&lt;bool&gt;?, 
+        "includeAddress":{"includeStreet":D&lt;bool&gt;?}, "includeCity":D&lt;bool&gt;}?} 
+</code></pre>
+
+<p>See <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate#sec:WishTemplate:Example">MAP website</a> for another example of a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a>.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>The design of a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> requires more effort than that of a plain list:</p>
+
+<ul>
+  <li>Have the template design be reviewed by different client developers before implementing it; apply the <a href="https://en.wikipedia.org/wiki/Pareto_principle">80-20 rule</a>, also known as the Pareto Principle, along the way.</li>
+  <li>Focus on cardinalities, optionality, and n:m relations in nested/linked data when designing, implementing, and testing the template. For instance, is it possible to include entire subtrees when specifying inclusion of nodes that are neither roots nor leaves?</li>
+  <li>Resist the temptation to focus on the wish declaration syntax more than on the business and domain logic using it. In other words, do not become a middleware provider/vendor but use existing languages and engines such as GraphQL for advanced scenarios.</li>
+</ul>
+
+<p><a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish Lists</a> and <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Templates</a> ay be applied to several operations called in sequence. When improving API performance and rightsizing one or more messages, also consider to apply Microservice API Patterns such as <a href="https://api-patterns.org/patterns/quality/referenceManagement/EmbeddedEntity">Embedded Entity</a> and <a href="https://api-patterns.org/patterns/quality/referenceManagement/LinkedInformationHolder">Linked Information Holder</a>.</p>
+
+<p>Also remember to update security policies so that clients cannot suddenly access more data than they should.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>An application of <a href="/refactorings/addwishlist">Add Wish List</a> may provide the starting point for this refactoring. A <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> can also be introduced if no <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> existed before; the steps dealing with the existing list are simply skipped in this case. A large integration interface to core banking systems that applied the pattern is described in Zimmermann et al. [<a href="#ref-ZimmermannEtAl:2004">2004</a>].</p>
+
+<p>GraphQL engines can be seen as a tool- and middleware-supported application of this refactoring, prpviding a single endpoint for flexible queries and mutations. The <a href="https://microservice-api-patterns.github.io/MDSL-Specification/tools">MDSL Tools</a> contain an implementation of this refactoring.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-ZimmermannEtAl:2004" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Sven Milinski, Michael Craes, and Frank Oellermann. 2004. “Second Generation Web Services-Oriented Architecture in Production in the Finance Industry.” In <em>Companion to the 19th Annual ACM SIGPLAN Conference on Object-Oriented Programming Systems, Languages, and Applications</em>, 283–89. OOPSLA ’04. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/1028664.1028772">https://doi.org/10.1145/1028664.1028772</a>.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/addwishlist" class="pagination--pager" title="Add Wish List
+">Previous</a>
+    
+    
+      <a href="/refactorings/bundlerequests" class="pagination--pager" title="Bundle Requests
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

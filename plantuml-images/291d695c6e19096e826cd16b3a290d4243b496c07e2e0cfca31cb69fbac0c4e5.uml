@@ -1,0 +1,24 @@
+@startuml
+hide empty description
+
+state "Experimental Preview" as ExperimentalPreview
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Limited Lifetime Guarantee" as LimitedLifetimeGuarantee
+state "Two In Production" as TwoInProduction
+state "N In Production" as NInProduction
+
+[*] --> ExperimentalPreview : Introduce changes and gather \n feedback from clients, without \nlong term commitment
+
+ExperimentalPreview --> AggressiveObsolescence : Increase guarantees, but \n keep options to sunset \n as early as possible
+
+AggressiveObsolescence --> LimitedLifetimeGuarantee : Give a fixed time-frame \n during which the API \n will not be broken
+
+ExperimentalPreview --> TwoInProduction : Ease migration for clients by\n providing more than one version
+
+AggressiveObsolescence --> TwoInProduction : Provide stable\n and less stable version
+
+LimitedLifetimeGuarantee --> TwoInProduction : Guarantee overlapping life times  
+
+TwoInProduction --> NInProduction: Offer three or more versions
+
+@enduml

@@ -1,0 +1,747 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Add Wish List - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Introduce Payload Feature Toggle, Support Response Shaping and Expansion">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Add Wish List">
+<meta property="og:url" content="/refactorings/addwishlist">
+
+
+  <meta property="og:description" content="also known as: Introduce Payload Feature Toggle, Support Response Shaping and Expansion">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/addwishlist">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Add Wish List</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Add Wish List</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Add Wish List">
+    <meta itemprop="description" content="also known as: Introduce Payload Feature Toggle, Support Response Shaping and Expansion">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Add Wish List
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-10-07T00:00:00+02:00">October 7, 2023</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2023
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Introduce Payload Feature Toggle, Support Response Shaping and Expansion</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API offers one or more endpoints exposing operations to retrieve structured data. Not all API clients are interested in the same <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> that can be retrieved, and both clients and providers want to reduce unnecessarily transmitted and processed data.</p>
+
+<p class="notice--primary">As an API client, I want exact control over response message content so that I receive just the data I require to realize an application feature.</p>
+
+<p>Ideally, a single call should be enough to retrieve all required data. So one solution would be to offer custom operations for different clients, but this requires much knowledge about the clients on the provider side, which might not be easy to obtain and change dynamically. It would also increase maintenance effort and coordination needs.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#client-information-needs">#client-information-needs</a></dt>
+  <dd>APIs are often used by multiple clients with different information needs, which makes it difficult for their providers to offer one-size-fits-all solutions.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#evolvability">#evolvability</a>, <a href="/refactorings/by-stakeholder-concerns/#flexibility">#flexibility</a></dt>
+  <dd>The information needs of clients and users vary over time, and an API and its provider-side implementation should not have to be adjusted every time something changes in its clients. Maintaining several variations of the same operation for different clients is possible but increases the maintenance effort and coordination needs, which in turn might constrain the flexibility of the API provider.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#green-software">#green-software</a>, <a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a>, <a href="/refactorings/by-stakeholder-concerns/#data-parsimony">#data-parsimony</a></dt>
+  <dd>Overall response time, throughput, client-side and server-side processing time are qualities that concern API clients and their providers. Unused data that is prepared, transported, and processed wastes resources and ought to be avoided.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The initial response shown in Figure 1 comprises several, possibly nested, <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>, also known as attributes.</p>
+
+<p><img src="/refactorings/images/AddWishList_Initial.png" alt="Add Wish List: Initial Position Sketch. The API provider responds to a request from a client (1) with a message (2) that contains [Data Elements](https://api-patterns.org/patterns/structure/elementStereotypes/DataElement). The client does not require all the received data." /></p>
+
+<p>Figure 1: Add Wish List: Initial Position Sketch. The API provider responds to a request from a client (1) with a message (2) that contains <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>. The client does not require all the received data.</p>
+
+<p>The targets of this refactoring are API operations with their request and response messages. The refactoring applies in different situations: the provider might return data the client is not interested in, as shown in Figure 1, where the client wants the ability to <em>filter</em> elements to avoid overfetching. The refactoring is also applicable when the provider omits data the client must retrieve through a second request from a different API operation. Clients can use the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> to <em>expand</em> the message content to avoid underfetching in that case.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#underfetching">Underfetching</a></em></dt>
+  <dd>Clients have to call multiple API operations to get all data they require because these operations do not offer any way to define the targeted <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#overfetching">Overfetching</a></em></dt>
+  <dd>Clients throw away large parts of the received data because the API design follows a one-size-fits-all approach, and the provider includes all data in responses that any present or future client might be interested in. For example, in an e-commerce API, product procurement information might only interest a few clients, while most want to learn about current prices and items in stock. Another phenomenon is “sell what is on the truck”: implementation data is exposed just because it is there, without any client-side use case.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#api-does-not-get-to-the-point">API does not get to the POINT</a></em></dt>
+  <dd>According to the <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">POINT principles</a> for API design, any operation should have a <em>purpose</em>. It should also be <em>T-shaped</em> (both broad and deep, that is). Underfetching and overfetching indicate that these two principles are violated or only partially met.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Adding a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> to request messages lets clients select what <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> they want the response to contain. Applying this pattern reduces the mismatch between client expectations and provider capabilities:</p>
+
+<ol>
+  <li>Analyze the current response message structure with respect to nesting, optionality, and data usage profiles. All its elements to become selectable must be optional; otherwise, not wishing for them cannot have any effect.</li>
+  <li>Apply <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> (DTO) or adjust existing DTOs as needed.</li>
+  <li>Add a set-valued request parameter that allows clients to enumerate the desired <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a>. The name of the parameter could, for example, be called <code>wishList</code>, <code>select</code>, or <code>expand</code>. Decide on a list separator that is easy to transport over the given networking protocol (for instance, slashes “/” might not be a good choice in HTTP APIs, but commas “,” work well).</li>
+  <li>Populate this parameter when preparing requests on the client side.</li>
+  <li>Process this parameter when responding to requests on the provider side. Evaluate which <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> to return and prepare the response message accordingly. Avoid retrieving data from the data store only to discard it afterward. For example, customize SQL queries to only fetch the required attributes and avoid unnecessary joins.</li>
+</ol>
+
+<p>Complete the refactoring with the following steps that apply to most/all IRC entries:</p>
+
+<ul>
+  <li>Test the changes to ensure that the new design works and that the end-to-end capabilities of the API remain unchanged. Use this opportunity to learn about its effectiveness; establish success criteria derived from the stakeholder concerns. For example, performance might be an important metric that can be tracked by a benchmark.</li>
+  <li>Enhance the external <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a> and document the rationale for the new design.</li>
+  <li>Upgrade the version number (indicating a backward-compatible feature enhancement in this case) and inform the clients when the new version has been released.</li>
+  <li>Analyze whether the refactoring application has been successful according to the success criteria.</li>
+</ul>
+
+<p>Several approaches to evolution exist. To preserve the original behavior for clients that omit the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> and ensure backward compatibility, the API should make the new parameter optional and keep the current response message structure and content. This approach does not break the clients, but they might miss the opportunity to learn about the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> and will continue to request the complete response structure. A different, possibly incompatible approach is only to return a minimal response message by default so that clients are forced to state their wishes.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> in the operation signature lets clients specify certain <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Elements</a> they are interested in. The provider then tailors the response to the client’s wishes. This solution is sketched in Figure 2. Chapter 7 of [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>] shows a solution sketch with a dedicated List Evaluator component to handle the client’s wish.</p>
+
+<p><img src="/refactorings/images/AddWishList_Target.png" alt="Add Wish List: Target Solution Sketch. In its request (1), the client also sends a [Wish List](https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList). The provider uses this wish to decide whether some [Data Element](https://api-patterns.org/patterns/structure/elementStereotypes/DataElement) should be included in the response message (2). The provider implementation might also delegate this filtering to the repository component to avoid retrieving unneeded data from the data store." /></p>
+
+<p>Figure 2: Add Wish List: Target Solution Sketch. In its request (1), the client also sends a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a>. The provider uses this wish to decide whether some <a href="https://api-patterns.org/patterns/structure/elementStereotypes/DataElement">Data Element</a> should be included in the response message (2). The provider implementation might also delegate this filtering to the repository component to avoid retrieving unneeded data from the data store.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The following example from our Lakeside Mutual sample application shows a response of the Policy Management backend microservice before refactoring. Note that no customer master data is included, only a <code>customerId</code>:</p>
+
+<pre><code>curl http://localhost/policies/fvo5pkqerr
+{
+  "policyId" : "fvo5pkqerr",
+  "customerId" : "rgpp0wkpec",
+  "creationDate" : "2021-07-07T13:40:52.201+00:00",
+  "policyPeriod" : {
+    "startDate" : "2018-02-04T23:00:00.000+00:00",
+    "endDate" : "2018-02-09T23:00:00.000+00:00"
+  },
+  ...
+}
+</code></pre>
+
+<p>A second request to the respective endpoint could then be performed to retrieve the customer data. However, the API description specifies that the GET operation may take an optional <code>expand</code> parameter:</p>
+
+<pre><code class="language-yaml">'/policies/{customerIdDto}':
+  get:
+    tags:
+      - customer-information-holder
+    summary: Get a customer's policies.
+    operationId: getPoliciesUsingGET
+    produces:
+      - '*/*'
+    parameters:
+      - name: customerIdDto
+        in: path
+        description: the customer's unique id
+        required: true
+        type: string
+      - name: expand
+        in: query
+        description: a comma-separated list of the fields  
+          that should be expanded in the response
+        required: false
+        type: string
+    ...
+</code></pre>
+
+<p>Adding <code>expand=customer</code> to the query string results in the following response, which now includes customer master data:</p>
+
+<pre><code>curl http://localhost/policies/fvo5pkqerr?expand=customer
+{
+  "policyId" : "fvo5pkqerr",
+  "customer" : {
+    "customerId" : "rgpp0wkpec",
+    "firstname" : "Max",
+    "lastname" : "Mustermann",
+    "birthday" : "1989-12-31T23:00:00.000+00:00",
+    "streetAddress" : "Oberseestrasse 10",
+    "postalCode" : "8640",
+    "city" : "Rapperswil",
+    "email" : "admin@example.com",
+    "phoneNumber" : "055 222 4111",
+    "moveHistory" : [ ],
+    ...
+  },
+  "creationDate" : "2021-07-07T13:40:52.201+00:00",
+  "policyPeriod" : {
+    "startDate" : "2018-02-04T23:00:00.000+00:00",
+    "endDate" : "2018-02-09T23:00:00.000+00:00"
+  },
+  ...
+}
+</code></pre>
+
+<p>The client does not have to issue a second request for the data when using the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a>.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>If some of the data that can be referred to in the wishes resides in another API endpoint, the API implementation is now depending on that other endpoint, which could not be permitted or desired according to the overall architecture that has been decided for.</p>
+
+<p>Remember that security measures might have to be adjusted because customers might retrieve more data in a single call than before the refactoring. Measures could include checking for authorization and other quality management concerns, like accounting for <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/RateLimit">Rate Limits</a>.</p>
+
+<p>If providing a single, general-purpose operation for different clients does not feel right, there is nothing wrong with having specialized operations, endpoints, or even entire APIs for clients. See the <a href="https://samnewman.io/patterns/architectural/bff/">Backends for Frontend</a> pattern for a deeper discussion of the pros and cons of this approach.</p>
+
+<p>Too many optional parameters can lead to difficult-to-use APIs, impeding <a href="/refactorings/by-stakeholder-concerns/#learnability">learnability</a> and resulting in a complex implementation logic.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>Step 2 of this refactoring applies <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a>. The <a href="https://microservice-api-patterns.github.io/MDSL-Specification/soad.html">MDSL Tools</a> contain an implementation of this refactoring.</p>
+
+<p><a href="/refactorings/splitoperation">Split Operation</a> could be used to undo this refactoring: if the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> is small (for example, there might only be a single data element that can be selected), it might be better to offer two separate operations instead of one with an optional <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> parameter.</p>
+
+<p>In the example above, we saw that the entire customer entity was included in the response. If only parts of that data are used, the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> pattern provides a mock object-based approach to further tailor the response to the client’s wishes. A <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> can be evolved and graduated into such a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishTemplate">Wish Template</a> with the <a href="/refactorings/addwishtemplate">Add Wish Template</a> refactoring.</p>
+
+<p>The Known Uses<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> section of the <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> pattern explains variants and implementation options. For example, <a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#expansion">Atlassian JIRA</a> has a concept of <em>resource expansion</em>.</p>
+
+<p>A <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> that is introduced with this refactoring can also provide flexibility regarding the content of request messages. For example, when partially updating server-side data, instead of offering many distinct operations that each update a specific field, a single operation can be provided. The request parameters of a <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> are not used to tailor the response but instruct the endpoint on what data to update. <a href="https://netflixtechblog.com/practical-api-design-at-netflix-part-2-protobuf-fieldmask-for-mutation-operations-2e75e1d230e4">“Practical API Design at Netflix, Part 2: Protobuf FieldMask for Mutation Operations”</a> in the Netflix technology blog shows this in the context of gRPC using Field Masks, the gRPC and Protocol Buffers pendant to our <a href="https://api-patterns.org/patterns/quality/dataTransferParsimony/WishList">Wish List</a> pattern.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://www.api-patterns.org/patterns/quality/dataTransferParsimony/WishList#sec:WishList:KnownUses">https://www.api-patterns.org/patterns/quality/dataTransferParsimony/WishList#sec:WishList:KnownUses</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/refactorings/addwishtemplate" class="pagination--pager" title="Add Wish Template
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

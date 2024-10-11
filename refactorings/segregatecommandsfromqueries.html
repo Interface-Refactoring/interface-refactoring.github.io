@@ -1,0 +1,757 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Segregate Commands from Queries - Interface Refactoring Catalog</title>
+<meta name="description" content="also known as: Introduce Command Query Responsibility Segregation (CQRS)">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Segregate Commands from Queries">
+<meta property="og:url" content="/refactorings/segregatecommandsfromqueries">
+
+
+  <meta property="og:description" content="also known as: Introduce Command Query Responsibility Segregation (CQRS)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2024-10-11T11:38:39+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/segregatecommandsfromqueries">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Segregate Commands from Queries</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Segregate Commands from Queries</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Sample System</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Segregate Commands from Queries">
+    <meta itemprop="description" content="also known as: Introduce Command Query Responsibility Segregation (CQRS)">
+    <meta itemprop="datePublished" content="2024-10-11T11:38:39+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Segregate Commands from Queries
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2023-10-06T00:00:00+02:00">October 6, 2023</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2023
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <p>also known as: Introduce Command Query Responsibility Segregation (CQRS)</p>
+
+<h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An endpoint cohesively bundles all operations dealing with a particular domain concept. Some of these operations modify the application state on the API provider side, while others only retrieve data. Some but not all read operations (following the <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a> pattern [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>]) offer declarative query parameters and return rich, multi-valued response structures, causing provider-side workload.</p>
+
+<p class="notice--primary">As an API provider, I want to serve queries and process commands separately so that I can optimize the respective read and write model designs independently.</p>
+
+<p>This distinction between commands and queries is known as the Command Query Separation (CQS) principle by Meyer [<a href="#ref-Meyer:1997">1997</a>]. CQS states that every method in an object-oriented program should either be a command that performs an action and thus changes state or a query that returns data to the caller, but not both.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#performance">#performance</a> and <a href="/refactorings/by-stakeholder-concerns/#scalability">#scalability</a></dt>
+  <dd>Computationally expensive workloads such as loading data from data stores, filtering, and formatting it, and high data volumes may make certain operations expensive. Such complex query operations should not slow down cheaper operations exposed by the same endpoint (for example, atomic updates of single attribute values).</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#agility">#agility</a> and <a href="/refactorings/by-stakeholder-concerns/#development-velocity">#development-velocity</a></dt>
+  <dd>Read operations and write operations may evolve at different speeds. For example, data analytics queries may often change, driven by client demand and insights just gained, while commands to modify master data might only change with major releases, if at all.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#flexibility">#flexibility</a> to change the API vs. <a href="/refactorings/by-stakeholder-concerns/#simplicity">#simplicity</a></dt>
+  <dd>Keeping the read and write operations of an endpoint together is easy to understand and brings functional endpoint <a href="/refactorings/by-stakeholder-concerns/#cohesion">cohesion</a>. A separation of these types of operations increases the ability to change them independently from each other; this can then happen more flexibly and more frequently.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#security">#security</a>, <a href="/refactorings/by-stakeholder-concerns/#data-privacy">#data-privacy</a></dt>
+  <dd>Read and write operations might have different protection needs. Few user roles, for instance, are usually authorized to update master data; many or all user roles may read it. If there are two separate endpoints for read and write access, it might be easier to fine-tune the <a href="https://whatis.techtarget.com/definition/Confidentiality-integrity-and-availability-CIA">Confidentiality, Integrity, and Availability (CIA)</a> rules and related compliance controls. See the <a href="https://owasp.org/www-project-api-security/">OWASP API Security Top 10</a> for risks and related advice on API security.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The operations an API endpoint offers can be sorted into four categories, depending on whether they read/write state. Each target quadrant is represented by a “Pattern for API Design” [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>], as shown in Figure 1.</p>
+
+<p><img src="/refactorings/images/IntroduceCQRS-Operation-Responsibilities.png" alt="The combination of reading and writing state leads to four different operation responsibilities." />{.resize-half}</p>
+
+<p>Figure 1: The combination of reading and writing state leads to four different operation responsibilities.</p>
+
+<ul>
+  <li><a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/ComputationFunction">Computation Functions</a> derive a result solely from the client input, neither reading nor writing server-side state.</li>
+  <li><a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateCreationOperation">State Creation Operations</a> initialize some new state at the API endpoint (for instance, by creating an implementation resource such as a customer record). A minimal amount of state can be read, for example, to ensure the uniqueness of identifiers.</li>
+  <li><a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operations</a> are read-only queries that clients use to fetch data.</li>
+  <li><a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateTransitionOperation">State Transition Operations</a> update the server-side state, including full or partial replacement and deleting of state.</li>
+</ul>
+
+<p>These operations are often implemented as CRUD (create, read, update, delete) resources, shown in Figure 2.</p>
+
+<p><img src="/refactorings/images/IntroduceCQRS-Initial.png" alt="Segregate Commands from Queries: Initial Position Sketch. Commands and Queries in Same Endpoint" /></p>
+
+<p>Figure 2: Segregate Commands from Queries: Initial Position Sketch. Commands and Queries in Same Endpoint</p>
+
+<p>The target of the refactoring is an endpoint, such as an <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a> [<a href="#ref-ZimmermannEtAl:2020:MAP-A">Zimmermann et al. 2020</a>] that offers both state-writing and state-reading operations. These operations can be realized by HTTP verbs/methods such as POST, GET, PUT, PATCH, and DELETE, supported by an HTTP resource that a URI identifies.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#high-latency-poor-response-time">High latency/poor response time</a></em></dt>
+  <dd>Poor performance may be caused by too tight operation coupling. Expensive queries slow down the execution of write operations (for instance, operations performing state creation or transition). Transactional isolation is insufficient.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#feature-release-inertia-a-k-a-stale-roadmap">Feature/release inertia a.k.a. stale roadmap</a></em></dt>
+  <dd>An endpoint provides both read and write operations; there might be many read, but only few write operation calls. These types of operations evolve at different speeds; possibly, different development teams are responsible for them. For instance, new query options in a customer relationship management application may be introduced in every two-week iteration in response to frequently arriving customer inquiries and client insights. In contrast, commands evolve with a frequency imposed by a master data management or Enterprise Resource Planning (ERP) package in the backend. The operations also differ in the amount of design and test work required; write operations change state and, therefore may have nontrivial “given” preconditions and “then” postconditions and require consistency management. The conceptual integrity of the endpoint and all of its read and write operations has to be preserved during each evolution step. As a result, it takes longer than desired to introduce new features, new queries in particular.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#too-coarse-grained-security-or-data-privacy-rules">Too coarse-grained security or data privacy rules</a></em></dt>
+  <dd>The security and data protection requirements of commands and queries differ. They are specified on the endpoint rather than the operation level. Hence, generalization has to take place that bears risks such as under-specification and over-engineering.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p><a href="https://martinfowler.com/bliki/CQRS.html">Command Query Responsibility Segregation (CQRS)</a> is an architectural pattern that increases flexibility but adds complexity. It can be introduced in the following steps:</p>
+
+<ol>
+  <li>Classify and group endpoint operations by their purpose and impact on provider-side state: read-only, write-only, read-write, neither-read-nor-write.</li>
+  <li>Apply the <a href="/refactorings/extractoperation">Extract Operation</a> refactoring to move the read-only operations to a new endpoint, the Read Model API.</li>
+  <li>Adjust the API implementation to match the outcome of Steps 1 and 2. Consciously decide for a data store serving both endpoints, the new Read Model API and the already existing endpoint that has become a Write Model API.</li>
+  <li>(Optional) Distribute the data store. When distributing data stores, choose suited data replication and consistency management solutions (for example, how current/fresh should the replicated data be?). Include all data stores in the backup and recovery strategy [<a href="#ref-Pardon:2018">Pardon, Pautasso, and Zimmermann 2018</a>].</li>
+  <li>Test “sunny day scenario” as well as “edge” cases and error situations such as slow and temporarily failing network and replication conflicts.</li>
+  <li>Update the <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Description</a>, including the technical API contract and supporting documentation.</li>
+  <li>Provide teaching material that covers migration from the old domain concept-oriented API to the new command-query API: What has to be changed in the API client? How do the <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/ServiceLevelAgreement">Service Level Agreements</a> change?</li>
+</ol>
+
+<p>The operation responsibility <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/ComputationFunction">Computation Function</a> neither reads nor writes provider-side application state.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> Such operations may appear in command endpoints as well as query endpoints; they might also go to separate stateless endpoints, yielding a “Command Computation Responsibility Segregation” variant of CQRS.</p>
+
+<p>The messages and operations stay the same when applying this refactoring. However, the resource address might change. An intermediary such as an API Gateway [<a href="#ref-Richardson:2018">Richardson 2018</a>], <a href="https://microservices.io/patterns/service-registry.html">Service Registry</a>, or Version Mediator can be used to preserve backward compatibility by mapping or forwarding messages.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>After applying the refactoring, shown in Figure 3, two distinct endpoints/resources implement the API operations. One is a <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/ProcessingResource">Processing Resource</a> handling the commands, and the other is an <a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resource</a> handling the queries.</p>
+
+<p><img src="/refactorings/images/IntroduceCQRS-Target.png" alt="Segregate Commands from Queries: Target Solution Sketch. Commands and Queries in Separate Endpoints" /></p>
+
+<p>Figure 3: Segregate Commands from Queries: Target Solution Sketch. Commands and Queries in Separate Endpoints</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>The following example shows an introduction of CQRS (notation: <a href="https://contextmapper.org/docs/language-reference/">Context Mapper DSL (CML)</a>):</p>
+
+<pre><code class="language-java">Service PublicationManagementFacade {
+    // a state creation/state transition operation:
+    @PaperId add(@PublicationEntryDTO newEntry);
+    
+    // retrieval operations:
+    @PublicationArchive dumpPublicationArchive();
+    Set&lt;@PublicationEntryDTO&gt;
+        lookupPublicationsFromAuthor(String writer);
+    String renderAsBibtex(@PaperId paperId);
+    
+    // computation operations (stateless):
+    String convertToBibtex(@PublicationEntryDTO entry); 
+</code></pre>
+
+<p>This single publication management endpoint can be separated into two in this API design:</p>
+
+<pre><code class="language-java">Service PublicationManagementCommandFacade {
+    // a state creation/state transition operation:
+    @PaperId add(@PublicationEntryDTO newEntry);
+    
+    // computation operations (stateless):
+    String convertToBibtex(@PublicationEntryDTO entry); 
+}
+
+Service PublicationManagementQueryFacade {
+    // retrieval operations:
+    @PublicationArchive dumpPublicationArchive();
+    Set&lt;@PublicationEntryDTO&gt;
+        lookupPublicationsFromAuthor(String writer);
+    String renderAsBibtex(@PaperId paperId);
+}
+</code></pre>
+
+<p>This API design achieves command-query segregation at the expense of distributing the two operations related to <a href="https://en.wikipedia.org/wiki/BibTeX">BibTeX</a> to two different endpoints. Consequently, the two endpoints are coupled from a domain design standpoint (to some extent).</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>When deciding to separate commands from queries by introducing the CQRS pattern:</p>
+
+<ul>
+  <li>Replicate data as needed. Decide between <a href="https://www.cloudcomputingpatterns.org/strict_consistency/">strict</a> and <a href="https://www.cloudcomputingpatterns.org/eventual_consistency/">eventual</a> consistency consciously.</li>
+  <li>Be aware of the implications of the <em>Backup Availability Consistency (BAC)</em> theorem [<a href="#ref-Pardon:2018">Pardon, Pautasso, and Zimmermann 2018</a>]. The BAC theorem states that it is not possible to backup and restore across services consistently without degrading availability.</li>
+  <li>Acknowledge that read models and event messages sent as Data Transfer Objects (DTOs) over APIs increase the data coupling between clients and providers. If multiple clients use the same DTOs, they might indirectly also be coupled consequently.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></li>
+  <li>Consider asynchronous, queue-based messaging to update the read model after a change to the write/command model caused by an API command or a backend activity. This integration style supports throttling and is able to guarantee message delivery (depending on the quality-of-service properties chosen for a particular queue).</li>
+  <li>Consider applying <a href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing</a> as one of several options when segregating commands from queries. An event source stores a series of state changes in chronological order but does not store the resulting final/current state. In such designs, it often makes sense to take snapshots of the current state periodically or upon client request; such snapshots can then be stored separately from the events and provided to clients via additional calls to API operations.</li>
+</ul>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>This pattern refines <a href="/refactorings/extractoperation">Extract Operation</a> in the context of CQRS. Hence, <a href="/refactorings/mergeendpoints">Merge Endpoints</a> reverts it. <a href="/refactorings/introducepagination">Introduce Pagination</a> and <a href="/refactorings/addwishlist">Add Wish List</a> might be alternative options to improve query performance. The <a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object</a> refactoring explains DTO usage.</p>
+
+<p><a href="https://api-patterns.org/patterns/responsibility/endpointRoles/InformationHolderResource">Information Holder Resources</a> of various types are related patterns that may benefit from command-query segregation. In “Patterns for API Design” [<a href="#ref-PatternsForAPIDesign:2022">Zimmermann et al. 2022</a>], queries are represented as <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operations</a>; commands are <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateCreationOperation">State Creation Operations</a> or <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateTransitionOperation">State Transition Operations</a>.</p>
+
+<p>Michael Ploed provides a comprehensive introduction to CQRS and event sourcing on <a href="https://de.slideshare.net/mploed/event-sourcing-introduction-challenges">slideshare</a>. A <a href="https://www.youtube.com/watch?v=A0goyZ9F4bg">presentation video by Michael Ploed</a> is available as well. Also see an <a href="https://udidahan.com/2009/12/09/clarified-cqrs/">online article by Udi Dahan</a> for examples and a discussion of pros and cons. The Context Mapper website provides a tutorial, <a href="https://contextmapper.org/docs/event-sourcing-and-cqrs-modeling/">“Event Sourcing and CQRS Modeling in Context Mapper.”</a></p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Evans:2003" class="csl-entry">
+
+    <p>Evans, Eric. 2003. <em>Domain-Driven Design: Tacking Complexity in the Heart of Software</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Meyer:1997" class="csl-entry">
+
+    <p>Meyer, Bertrand. 1997. <em>Object-Oriented Software Construction (2nd Ed.)</em>. USA: Prentice-Hall, Inc.</p>
+
+  </div>
+
+  <div id="ref-Pardon:2018" class="csl-entry">
+
+    <p>Pardon, Guy, Cesare Pautasso, and Olaf Zimmermann. 2018. “Consistent Disaster Recovery for Microservices: The BAC Theorem.” <em>IEEE Cloud Computing</em> 5 (1): 49–59. <a href="https://doi.org/10.1109/MCC.2018.011791714">https://doi.org/10.1109/MCC.2018.011791714</a>.</p>
+
+  </div>
+
+  <div id="ref-Richardson:2018" class="csl-entry">
+
+    <p>Richardson, Chris. 2018. <em>Microservices Patterns</em>. Manning.</p>
+
+  </div>
+
+  <div id="ref-ZimmermannEtAl:2020:MAP-A" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Daniel Lübke, Uwe Zdun, Cesare Pautasso, and Mirko Stocker. 2020. “Interface Responsibility Patterns: Processing Resources and Operation Responsibilities.” In <em>Proc. Of the European Conference on Pattern Languages of Programs</em>. EuroPLoP ’20. Online.</p>
+
+  </div>
+
+  <div id="ref-PatternsForAPIDesign:2022" class="csl-entry">
+
+    <p>Zimmermann, Olaf, Mirko Stocker, Daniel Lübke, Uwe Zdun, and Cesare Pautasso. 2022. <em>Patterns for API Design: Simplifying Integration with Loosely Coupled Message Exchanges</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>unlike <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateCreationOperation">State Creation Operation</a>, <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/RetrievalOperation">Retrieval Operation</a>, and <a href="https://api-patterns.org/patterns/responsibility/operationResponsibilities/StateTransitionOperation">State Transition Operation</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>This cannot be avoided entirely in any Published Language [<a href="#ref-Evans:2003">Evans 2003</a>] in an API; the coupling still exists but becomes less obvious when commands and queries are separated (as they still work on the same domain concepts). If the two endpoints evolve autonomously (independently of each other, that is), the models will eventually deviate further and further (which to some extent is desired). Over time, this may cause technical debt and hidden dependencies that counter the original motivation of the pattern and the refactoring. If this happens, the inverse <a href="/refactorings/mergeendpoints">Merge Endpoints</a> refactoring may be applied. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/renamerepresentationelement" class="pagination--pager" title="Rename Representation Element
+">Previous</a>
+    
+    
+      <a href="/refactorings/splitoperation" class="pagination--pager" title="Split Operation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
