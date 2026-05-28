@@ -1,0 +1,752 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Split Application Backend Logic - Interface Refactoring Catalog</title>
+<meta name="description" content="Context and Motivation">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Split Application Backend Logic">
+<meta property="og:url" content="/refactorings/splitapplicationbackendlogic">
+
+
+  <meta property="og:description" content="Context and Motivation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-28T19:35:44+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/splitapplicationbackendlogic">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Split Application Backend Logic</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Split Application Backend Logic</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#smells">Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendlogic">Split Application Backend Logic </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Examples (TELL)</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Split Application Backend Logic">
+    <meta itemprop="description" content="Context and Motivation">
+    <meta itemprop="datePublished" content="2026-05-28T19:35:44+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Split Application Backend Logic
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2026-05-28T00:00:00+02:00">May 28, 2026</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2025
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An application implements a domain model with its entities, relationships, services, and so on. Parts or all of the data are stored in a database or other data store.</p>
+
+<p class="notice--primary">As an application architect, I want to (re-)locate the components realizing business logic (i.e., computations, manipulation of business objects) on physical tiers in such a way that design-time and runtime properties are able to meet the project goals, functional and non-functional requirements, and constraints in an adequate, balanced way.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#availability">#availability</a></dt>
+  <dd>Failures in one part of the system can impact others unless fault isolation is carefully designed. In distributed systems, service dependencies and network issues increase the risk of cascading failures. In monoliths, a single crash can bring down the entire application. Availability must be addressed explicitly during design, evolution, and operation.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#consistency">#consistency</a></dt>
+  <dd>Data stored together can be guaranteed to meet the ACID properties more easily than distributed data. A single, local system transaction manager (such as a relational database management system) can take care of that. “Software Architecture: The Hard Parts” discusses this concern as one of the difficult-to-make architectural decisions that are required [<a href="#ref-Ford:2021">Ford et al. 2021</a>].</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#coupling">#coupling</a></dt>
+  <dd>Application logic and data storage within a single deployment unit are inherently coupled in terms of change management and scaling, even when separated by local interfaces. The amount of coupling is a multidimensional stakeholder concern. See for instance <a href="https://www.enterpriseintegrationpatterns.com/ramblings/coupling_facets.html">“The Many Facets of Coupling”</a>.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#ethicality">#ethicality</a></dt>
+  <dd>Openness, transparency, accuracy are typical ethical values and values requirements, for instance for Web applications that work with personal sensitive information. Distributing application logic and data might raise additional value requirements, for instance regarding data privacy. Furthermore, teams responsible for deployment units might prioritize values differently than developers, end users, product managers, or project sponsors [<a href="#ref-Kapferer:2024:VDAD">Kapferer, Zimmermann, and Stocker 2024</a>]. Irrespective of the chosen architectural styles and patterns, no application content should violate “Netiquette” or other guidelines and principles for communication and digitalization.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#flexibility">#flexibility</a></dt>
+  <dd>Distribution of backend logic decouples the build cycles of the parts. For instance, independent changeability, deployability, and scalability are among the drivers for microservices.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#observability">#observability</a></dt>
+  <dd>Distributed business logic increases the requirements for and the complexity of monitoring and debugging. Logging, tracing, and metrics must be designed to work across service boundaries, which requires extra design and implementation work. For instance, distributed traces must be correlated with each other and with the business transaction they belong to. The <a href="https://api-patterns.org/patterns/structure/compositeRepresentations/ContextRepresentation">Context Representation</a> pattern, which is the target of the <a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation</a> refactoring in IRC, may help to consolidate and correlate trace information to achieve end-to-end observability.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#scalability">#scalability</a></dt>
+  <dd>Backend components may carry different workloads, which suggests to scale them independently. This is possible with a distributed application backend, but not with a monolith.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#service-rightsizing">#service-rightsizing</a></dt>
+  <dd>A major problem when adopting microservices and other approaches to server-side componentization and decomposition is the myth that it is inherently better than a monolith. Inadequate expectations and misunderstandings occur easily. Which evolution and maintenance problems are addressed? Is there an actual need for independent scalability and changeability? What is easier to do in a distributed, service-based system than in a monolith? [<a href="#ref-Mendonca:2021">Mendonça et al. 2021</a>]</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>This refactoring targets the business logic layer of logically layered applications; logical layering is a prerequisite for it. Figure 1 illustrates a monolithic backend organized into three logical layers: presentation, business logic, and persistence (data access and storage). These layers are explained further in the Initial Position Sketch of <a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend</a>; detailed descriptions can be found in the literature [<a href="#ref-PoEAA">Fowler 2002</a>].</p>
+
+<p><img src="/refactorings/images/SplitApplicationBackendLogic_Initial.png" alt="Split Application Backend Logic: Initial Position Sketch. A logically layered monolithic backend. It may or may not contain presentation logic; the latter is more common in practice, but not shown in the figure (client tier, e.g. desktop PC or mobile phone running a Web browser, missing)." /></p>
+
+<p>Figure 1: Split Application Backend Logic: Initial Position Sketch. A logically layered monolithic backend. It may or may not contain presentation logic; the latter is more common in practice, but not shown in the figure (client tier, e.g. desktop PC or mobile phone running a Web browser, missing).</p>
+
+<h2 id="smells">Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#bad-developer-experience">Bad developer experience</a></em></dt>
+  <dd>Some teams have to work less agile than they would like to because certain application parts are owned and DevOps-ed by other teams. The different parts do not evolve at the same speed, but there is a compile-time and/or build-time dependency between them. Team and system boundaries might not align, causing friction and lack of clear responsibility.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#insufficient-changeability">Insufficient changeability</a></em></dt>
+  <dd>During maintenance and evolution, new features are implemented and existing ones patched. Not all parts of a monolithic backend have to change at the same speed when implementing new features, responding to change requests, and fixing bugs; the reasons for change differ from use case to use case. Monolith parts are compiled, built, tested, and deployed jointly; the fast moving parts have to wait for the slower changing ones or the slow changing parts have to be touched more often than needed. As a consequence, a monolith might become hard to maintain and extend; technical debt is accumulated as compromises are made to speed up development. As a result, API providers may experience that they are slower to respond to change requests from the business. Not all use cases supported by an application backend face the same scalability requirements.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#inflexible-scalability">Inflexible scalability</a></em></dt>
+  <dd>Workload patterns [<a href="#ref-Fehling:2014">Fehling et al. 2014</a>] and thus scalability requirements can differ per application component. For instance, the product catalog in an online ticket shop is accessed much more frequently than the monthly financial reporting. The ticket shop has to be available around the clock, and especially during pre-sale periods.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#missing-fault-isolation">Missing fault isolation</a></em></dt>
+  <dd>In a monolith, a failure in one part of the system (e.g., reporting) can bring down unrelated critical functions (e.g., production tracking). In operational environments, this lack of isolation can disrupt business processes and halt production entirely.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#poor-response-times">Poor response times</a></em>, e.g., <em><a href="/refactorings/by-smells-drivers#queries-take-long-to-complete">queries take long to complete</a></em></dt>
+  <dd>Critical application parts cannot be scaled up easily because they are co-located with others, and the resource consumption and workload caused by the monolith are rather high. Another reason for slow query response times (long latency) might be that the database has become very large, and the query processing is challenged to meet its performance NFRs.</dd>
+  <dt>#team-organization</dt>
+  <dd>See <a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend</a>.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>The general option for splitting an application backend logic was identified and captured in pattern form back in 1997 [<a href="#ref-Renzel:1997:CSC">Renzel and Keller 1997</a>]:</p>
+
+<ul>
+  <li><em>Distribute Application Kernel</em>. Refactor from monolithic business logic to distributed application kernel.</li>
+</ul>
+
+<p>There are two more options to split the backend, Remote Database and Distributed Database. They are featured as <a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence</a>.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The distribution pattern <em>Distributed Application Kernel</em> is one of the <em>client-server-cuts</em> from Renzel and Keller [<a href="#ref-Renzel:1997:CSC">1997</a>]. It can be combined with the other two cuts focussing on the backend and with the two cuts dealing with application frontend decomposition.</p>
+
+<p>The general option to refactor monolithic business logic to distributed application kernel is sketched in Figure 2.</p>
+
+<p><img src="/refactorings/images/SplitApplicationBackendLogic_Target.png" alt="Split Application Backend Logic: Target Solution Sketch. From Monolithic Business Logic in a single backend tier to Distributed Application Kernel. Note that again the client tier (application frontend) is not shown." /></p>
+
+<p>Figure 2: Split Application Backend Logic: Target Solution Sketch. From Monolithic Business Logic in a single backend tier to Distributed Application Kernel. Note that again the client tier (application frontend) is not shown.</p>
+
+<p>The business logic is now split and distributed to different physical hardware nodes (actual or virtual ones); its components communicate via a remote protocol such as gRPC or HTTP.</p>
+
+<p>When the database is split and distributed along with the application logic, the backend morphs into a set of microservices.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>Lakeside Mutual splits its application logic into microservices. Its database may reside on a separate host, depending on the JDBC configuration and chosen RDBMS.</p>
+
+<p>The service mesh Istio realized the reverse transformation and went from microservices to modular monolith [<a href="#ref-Mendonca:2021">Mendonça et al. 2021</a>].</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Splitting an application backend is a “big” architectural decision, which requires careful evaluation and justification [<a href="#ref-DPR:2021">Zimmermann and Stocker 2021</a>]:</p>
+
+<ul>
+  <li>Do not introduce microservices just because. Trace the decision to refactor monolithic business logic into a distributed application kernel back to project-specific requirements that justify investing in independent deployability, scalability, and changeability [<a href="#ref-Mendonca:2021">Mendonça et al. 2021</a>; <a href="#ref-MAP-DDD:ICSA:2021">Singjai, Zdun, and Zimmermann 2021</a>].</li>
+  <li>Apply an API first approach and consider using API design patterns when creating the required remote APIs. Document the API contract. Secure the API access properly; do not store database or connection credentials in inappropriate places such as source code; consult the OWASP API Top 10 for more advice.</li>
+  <li>Provide test mock-ups and test data. Do not let continuous integration builds fail because of the distribution introduced here.</li>
+  <li>Adapt the Test, Explain, Let Know, and Learn (TELL) steps featured <a href="https://interface-refactoring.github.io/hints/">online</a> and in our 2023 EuroPLoP paper [<a href="#ref-Stocker:2023">Stocker and Zimmermann 2023</a>] on/for the architectural level.</li>
+  <li>Apply strategic Domain-Driven Design (DDD) to identify adequate splits that reflect the subdomains and bounded contexts of the domain [<a href="#ref-Kapferer-Zimmermann-CM-ARs:2020">Kapferer and Zimmermann 2020</a>]. See the Design Practice Repository and the corresponding e-book [<a href="#ref-DPR:2021">Zimmermann and Stocker 2021</a>] for a brief introduction to <a href="https://socadk.github.io/design-practice-repository/activities/DPR-StrategicDDD.html">Strategic DDD</a>.</li>
+  <li>In distributed backends, faults still affect other services if isolation is not carefully designed. Design for fault isolation using patterns such as Circuit Breakers [<a href="#ref-Nygard:2018">Nygard 2018</a>] or separate runtimes to prevent local failures from affecting unrelated features.</li>
+  <li>Implement service health checks. This allows orchestration platforms and monitoring tools to detect failures early, isolate faulty services, and avoid propagating errors across the system. <a href="https://pragprog.com/titles/mnee2/release-it-second-edition/">“Release It!”</a> [<a href="#ref-Nygard:2018">Nygard 2018</a>] is a hands-on guide to designing and deploying resilient, scalable, and production-ready software systems.</li>
+</ul>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>Other architectural refactorings in this catalog include <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> and <a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend</a>. <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a> can be seen as a special type of backend split. Note that these refactorings can be combined and also be applied multiple times/progressively.</p>
+
+<p>In “Serverless Land”, <a href="https://serverlessland.com/content/guides/refactoring-serverless/direct_database_access">Direct Database Access</a> can be seen as inverting the client-server-cut Remote Database [<a href="#ref-Renzel:1997:CSC">Renzel and Keller 1997</a>] in a particular application context.</p>
+
+<p>“Software Architecture: The Hard Parts” by Ford et al. [<a href="#ref-Ford:2021">2021</a>] discusses criteria for splitting application kernels (and reasons not to do so) under service <em>disintegrators</em> (service scope and function, code volatility, fault tolerance, security, extensibility) and <em>integrators</em> (database transactions, workflow and choreography, hared code, database relationships). The book also covers architectural decisions regarding communication (APIs!), coordination (state management), and consistency (atomic versus eventual), which have to be made when applying one or more of the splitting options described here and in <a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence</a>.</p>
+
+<p>In Domain-Driven Design (DDD) this refactoring could correspond to splitting a so-called Bounded Context [<a href="#ref-Evans:2003">Evans 2003</a>]. Context Mapper [<a href="#ref-Kapferer-Zimmermann-CM-ARs:2020">Kapferer and Zimmermann 2020</a>] therefore implements this refactoring with <a href="https://contextmapper.org/docs/ar-split-bounded-context-by-features/">Split Bounded Context by Features</a> and <a href="https://contextmapper.org/docs/ar-split-bounded-context-by-owners/">Split Bounded Context by Owner</a>. The inverse refactoring in Context Mapper is <a href="https://contextmapper.org/docs/ar-merge-bounded-contexts/">Merge Bounded Contexts</a>.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Evans:2003" class="csl-entry">
+
+    <p>Evans, Eric. 2003. <em>Domain-Driven Design: Tacking Complexity in the Heart of Software</em>. Addison-Wesley.</p>
+
+  </div>
+
+  <div id="ref-Fehling:2014" class="csl-entry">
+
+    <p>Fehling, Christoph, Frank Leymann, Ralph Retter, Walter Schupeck, and Peter Arbitter. 2014. <em>Cloud Computing Patterns: Fundamentals to Design, Build, and Manage Cloud Applications</em>. Springer. <a href="https://doi.org/10.1007/978-3-7091-1568-8">https://doi.org/10.1007/978-3-7091-1568-8</a>.</p>
+
+  </div>
+
+  <div id="ref-Ford:2021" class="csl-entry">
+
+    <p>Ford, N., M. Richards, P. Sadalage, and Z. Dehghani. 2021. <em>Software Architecture: The Hard Parts</em>. O’Reilly Media.</p>
+
+  </div>
+
+  <div id="ref-PoEAA" class="csl-entry">
+
+    <p>Fowler, Martin. 2002. <em>Patterns of Enterprise Application Architecture</em>. Boston, MA, USA: Addison-Wesley Longman Publishing Co., Inc.</p>
+
+  </div>
+
+  <div id="ref-Kapferer-Zimmermann-CM-ARs:2020" class="csl-entry">
+
+    <p>Kapferer, Stefan, and Olaf Zimmermann. 2020. “Domain-Driven Service Design.” In <em>Service-Oriented Computing</em>, edited by Schahram Dustdar, 189–208. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-64846-6_11">https://doi.org/10.1007/978-3-030-64846-6_11</a>.</p>
+
+  </div>
+
+  <div id="ref-Kapferer:2024:VDAD" class="csl-entry">
+
+    <p>Kapferer, Stefan, Olaf Zimmermann, and Mirko Stocker. 2024. “[Value-Driven Analysis and Design: Applying Domain-Driven Practices in Ethical Software Engineering]{.nocase}.” In <em>Proceedings of the 29th European Conference on Pattern Languages of Programs, People, and Practices</em>. EuroPLoP ’24. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3698322.3698332">https://doi.org/10.1145/3698322.3698332</a>.</p>
+
+  </div>
+
+  <div id="ref-Mendonca:2021" class="csl-entry">
+
+    <p>Mendonça, Nabor C., Craig Box, Costin Manolache, and Louis Ryan. 2021. “[The Monolith Strikes Back: Why Istio Migrated From Microservices to a Monolithic Architecture]{.nocase}.” <em>IEEE Software</em> 38 (5): 17–22. <a href="https://doi.org/10.1109/MS.2021.3080335">https://doi.org/10.1109/MS.2021.3080335</a>.</p>
+
+  </div>
+
+  <div id="ref-Nygard:2018" class="csl-entry">
+
+    <p>Nygard, Michael T. 2018. <em>Release It!: Design and Deploy Production-Ready Software</em>. Pragmatic Programmers. Pragmatic Bookshelf.</p>
+
+  </div>
+
+  <div id="ref-Renzel:1997:CSC" class="csl-entry">
+
+    <p>Renzel, Klaus, and Wolfgang Keller. 1997. “[Client/Server Architectures for Business Information Systems – A Pattern Language]{.nocase}.” In <em>Proceedings of the Conference on Pattern Languages of Programs</em>. PLoP ’97.</p>
+
+  </div>
+
+  <div id="ref-MAP-DDD:ICSA:2021" class="csl-entry">
+
+    <p>Singjai, Apitchaka, Uwe Zdun, and Olaf Zimmermann. 2021. “[Practitioner Views on the Interrelation of Microservice APIs and Domain-Driven Design: A Grey Literature Study Based on Grounded Theory]{.nocase}.” In <em>18th IEEE International Conference on Software Architecture (ICSA 2021)</em>. https://doi.org/<a href="https://doi.org/10.5281/zenodo.4493865">https://doi.org/10.5281/zenodo.4493865</a>.</p>
+
+  </div>
+
+  <div id="ref-Stocker:2023" class="csl-entry">
+
+    <p>Stocker, Mirko, and Olaf Zimmermann. 2023. “[API Refactorings to Patterns: Catalog, Template and Tools for Remote Interface Evolution]{.nocase}.” In <em>Proceedings of the 28th European Conference on Pattern Languages of Programs</em>. EuroPLop ’23. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3628034.3628073">https://doi.org/10.1145/3628034.3628073</a>.</p>
+
+  </div>
+
+  <div id="ref-DPR:2021" class="csl-entry">
+
+    <p>Zimmermann, Olaf, and Mirko Stocker. 2021. <em>Design Practice Reference - Guides and Templates to Craft Quality Software in Style</em>. LeanPub. <a href="https://leanpub.com/dpr">https://leanpub.com/dpr</a>.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/segregatecommandsfromqueries" class="pagination--pager" title="Segregate Commands from Queries
+">Previous</a>
+    
+    
+      <a href="/refactorings/splitapplicationbackendpersistence" class="pagination--pager" title="Split Application Backend Persistence
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="669px" preserveAspectRatio="none" style="width:1134px;height:669px;background:#F3F6F6;" version="1.1" viewBox="0 0 1134 669" width="1134px" zoomAndPan="magnify"><defs/><g><!--MD5=[68767c78be08caa96780c014af9fbeaa]
+class API--><rect codeLine="2" fill="#FFFFFF" height="26.2969" id="API" style="stroke:#A80036;stroke-width:1.5;" width="31" x="374" y="22.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="25" x="377" y="40.4951">API</text><path d="M116.5,6 L116.5,64.8906 A0,0 0 0 0 116.5,64.8906 L338.5,64.8906 A0,0 0 0 0 338.5,64.8906 L338.5,39.5 L373.98,35.5 L338.5,31.5 L338.5,16 L328.5,6 L116.5,6 A0,0 0 0 0 116.5,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M328.5,6 L328.5,16 L338.5,16 L328.5,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="136" x="122.5" y="23.9951">API Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="126.5" y="40.292">• Tighten Evolution Strategy</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="177" x="126.5" y="56.5889">• Relax Evolution Strategy</text><!--MD5=[4fd3bb6c1d79f4919f90c95b62a35422]
+class Endpoint--><rect codeLine="6" fill="#FFFFFF" height="66.8906" id="Endpoint" style="stroke:#A80036;stroke-width:1.5;" width="127" x="326" y="129"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="355" y="146.9951">Endpoint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="327" x2="452" y1="155.2969" y2="155.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="332" y="172.292">Address location</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="332" y="188.5889">APIPattern role</text><path d="M6,125 L6,200.1875 A0,0 0 0 0 6,200.1875 L291,200.1875 A0,0 0 0 0 291,200.1875 L291,166.5 L325.71,162.5 L291,158.5 L291,135 L281,125 L6,125 A0,0 0 0 0 6,125 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M281,125 L281,135 L291,135 L281,125 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="180" x="12" y="142.9951">Endpoint Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="16" y="159.292">• Rename Endpoint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="16" y="175.5889">• Merge Endpoints</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="260" x="16" y="191.8857">• Segregate Commands from Queries</text><!--MD5=[119d254d3446821611096c5f81da6997]
+class CommunicationParticipant--><rect codeLine="12" fill="#FFFFFF" height="26.2969" id="CommunicationParticipant" style="stroke:#A80036;stroke-width:1.5;" width="216" x="746.5" y="149.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="210" x="749.5" y="167.4951">Communication Participant</text><!--MD5=[26f11e2349a5a3273bca691432a53674]
+class APIClient--><rect codeLine="17" fill="#FFFFFF" height="26.2969" id="APIClient" style="stroke:#A80036;stroke-width:1.5;" width="81" x="809" y="301"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="75" x="812" y="318.9951">API Client</text><path d="M517.5,292.5 L517.5,335.0938 A0,0 0 0 0 517.5,335.0938 L773.5,335.0938 A0,0 0 0 0 773.5,335.0938 L773.5,318 L808.99,314 L773.5,310 L773.5,302.5 L763.5,292.5 L517.5,292.5 A0,0 0 0 0 517.5,292.5 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M763.5,292.5 L763.5,302.5 L773.5,302.5 L763.5,292.5 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="156" x="523.5" y="310.4951">Client Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="527.5" y="326.792">— Distribute Application Frontend</text><!--MD5=[6be877ab37e3666b3f77cb8fecf35c62]
+class APIProvider--><rect codeLine="22" fill="#FFFFFF" height="26.2969" id="APIProvider" style="stroke:#A80036;stroke-width:1.5;" width="103" x="925" y="301"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="97" x="928" y="318.9951">API Provider</text><path d="M825.5,432 L825.5,490.8906 A0,0 0 0 0 825.5,490.8906 L1127.5,490.8906 A0,0 0 0 0 1127.5,490.8906 L1127.5,442 L1117.5,432 L980.5,432 L976.5,327.41 L972.5,432 L825.5,432 A0,0 0 0 0 825.5,432 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1117.5,432 L1117.5,442 L1127.5,442 L1117.5,432 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="178" x="831.5" y="449.9951">Backend Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="835.5" y="466.292">— Split Application Backend Logic</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="277" x="835.5" y="482.5889">— Split Application Backend Persistence</text><path d="M488,133 L488,158.5 L453.07,162.5 L488,166.5 L488,191.8906 A0,0 0 0 0 488,191.8906 L711,191.8906 A0,0 0 0 0 711,191.8906 L711,143 L701,133 L488,133 A0,0 0 0 0 488,133 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M701,133 L701,143 L711,143 L701,133 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="183" x="494" y="150.9951">Evolution Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="197" x="498" y="167.292">• Introduce Version Identifier</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198" x="498" y="183.5889">• Introduce Version Mediator</text><!--MD5=[cca5d97aaf46870920fae66c9bd85cdd]
+class Operation--><rect codeLine="34" fill="#FFFFFF" height="66.8906" id="Operation" style="stroke:#A80036;stroke-width:1.5;" width="177" x="301" y="280.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="78" x="350.5" y="298.4951">Operation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="302" x2="477" y1="306.7969" y2="306.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="307" y="323.792">String name</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="307" y="340.0889">APIPattern responsibility</text><path d="M55.5,260 L55.5,367.7813 A0,0 0 0 0 55.5,367.7813 L265.5,367.7813 A0,0 0 0 0 265.5,367.7813 L265.5,318 L300.94,314 L265.5,310 L265.5,270 L255.5,260 L55.5,260 A0,0 0 0 0 55.5,260 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M255.5,260 L255.5,270 L265.5,270 L255.5,260 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="189" x="61.5" y="277.9951">Operation Refactorings:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="65.5" y="294.292">• Extract Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="65.5" y="310.5889">• Move Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142" x="65.5" y="326.8857">• Rename Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="65.5" y="343.1826">• Split Operation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="65.5" y="359.4795">• Merge Operations</text><!--MD5=[e93d480bc88e1c582484fbb697036f76]
+class ResponseMessagePayload--><rect codeLine="42" fill="#FFFFFF" height="66.8906" id="ResponseMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="295" x="32" y="428"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="219" x="70" y="445.9951">Response Message Payload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="326" y1="454.2969" y2="454.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="38" y="471.292">KeyValuePairs protocolHeaders</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="283" x="38" y="487.5889">RepresentationElements requestPayload</text><path d="M46,555 L46,662.7813 A0,0 0 0 0 46,662.7813 L313,662.7813 A0,0 0 0 0 313,662.7813 L313,565 L303,555 L183.5,555 L179.5,495.15 L175.5,555 L46,555 A0,0 0 0 0 46,555 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M303,555 L303,565 L313,565 L303,555 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="211" x="52" y="572.9951">Message Refactorings 1/2:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="224" x="56" y="589.292">• Introduce Data Transfer Object</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189" x="56" y="605.5889">• Extract Information Holder</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="178" x="56" y="621.8857">• Inline Information Holder</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154" x="56" y="638.1826">• Introduce Pagination</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="242" x="56" y="654.4795">• Rename Representation Element</text><!--MD5=[2266c51e2e890c8bcebcea740afba0fd]
+class RequestMessagePayload--><rect codeLine="48" fill="#FFFFFF" height="66.8906" id="RequestMessagePayload" style="stroke:#A80036;stroke-width:1.5;" width="307" x="362" y="428"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="206" x="412.5" y="445.9951">Request Message Payload</text><line style="stroke:#A80036;stroke-width:1.5;" x1="363" x2="668" y1="454.2969" y2="454.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="368" y="471.292">KeyValuePairs protocolHeaders</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="295" x="368" y="487.5889">RepresentationElements responsePayload</text><path d="M368,555 L368,662.7813 A0,0 0 0 0 368,662.7813 L663,662.7813 A0,0 0 0 0 663,662.7813 L663,565 L653,555 L519.5,555 L515.5,495.15 L511.5,555 L368,555 A0,0 0 0 0 368,555 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M653,555 L653,565 L663,565 L653,555 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="211" x="374" y="572.9951">Message Refactorings 2/2:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="378" y="589.292">• Add Wish List</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="378" y="605.5889">• Add Wish Template</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132" x="378" y="621.8857">• Bundle Requests</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="266" x="378" y="638.1826">• Encapsulate Context Representation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="378" y="654.4795">• Make Request Conditional</text><!--MD5=[028a0e69489f0a634a6b8b99cb80bf4e]
+reverse link Endpoint to CommunicationParticipant--><path codeLine="15" d="M431.02,125.85 C447.58,113.54 467.55,101.33 488,95 C582.67,65.67 614.27,73.39 711,95 C757.75,105.45 807.24,132.88 834.15,149.38 " fill="none" id="Endpoint-backto-CommunicationParticipant" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="426.88,128.98,436.4711,126.7416,430.868,125.964,431.6455,120.3609,426.88,128.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[589f97a9b16425f59082067bddef85ca]
+link APIClient to APIProvider--><!--MD5=[9f28ca76701597f52d44af04320774ca]
+reverse link CommunicationParticipant to APIClient--><path codeLine="29" d="M853.42,195.73 C852.32,228.56 850.68,277.8 849.91,300.6 " fill="none" id="CommunicationParticipant-backto-APIClient" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="846.43,195.49,854.09,175.73,860.42,195.96,846.43,195.49" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f7a7c10ae3d18c2fea5618e491c24fbe]
+reverse link CommunicationParticipant to APIProvider--><path codeLine="30" d="M877.38,191.54 C904.06,224.23 946.96,276.81 966.38,300.6 " fill="none" id="CommunicationParticipant-backto-APIProvider" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="871.71,195.66,864.48,175.73,882.55,186.8,871.71,195.66" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0b0864a2bf5314f9d070ebd08a1e0c29]
+reverse link API to Endpoint--><path codeLine="54" d="M389.5,62.06 C389.5,81.36 389.5,108.01 389.5,128.85 " fill="none" id="API-backto-Endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="389.5,48.94,385.5,54.94,389.5,60.94,393.5,54.94,389.5,48.94" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[60da6c4a67454334c72f872775e73766]
+reverse link Endpoint to Operation--><path codeLine="55" d="M389.5,209.56 C389.5,232.44 389.5,259.54 389.5,280.27 " fill="none" id="Endpoint-backto-Operation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="389.5,196.31,385.5,202.31,389.5,208.31,393.5,202.31,389.5,196.31" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e944a18fce392a08bc691f299d3dab8b]
+reverse link Operation to RequestMessagePayload--><path codeLine="56" d="M426.4,357.61 C445.85,380.07 469.34,407.2 487.32,427.96 " fill="none" id="Operation-backto-RequestMessagePayload" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="417.78,347.65,418.6852,354.8041,425.6372,356.72,424.7319,349.566,417.78,347.65" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[86135add3d6fd75ff6dc2a8efd99e1cf]
+reverse link Operation to ResponseMessagePayload--><path codeLine="57" d="M331.48,355.2 C298.41,378.11 257.51,406.45 226.47,427.96 " fill="none" id="Operation-backto-ResponseMessagePayload" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="342.37,347.65,335.1601,347.784,332.5108,354.4908,339.7207,354.3568,342.37,347.65" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[95af7f705bf4bfe8a9404cc498cb5825]
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+class API {
+}
+note left: <b>API Refactorings:</b>\n • Tighten Evolution Strategy \n • Relax Evolution Strategy
+
+class Endpoint {
+ Address location
+ APIPattern role
+}
+note left: <b>Endpoint Refactorings:</b>\n • Rename Endpoint \n • Merge Endpoints \n • Segregate Commands from Queries
+
+class "Communication Participant" as CommunicationParticipant {
+}
+
+CommunicationParticipant -left-> Endpoint
+
+class "API Client" as APIClient {
+}
+note left: <b>Client Refactorings:</b>\n — Distribute Application Frontend
+
+
+class "API Provider" as APIProvider {
+}
+note bottom: <b>Backend Refactorings:</b>\n — Split Application Backend Logic \n — Split Application Backend Persistence
+
+
+APIClient -[hidden]right-> APIProvider
+
+APIClient -up-|> CommunicationParticipant
+APIProvider -up-|> CommunicationParticipant
+
+note "<b>Evolution Refactorings:</b>\n • Introduce Version Identifier\n • Introduce Version Mediator" as EvolutionRefactoringNote
+
+class Operation {
+ String name
+ APIPattern responsibility
+}
+note left: <b>Operation Refactorings:</b>\n • Extract Operation \n • Move Operation \n • Rename Operation \n • Split Operation \n • Merge Operations 
+
+EvolutionRefactoringNote -left- Endpoint
+
+class "Response Message Payload" as ResponseMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note bottom: <b>Message Refactorings 1/2:</b>\n • Introduce Data Transfer Object \n • Extract Information Holder \n • Inline Information Holder \n • Introduce Pagination \n • Rename Representation Element
+
+class "Request Message Payload" as RequestMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note bottom: <b>Message Refactorings 2/2:</b>\n • Add Wish List \n • Add Wish Template \n • Bundle Requests \n • Encapsulate Context Representation \n • Make Request Conditional
+
+API *- - Endpoint
+Endpoint *- - Operation 
+Operation *- - RequestMessagePayload 
+Operation *- - ResponseMessagePayload
+' RequestMessage *- - InParameters
+' ResponseMessage*- - OutParameters
+
+@enduml
+
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+class API {
+}
+note left: <b>API Refactorings:</b>\n • Tighten Evolution Strategy \n • Relax Evolution Strategy
+
+class Endpoint {
+ Address location
+ APIPattern role
+}
+note left: <b>Endpoint Refactorings:</b>\n • Rename Endpoint \n • Merge Endpoints \n • Segregate Commands from Queries
+
+class "Communication Participant" as CommunicationParticipant {
+}
+
+CommunicationParticipant -left-> Endpoint
+
+class "API Client" as APIClient {
+}
+note left: <b>Client Refactorings:</b>\n — Distribute Application Frontend
+
+
+class "API Provider" as APIProvider {
+}
+note bottom: <b>Backend Refactorings:</b>\n — Split Application Backend Logic \n — Split Application Backend Persistence
+
+
+APIClient -[hidden]right-> APIProvider
+
+APIClient -up-|> CommunicationParticipant
+APIProvider -up-|> CommunicationParticipant
+
+note "<b>Evolution Refactorings:</b>\n • Introduce Version Identifier\n • Introduce Version Mediator" as EvolutionRefactoringNote
+
+class Operation {
+ String name
+ APIPattern responsibility
+}
+note left: <b>Operation Refactorings:</b>\n • Extract Operation \n • Move Operation \n • Rename Operation \n • Split Operation \n • Merge Operations 
+
+EvolutionRefactoringNote -left- Endpoint
+
+class "Response Message Payload" as ResponseMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements requestPayload
+}
+note bottom: <b>Message Refactorings 1/2:</b>\n • Introduce Data Transfer Object \n • Extract Information Holder \n • Inline Information Holder \n • Introduce Pagination \n • Rename Representation Element
+
+class "Request Message Payload" as RequestMessagePayload {
+  KeyValuePairs protocolHeaders
+  RepresentationElements responsePayload
+}
+note bottom: <b>Message Refactorings 2/2:</b>\n • Add Wish List \n • Add Wish Template \n • Bundle Requests \n • Encapsulate Context Representation \n • Make Request Conditional
+
+API *- - Endpoint
+Endpoint *- - Operation 
+Operation *- - RequestMessagePayload 
+Operation *- - ResponseMessagePayload
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

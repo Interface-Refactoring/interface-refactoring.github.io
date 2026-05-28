@@ -1,0 +1,751 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Distribute Application Frontend - Interface Refactoring Catalog</title>
+<meta name="description" content="Context and Motivation">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Distribute Application Frontend">
+<meta property="og:url" content="/refactorings/distributeapplicationfrontend">
+
+
+  <meta property="og:description" content="Context and Motivation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-28T19:35:44+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/distributeapplicationfrontend">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Distribute Application Frontend</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Distribute Application Frontend</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#smells">Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendlogic">Split Application Backend Logic </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Examples (TELL)</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Distribute Application Frontend">
+    <meta itemprop="description" content="Context and Motivation">
+    <meta itemprop="datePublished" content="2026-05-28T19:35:44+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Distribute Application Frontend
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2026-05-28T00:00:00+02:00">May 28, 2026</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2025
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An application accepts input from human users, and displays processing results to them. The user interface might be organized into multiple dialogs (aka editors/forms and views or pages).</p>
+
+<p class="notice--primary">As an application architect, I want to distribute logical presentation layer responsibilities (e.g., input consumption and validation, output display, dialog control) to physical tiers in such a way that design-time and runtime properties are balanced and able to meet the project goals, quality requirements, and constraints.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#discoverability">#discoverability</a></dt>
+  <dd>Search Engine Optimization (SEO) can have a significant impact on business success. Distributing rendering strategies to dedicated tiers influences the way information can be indexed by web crawlers. The chosen presentation strategy should address and reflect SEO requirements early in the design.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#evolvability">#evolvability</a></dt>
+  <dd>User interfaces must remain adaptable as technologies, platforms, and user needs evolve. Supporting different platforms or updating frameworks should not require full system changes.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#runtime-qos">#runtime-QoS</a></dt>
+  <dd>The distribution of presentation logic (i.e., forms and views, dialog control) across physical tiers affects runtime Quality-of-Service (QoS) attributes such as performance, scalability, and reliability. For example, moving certain functions to the client side can reduce server load but might impact client performance or network utilization.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#security">#security</a></dt>
+  <dd>Remote placement of presentation layer responsibilities exposes more code to external parties. The data accepted from and displayed to end users as such does not change, but is transported and treated differently. Authentication, authorization, and data validation concerns become more complex when the frontend is distributed.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#team-organization">#team-organization</a></dt>
+  <dd>Cases in which there is a dedicated team (silo) of designers (such as Web designers or user interface designers) have to be taken into account; while the notion of a “full stack developer” exists that covers frontend and backend development, specializations can also be observed. The specialized teams should communicate well and collaborate intensively (but cannot be assumed to always do). Conway’s Law applies, stating that organizations which design systems produce designs that are copies of the communication structures of these organizations [<a href="#ref-Conway:1968">Conway 1968</a>; <a href="#ref-Vernon:2022">Vernon and Jaskula 2022</a>]; an adequate organizational fit is a critical success factor. The Team Topologies community and book [<a href="#ref-Skelton:2019">Skelton, Pais, and Malan 2019</a>] elaborate and suggest suited organization structures. An “inverse Conway maneuver” has been proposed by M. Fowler [<a href="#ref-Fowler:2022">2022</a>] but also criticized by Dupuydauby [<a href="#ref-Dupuydauby:2023">2023</a>].</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#testability">#testability</a></dt>
+  <dd>UI testing includes both logic verification and visual validation. Architectures that combine frontend with backend in one tier make automation harder and increase effort for consistent, isolated UI tests.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#user-experience">#user-experience</a></dt>
+  <dd>The easier it is to navigate, provide input, and view output, the better. There may not be a one-size-fits-all user interface for all stakeholders. Supporting different User Interface (UI) paradigms (e.g. desktop, web, mobile) might be necessary. Certain user interface designs might require special hardware.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>This refactoring targets the logical presentation layer [<a href="#ref-PoEAA">Martin Fowler 2002</a>] of an application. This presentation layer is responsible for controlling dialog between end users and the systems, displaying processing results and accepting user input (and validating it). The business logic in the next layer performs computations, manipulates business objects, and maintains application state. The persistence layer stores business objects and all other long-lasting application state; it also offers data retrieval and update operations (data access).</p>
+
+<p>Figure 1 illustrates a logically layered monolith. There is a single tier only; the entire user interface is part of it. Hence, desktop applications such as word processors or spreadsheet software and standalone IDEs not connecting to cloud services qualify as known uses; Web applications that serve an end user via a browser or a smartphone that communicate with a remote backend do not. Note that the term “monolith” sometimes also is used to describe a backend that is not split into separate processes or other forms of application components that can be distributed; this double use of the term can be attributed to the omnipresence of Web applications of all kinds today.</p>
+
+<p><img src="/refactorings/images/DistributeApplicationFrontend_Initial.png" alt="Distribute Application Frontend: Initial Position Sketch. A logically layered monolithic application." /></p>
+
+<p>Figure 1: Distribute Application Frontend: Initial Position Sketch. A logically layered monolithic application.</p>
+
+<h2 id="smells">Smells</h2>
+
+<p>The fully monolithic initial position, but also the desired target solutions (distribution patterns) may suffer from certain problems regarding their desired qualities (articulated as concerns earlier on):</p>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#bad-user-experience">Bad user experience</a></em></dt>
+  <dd>Some server-rendered UIs (called “Distributed Presentation” in the client-server cut terminology from Renzel and Keller [<a href="#ref-Renzel:1997:CSC">1997</a>]) come across as outdated or inflexible; they were particularly popular in the early 2000s [<a href="#ref-PoEAA">Martin Fowler 2002</a>]. Users expect interactive interfaces with real-time feedback, intuitive navigation, and offline capability today. Full-page reloads or delayed updates lower the flow of interaction and reduce user satisfaction.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#installation-effort-and-incompatibilities">Installation effort and incompatibilities</a></em></dt>
+  <dd>In monolithic architectures, chan-ges in lower logical layers (e.g., backend APIs or data models) may require updates to the higher layers. Tightly coupled deployments increase the frequency of breaking changes, raising installation and configuration effort for users.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#limited-evolvability">Limited evolvability</a></em></dt>
+  <dd>A frontend tightly coupled to server-side technologies (“Distributed Presentation”) limits the ability to adopt new frontend frameworks or develop alternative interfaces (e.g., mobile apps). Backend modifications are often required for UI-level innovation or migration. Large UI migrations often require full rewrites instead of incremental, step-by-step transitions.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#poor-response-times">Poor response times</a></em></dt>
+  <dd>Server-side rendering (“Distributed Presentation”) often leads to frequent client-server round trips, especially in multistep dialogs. Page transitions may lag due to network delays, and round trips put additional load on the backend. On the other hand, client-side rendering can result in unnecessary re-rendering or flickering. Such performance issues negatively affect user experience and system efficiency.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#poor-visibility">Poor visibility</a></em></dt>
+  <dd>Client-side rendering (called “Remote User Interface” in the client-server cut terminology from Renzel and Keller [<a href="#ref-Renzel:1997:CSC">1997</a>]) without appropriate fallbacks can hinder site/page indexing by search engines. Pages may appear blank or incomplete to crawlers, reducing discoverability and affecting business outcomes that depend on search engine rankings.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#reduced-testability">Reduced testability</a></em></dt>
+  <dd>Testing requires full system deployment when monolithic cross-layer dependencies exist. Presentation logic that is not physically separated from the business logic cannot be verified in isolation, slowing down test cycles and complicating test automation setups.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>There are several options, depending on the as-is situation:</p>
+
+<ul>
+  <li>A. Refactor from monolith (no separate frontend) to distributed presentation. Extract User Interface (UI) to a thin server-rendered web tier.</li>
+  <li>B. Refactor from monolith (no separate frontend) to remote UI. Extract UI to a rich client-rendered frontend, either a Single-Page Application (SPA) or a native app (on desktop PC or mobile phone).</li>
+  <li>C. Switch from distributed presentation to remote UI. Migrate server-rendered frontend to SPA for better user experience and decoupled evolution.</li>
+  <li>D. Switch from remote UI to distributed presentation. Reintroduce server rendering for simplicity, performance, caching, pre rendering, maintainability or SEO needs.</li>
+  <li>E. Return to monolith and remove separate application frontend. Move user interface back into the monolith, for simpler deployment in internal apps.</li>
+</ul>
+
+<p>Figure 2 visualizes these transition options in a state diagram.</p>
+
+<p><img src="/plantuml-images/0b2aca8302325bff2b5547d00626a2ebc95bcbdd58b41ade1db989a083f85f4a.svg" alt="Distribute Application Frontend: Refactoring Options" /></p>
+
+<p>Figure 2: Distribute Application Frontend: Refactoring Options</p>
+
+<p>Note that Option E actually is not a full refactoring on its own, but merely undoes other options. Cloud-native applications by definition have a separate Web application frontend that forms its own tier; Options A, B and E are not available in that setting as a true/full monolith is not possible.</p>
+
+<p>The five options above focus on distributing presentation logic across physical tiers. Note that we define tier as a collection of co-located compute nodes here (which is in line with the Renzel/Keller paper [<a href="#ref-Renzel:1997:CSC">Renzel and Keller 1997</a>]). Remote communication is required to integrate API clients and providers on different tiers; within a compute note, inter-process or intra-process communication is sufficient. Modularizing a remote user interface restructures a large frontend into independently evolvable vertical slices (aka microfrontends), enabling domain ownership and incremental modernization.</p>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>The frontend can either be separated from the backend partially, with the dialog control remaining on the server-side (Option A) or with the dialog control also moved (Option B). In Option B, a remote API (typically a Web API) connects frontend (presentation layer) and backend (business logic and persistence). Figure 3 sketches Option A; Option B is sketched in Figure 4. Switching from either target to the other (Options C and D) is shown in Figure 5.</p>
+
+<p><img src="/refactorings/images/DistributeApplicationFrontend_Target1.png" alt="Distribute Application Frontend: Target Solution Sketch. From Local User Interface (Monolith) to Distributed Presentation (Option A)." /></p>
+
+<p>Figure 3: Distribute Application Frontend: Target Solution Sketch. From Local User Interface (Monolith) to Distributed Presentation (Option A).</p>
+
+<p><img src="/refactorings/images/DistributeApplicationFrontend_Target2.png" alt="Distribute Application Frontend: Target Solution Sketch. From Local User Interface (Monolith) to Remote User Interface (Option B)." /></p>
+
+<p>Figure 4: Distribute Application Frontend: Target Solution Sketch. From Local User Interface (Monolith) to Remote User Interface (Option B).</p>
+
+<p><img src="/refactorings/images/DistributeApplicationFrontend_Target3.png" alt="Distribute Application Frontend: Target Solution Sketch. From Distributed Presentation to Remote User Interface and back (Options C and D)." /></p>
+
+<p>Figure 5: Distribute Application Frontend: Target Solution Sketch. From Distributed Presentation to Remote User Interface and back (Options C and D).</p>
+
+<p>These options can be combined with other client-server cuts, including distributed application kernel, remote database, and distributed database [<a href="#ref-Renzel:1997:CSC">Renzel and Keller 1997</a>].</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>Examples for the target solutions of the first four options presented above are:</p>
+
+<ul>
+  <li>Distributed Presentation (Options A and D): Spring Pet Clinic uses server-rendered Thymeleaf templates following a Template View pattern from “Patterns of Enterprise Application Architecture” [<a href="#ref-PoEAA">Martin Fowler 2002</a>]. The backend is responsible for HTML generation and dialog navigation.</li>
+  <li>Remote User Interface (Options B and C): SPAs built with React, Angular, or Vue usually consume backend APIs via REST or GraphQL. The frontend owns routing and local state.</li>
+</ul>
+
+<p>Large-scale platforms use microfrontends to let teams build and deploy UI parts independently, even with different frameworks and release cycles. They are integrated into a platform by a shell application.</p>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Frontend engineering is a sub-discipline of computer science and software engineering with its own principles, tools, and communities. When designing client-server architectures that involve frontend distribution, consider the following guidelines:</p>
+
+<ul>
+  <li>Balance trade-offs using requirements: Let non-functional goals such as performance, scalability, security, and usability guide where to split front-end and back-end. Server rendering may reduce latency and simplify optimization, while client-heavy apps enable interactivity and offline use. Prioritize requirements over trends when making architecture decisions.</li>
+  <li>Don’t violate logical layering: Avoid bypassing intended separation of concerns. In server-rendered apps, don’t embed SQL in templates. In client-heavy apps, avoid direct database access. Always go through backend APIs to maintain modularity and prevent tight coupling.</li>
+  <li>Do not implement complex business logic in a frontend following the remote user interface client/server cut; place this logic in a separate logical layer in the backend. Introduce suited frontend-backend integration APIs.</li>
+  <li>Avoid hybrid rendering unless necessary: Mixing server-side rendering with SPAs increases complexity and reduces consistency. Only use hybrid strategies if clearly justified, and document which parts follow which model to simplify onboarding and maintenance.</li>
+  <li>Separate the interface to the business logic from any server-side presentation logic (like HTML templating) carefully.</li>
+  <li>Be mindful of microfrontend complexity. Like microservices in the backend microfrontends add modularity, but also bring coordination challenges. Watch for duplicate dependencies, fragmented UX, and complex deployments. Favor well-defined contracts, consistent design tokens, and automated integration to maintain modularity without sacrificing cohesion.</li>
+  <li>Make sure that general concerns such as security and testability are met; detail suggestions how to achieve that can be found in the literature [<a href="#ref-Hoffman:2024">Hoffman 2024</a>].</li>
+</ul>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>Other architectural refactorings in this catalog include <a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries</a>, <a href="/refactorings/splitapplicationbackendlogic">Split Application Backend Logic</a>, and <a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence</a>.</p>
+
+<p>The paper “Client/Server Architectures for Business Information Systems – A Pattern Language” [<a href="#ref-Renzel:1997:CSC">Renzel and Keller 1997</a>] features five client-server cuts (aka distribution patterns) including Remote User Interface and Distributed Presentation.</p>
+
+<p>The <a href="https://martinfowler.com/articles/micro-frontends.html"><em>Microfrontend</em> Architecture</a> extends the Remote User Interface and Distributed Presentation patterns by decomposing the frontend into independently developed and deployed fragments. This enables domain-aligned team ownership, incremental technology migration, and independently evolving UI modules. While microfrontends operate within a single client tier, they share key architectural goals with <a href="/refactorings/splitapplicationbackendlogic">Split Application Backend Logic</a> on the backend. As with the backend, Domain-Driven Design (DDD) principles can be applied to structure microfrontends, aligning each independently evolving fragment with a Bounded Context.</p>
+
+<p>Modern frontend architectures often rely on a mix of rendering strategies such as Server-Side Rendering (SSR), Client-Side Rendering (CSR), Static Site Generation (SSG), Incremental Static Generation (ISG) or Edge Side Rendering (ESR). These techniques balance trade-offs between interactivity, performance, and SEO. Frameworks like Next.js, Nuxt, Astro and qwik support hybrid approaches combining SSR with static pre-rendering and hydration or resumability. See <a href="https://micro-frontends.org">micro-frontends.org</a>, <a href="https://nextjs.org/learn/seo/rendering-strategies">nextjs</a> or <a href="https://vercel.com/blog/how-to-choose-the-best-rendering-strategy-for-your-app">vercel.com</a> for architectural implications of rendering strategy choices.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Conway:1968" class="csl-entry">
+
+    <p>Conway, Melvin E. 1968. “How Do Committees Invent?” <em>Datamation</em>. <a href="http://www.melconway.com/research/committees.html">http://www.melconway.com/research/committees.html</a>.</p>
+
+  </div>
+
+  <div id="ref-Dupuydauby:2023" class="csl-entry">
+
+    <p>Dupuydauby, C. 2023. “[ICM #1: Say no to the ’Inverse Conway Maneuver’]{.nocase}.” A Medium Corporation. <a href="https://medium.com/@Cyrdup/icm-1-say-no-to-the-inverse-conway-maneuver-6672ba2373cb">https://medium.com/@Cyrdup/icm-1-say-no-to-the-inverse-conway-maneuver-6672ba2373cb</a>.</p>
+
+  </div>
+
+  <div id="ref-Fowler:2022" class="csl-entry">
+
+    <p>Fowler, M. 2022. “[Conway’s Law]{.nocase}.” <a href="https://martinfowler.com/bliki/ConwaysLaw.html">https://martinfowler.com/bliki/ConwaysLaw.html</a>.</p>
+
+  </div>
+
+  <div id="ref-PoEAA" class="csl-entry">
+
+    <p>Fowler, Martin. 2002. <em>Patterns of Enterprise Application Architecture</em>. Boston, MA, USA: Addison-Wesley Longman Publishing Co., Inc.</p>
+
+  </div>
+
+  <div id="ref-Hoffman:2024" class="csl-entry">
+
+    <p>Hoffman, A. 2024. <em>Web Application Security: Exploitation and Countermeasures for Modern Web Applications</em>. O’Reilly Media.</p>
+
+  </div>
+
+  <div id="ref-Renzel:1997:CSC" class="csl-entry">
+
+    <p>Renzel, Klaus, and Wolfgang Keller. 1997. “[Client/Server Architectures for Business Information Systems – A Pattern Language]{.nocase}.” In <em>Proceedings of the Conference on Pattern Languages of Programs</em>. PLoP ’97.</p>
+
+  </div>
+
+  <div id="ref-Skelton:2019" class="csl-entry">
+
+    <p>Skelton, M., M. Pais, and R. Malan. 2019. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution.</p>
+
+  </div>
+
+  <div id="ref-Vernon:2022" class="csl-entry">
+
+    <p>Vernon, Vaughn, and Tomasz Jaskula. 2022. <em>Strategic Monoliths and Microservices: Driving Innovation Using Purposeful Architecture</em>. Addison-Wesley Signature Series (Vernon). Addison-Wesley Professional.</p>
+
+  </div>
+
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/bundlerequests" class="pagination--pager" title="Bundle Requests
+">Previous</a>
+    
+    
+      <a href="/refactorings/encapsulatecontextrepresentation" class="pagination--pager" title="Encapsulate Context Representation
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

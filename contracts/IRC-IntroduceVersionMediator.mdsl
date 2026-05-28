@@ -1,0 +1,43 @@
+API description LakesideMutual version "v1.0.0"
+
+data type CustomerDTO1 {"name":D<string>}
+
+data type CustomerDTO2 {"firstName":D<string>, "lastName":D<string>}
+
+endpoint type CustomerCoreOriginalContract
+exposes 
+  operation createCustomerMasterData
+    expecting payload "customerData": CustomerDTO1
+    delivering payload "customerId": ID<int>
+  operation readCustomerMasterData 
+    expecting payload "customerId": ID<int>
+    delivering payload "customerData": CustomerDTO1
+    
+endpoint type CustomerCoreRevisedContract
+exposes 
+  operation createCustomerMasterData
+    expecting payload "customerData": CustomerDTO2
+    delivering payload "customerId": ID<int>
+  operation readCustomerMasterData 
+    expecting payload "customerId": ID<int>
+    delivering payload "customerData": CustomerDTO2
+   
+API provider LakesideMutualAPI
+  offers CustomerCoreOriginalContract
+  at endpoint location "http://some.original.address"
+  via protocol HTTP binding resource Home
+
+API client CustomerRelationshipManagementApplication
+  consumes CustomerCoreOriginalContract
+  via protocol HTTP 
+    
+API gateway Version1ToVersion2Mediator
+  offers CustomerCoreOriginalContract
+  at endpoint location "http://some.new.address"
+  via protocol HTTP binding resource Home
+  consumes CustomerCoreRevisedContract 
+  from LakesideMutualAPI
+  via protocol HTTP
+  mediates from CustomerDTO1 to CustomerDTO2 
+  // TODO define element-level mapping rules here 
+   

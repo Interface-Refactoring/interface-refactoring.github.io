@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: ExtractOperationSketch
+  version: "1.0"
+servers:
+- url: http://localhost:8080
+tags:
+- name: Endpoint1AndEndpoint2MergedProvider-Home
+  externalDocs:
+    description: The role of this endpoint, offering a Endpoint1AndEndpoint2Merged
+      contract, is not specified.
+    url: ""
+paths:
+  /Endpoint1:
+    post:
+      tags:
+      - Endpoint1
+      description: unspecified operation responsibility
+      operationId: operation1
+      parameters: []
+      responses:
+        "200":
+          description: operation1 successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+  /Endpoint2:
+    post:
+      tags:
+      - Endpoint2
+      description: unspecified operation responsibility
+      operationId: operation2
+      parameters: []
+      responses:
+        "200":
+          description: operation2 successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+  /Home:
+    put:
+      tags:
+      - Endpoint1AndEndpoint2MergedProvider-Home
+      description: unspecified operation responsibility
+      operationId: Home-operation2
+      parameters: []
+      responses:
+        "200":
+          description: operation2 successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+      - Endpoint1AndEndpoint2MergedProvider-Home
+      description: unspecified operation responsibility
+      operationId: Home-operation1
+      parameters: []
+      responses:
+        "200":
+          description: operation1 successful execution
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas: {}

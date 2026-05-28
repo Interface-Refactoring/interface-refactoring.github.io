@@ -1,0 +1,16 @@
+API description RenameRepresentationElementSketch
+
+// the most simple version of "Rename Representation Element"
+
+// source:
+endpoint type GenericEndpointOfUnknownRole
+exposes 
+  operation hardToGraspName 
+    expecting payload "SomeRequestMessage" 
+    
+// target:
+endpoint type DomainNounAndRDDRoleStereotype
+exposes 
+  operation verbFromDomainLanguage 
+    expecting payload "DomainLevelTransferObject1" 
+    delivering payload "DomainLevelTransferObject2"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="347px" preserveAspectRatio="none" style="width:854px;height:347px;background:#F3F6F6;" version="1.1" viewBox="0 0 854 347" width="854px" zoomAndPan="magnify"><defs/><g><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="456" x="128.53" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="446" x="133.53" y="31.8467">Monolith (Co-Located Presentation, Business Logic, Persistence)</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="178" x="40.53" y="162"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="45.53" y="186.8467">Distributed Presentation</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="165" x="237.03" y="301"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="242.03" y="325.8467">Remote User Interface</text><!--MD5=[f398a4593436483d6e0eee1ea3de052e]
+link Monolith to DistributedPresentation--><path d="M128.12,39.14 C78.97,46.42 36.82,58.16 20.53,77 C6,93.81 8.81,108.12 20.53,127 C29.31,141.15 43.02,151.7 57.79,159.54 " fill="none" id="Monolith-to-DistributedPresentation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="62.41,161.88,56.188,154.2454,57.9494,159.6211,52.5737,161.3825,62.41,161.88" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="76.53" y="90.9951">(A) Introduce thin</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="69.53" y="107.292">application frontend</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="233" x="21.53" y="123.5889">(thin client, server-side rendering)</text><!--MD5=[86f84a7f76f38afff58683d1a75c4795]
+link DistributedPresentation to Monolith--><path d="M194.85,161.94 C216.83,153.51 240.57,142.03 259.53,127 C280.99,109.99 276.69,96.87 295.53,77 C304.61,67.43 315.58,58.07 325.7,50.14 " fill="none" id="DistributedPresentation-to-Monolith" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="329.67,47.06,320.1024,49.3969,325.7133,50.1168,324.9933,55.7277,329.67,47.06" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="296.53" y="98.9951">(E) Return to</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="312.53" y="115.292">monolith</text><!--MD5=[b0658f7b4d9735b11ff216d9880a5423]
+link Monolith to RemoteUI--><path d="M375.66,47.25 C382.72,55.66 389.87,66.08 393.53,77 C420.93,158.75 434.33,195.04 393.53,271 C387.66,281.93 378.17,290.83 367.91,297.89 " fill="none" id="Monolith-to-RemoteUI" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="363.47,300.81,373.1901,299.2228,367.6521,298.0695,368.8054,292.5315,363.47,300.81" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="512.53" y="170.9951">(B) Introduce rich</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="503.53" y="187.292">application frontend</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="309" x="419.53" y="203.5889">(remote user interface, client-side rendering)</text><!--MD5=[b284341d294fb1e052b8138ced96f3c5]
+link RemoteUI to Monolith--><path d="M402.36,309.52 C512.23,293.72 697.03,259.9 737.53,207 C806.06,117.48 653.65,70.85 521.69,47.93 " fill="none" id="RemoteUI-to-Monolith" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="516.61,47.05,524.8069,52.5099,521.5385,47.8928,526.1555,44.6243,516.61,47.05" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="754.53" y="178.9951">(E) Return to</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="770.53" y="195.292">monolith</text><!--MD5=[73c195280570afba8d467999e4d3cf5b]
+link DistributedPresentation to RemoteUI--><path d="M71.02,202.02 C55.1,210.18 39.73,221.51 30.53,237 C22.82,249.99 20.78,259.46 30.53,271 C55.95,301.09 156.28,312.7 231.64,317.19 " fill="none" id="DistributedPresentation-to-RemoteUI" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="237.03,317.5,228.2857,312.9682,232.039,317.2005,227.8066,320.9538,237.03,317.5" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="60.53" y="250.9951">(C) Switch to</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="149" x="31.53" y="267.292">remote user interface</text><!--MD5=[c6057f8d307f49d1b03c0ff4abc051c4]
+link RemoteUI to DistributedPresentation--><path d="M274.51,300.97 C257.28,292.81 237.86,282.5 221.53,271 C219.61,269.65 179.83,231.44 153.21,205.82 " fill="none" id="RemoteUI-to-DistributedPresentation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="149.39,202.14,153.1109,211.259,152.9964,205.6033,158.6521,205.4888,149.39,202.14" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="259.53" y="250.9951">(D) Switch to</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="222.53" y="267.292">distributed presentation</text><!--MD5=[24d978fb08e1d4b91cee717d3c045b56]
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+'state Monolith
+state "Monolith (Co-Located Presentation, Business Logic, Persistence)" as Monolith
+state "Distributed Presentation" as DistributedPresentation
+state "Remote User Interface" as RemoteUI
+
+Monolith - -> DistributedPresentation : (A) Introduce thin \napplication frontend\n(thin client, server-side rendering)
+Monolith - -> RemoteUI : (B) Introduce rich \napplication frontend \n(remote user interface, client-side rendering)
+
+DistributedPresentation - -> RemoteUI : (C) Switch to \nremote user interface
+RemoteUI - -> DistributedPresentation : (D) Switch to \ndistributed presentation
+
+DistributedPresentation -[dashed]-> Monolith : (E) Return to \nmonolith
+RemoteUI -[dashed]-> Monolith : (E) Return to \nmonolith
+@enduml
+
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+state "Monolith (Co-Located Presentation, Business Logic, Persistence)" as Monolith
+state "Distributed Presentation" as DistributedPresentation
+state "Remote User Interface" as RemoteUI
+
+Monolith - -> DistributedPresentation : (A) Introduce thin \napplication frontend\n(thin client, server-side rendering)
+Monolith - -> RemoteUI : (B) Introduce rich \napplication frontend \n(remote user interface, client-side rendering)
+
+DistributedPresentation - -> RemoteUI : (C) Switch to \nremote user interface
+RemoteUI - -> DistributedPresentation : (D) Switch to \ndistributed presentation
+
+DistributedPresentation -[dashed]-> Monolith : (E) Return to \nmonolith
+RemoteUI -[dashed]-> Monolith : (E) Return to \nmonolith
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

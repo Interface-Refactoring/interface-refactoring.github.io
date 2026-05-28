@@ -1,0 +1,20 @@
+API description MergeOperationsSketch
+
+data type ConsolidatedRequestMessage {"RequestMessage1", "RequestMessage2"}
+data type ConsolidatedResponseMessage {"ResponseMessage1",  "ResponseMessage2"}
+
+endpoint type Endpoint1a
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+    
+   operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+
+endpoint type Endpoint1b
+exposes 
+  operation operation1and2Merged 
+    expecting payload "RequestMessage12":ConsolidatedRequestMessage
+    delivering payload "ResponseMessage12":ConsolidatedResponseMessage

@@ -1,0 +1,749 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.23.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Merge Endpoints - Interface Refactoring Catalog</title>
+<meta name="description" content="Context and Motivation">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Interface Refactoring Catalog">
+<meta property="og:title" content="Merge Endpoints">
+<meta property="og:url" content="/refactorings/mergeendpoints">
+
+
+  <meta property="og:description" content="Context and Motivation">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-05-28T19:35:44+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="/refactorings/mergeendpoints">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="x8wyOj5Ci0-5V8KvrqNeZ90_I9sOVHog3UqCKVUem28" />
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Interface Refactoring Catalog Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/arduino-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.registerLanguage("mdsl", function(hljs) {
+          return {
+            keywords: {
+                        // See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
+                        keyword: "API IPA description data type endpoint operation provider client gateway responsibility serves as exposes offers consumes expecting delivering scenario story supports with a wants to so that via protocol binding resource at element realized as location and mediates from to",
+                        literal: 'header payload "GET" "PUT" "POST" "PATCH" "DELETE" "HTTP"', // not sure about this group 
+                        operator: "* + ? !",
+                        type: "ID D MD L P string int long bool raw Identifier Data Metadata Link",
+                        built_in: "PROCESSING_RESOURCE INFORMATION_HOLDER_RESOURCE COLLECTION_RESOURCE STATE_CREATION_OPERATION RETRIEVAL_OPERATION STATE_TRANSITION_OPERATION STATE_DELETION_OPERATION STATE_REPLACEMENT_OPERATION COMPUTATION_FUNCTION Pagination Wish_List Wish_Template Request_Bundle Context_Representation"
+                    },
+                    contains: [
+                        hljs.C_LINE_COMMENT_MODE,
+                        hljs.C_BLOCK_COMMENT_MODE,
+                        hljs.QUOTE_STRING_MODE
+                    ]
+          }
+      });
+      hljs.registerLanguage("cml", function(hljs) {
+          return {
+              keywords: {
+                  keyword: "Aggregate Service",
+                  type: "String",
+              },
+              contains: [
+                  hljs.C_LINE_COMMENT_MODE,
+                  hljs.C_BLOCK_COMMENT_MODE
+              ]
+          }
+      });
+      hljs.initHighlighting();
+  });
+</script>
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide refactoring">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Interface Refactoring Catalog"></a>
+        
+        <a class="site-title" href="/">
+          Interface Refactoring Catalog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/refactorings/by-stakeholder-concerns">Stakeholder Concerns</a>
+            </li><li class="masthead__menu-item">
+              <a href="/refactorings/by-smells-drivers">Smells</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/refactorings" itemprop="item"><span itemprop="name">Refactorings</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Merge Endpoints</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle Menu</label>
+  <ul class="nav__items">
+    
+      <li>
+          <span class="nav__sub-title">Merge Endpoints</span>
+          <ul><li><a href="#context-and-motivation">Context and Motivation</a></li><li><a href="#stakeholder-concerns">Stakeholder Concerns</a></li><li><a href="#initial-position-sketch">Initial Position Sketch</a></li><li><a href="#design-smells">Design Smells</a></li><li><a href="#instructions">Instructions</a></li><li><a href="#target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</a></li><li><a href="#examples">Example(s)</a></li><li><a href="#hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</a></li><li><a href="#related-content">Related Content</a></li><li><a href="#references">References</a></li></ul>
+
+      </li>
+    
+    <li>
+      <ul>
+        <span class="nav__sub-title">Refactorings Index</span>
+        
+          <li><a href="/refactorings/addwishlist">Add Wish List </a></li>
+        
+          <li><a href="/refactorings/addwishtemplate">Add Wish Template </a></li>
+        
+          <li><a href="/refactorings/bundlerequests">Bundle Requests </a></li>
+        
+          <li><a href="/refactorings/distributeapplicationfrontend">Distribute Application Frontend </a></li>
+        
+          <li><a href="/refactorings/encapsulatecontextrepresentation">Encapsulate Context Representation </a></li>
+        
+          <li><a href="/refactorings/extractinformationholder">Extract Information Holder </a></li>
+        
+          <li><a href="/refactorings/extractoperation">Extract Operation </a></li>
+        
+          <li><a href="/refactorings/inlineinformationholder">Inline Information Holder </a></li>
+        
+          <li><a href="/refactorings/introducedatatransferobject">Introduce Data Transfer Object </a></li>
+        
+          <li><a href="/refactorings/introducepagination">Introduce Pagination </a></li>
+        
+          <li><a href="/refactorings/introduceversionidentifier">Introduce Version Identifier </a></li>
+        
+          <li><a href="/refactorings/introduceversionmediator">Introduce Version Mediator </a></li>
+        
+          <li><a href="/refactorings/makerequestconditional">Make Request Conditional </a></li>
+        
+          <li><a href="/refactorings/mergeendpoints">Merge Endpoints </a></li>
+        
+          <li><a href="/refactorings/mergeoperations">Merge Operations </a></li>
+        
+          <li><a href="/refactorings/moveoperation">Move Operation </a></li>
+        
+          <li><a href="/refactorings/relaxevolutionstrategy">Relax Evolution Strategy </a></li>
+        
+          <li><a href="/refactorings/renameendpoint">Rename Endpoint </a></li>
+        
+          <li><a href="/refactorings/renameoperation">Rename Operation </a></li>
+        
+          <li><a href="/refactorings/renamerepresentationelement">Rename Representation Element </a></li>
+        
+          <li><a href="/refactorings/segregatecommandsfromqueries">Segregate Commands from Queries </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendlogic">Split Application Backend Logic </a></li>
+        
+          <li><a href="/refactorings/splitapplicationbackendpersistence">Split Application Backend Persistence </a></li>
+        
+          <li><a href="/refactorings/splitoperation">Split Operation </a></li>
+        
+          <li><a href="/refactorings/tightenevolutionstrategy">Tighten Evolution Strategy </a></li>
+        
+      </ul>
+    </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Browse Refactorings</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/refactorings/by-stakeholder-concerns">... by Stakeholder Concerns</a></li>
+          
+            <li><a href="/refactorings/by-smells-drivers">... by Smells</a></li>
+          
+            <li><a href="/refactorings">... by Target</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Extras</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/news">News</a></li>
+          
+            <li><a href="/hints">Hints and Examples (TELL)</a></li>
+          
+            <li><a href="/glossary">Glossary</a></li>
+          
+            <li><a href="/publications">Articles and Books</a></li>
+          
+            <li><a href="/about">About the Authors</a></li>
+          
+            <li><a href="/terms">Terms and License</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Merge Endpoints">
+    <meta itemprop="description" content="Context and Motivation">
+    <meta itemprop="datePublished" content="2026-05-28T19:35:44+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Merge Endpoints
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <strong>Updated:</strong>
+        
+        <time datetime="2026-05-28T00:00:00+02:00">May 28, 2026</time>
+      </span>
+    
+    
+      <span class="page__meta-workshopped">
+        <strong>Published:</strong> EuroPLoP 2025
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      
+        
+      
+
+      <section class="page__content" itemprop="text">
+        <h2 id="context-and-motivation">Context and Motivation</h2>
+
+<p>An API consists of multiple endpoints that expose one or more operations. Two or more of these operations are strongly related to each other. For instance, one can only be executed when the other one has succeeded, or one prepares the data that the other one works with. Because of their mutual dependencies, they have the same reasons to change and usually do so at the same time. This creates an undesired, rather tight coupling between the endpoints.</p>
+
+<p class="notice--primary">As an API provider, I want to bring the operations from multiple endpoints together and consolidate them in a single endpoint so that they can be deployed, scaled, and evolved jointly.</p>
+
+<h2 id="stakeholder-concerns">Stakeholder Concerns</h2>
+
+<dl>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#cohesion">#cohesion</a></dt>
+  <dd>Cohesion refers to “the degree to which the elements inside a module belong together” according to <a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)">Wikipedia</a>. In the context of this refactoring, the “elements” are the API operations, and the “modules” are the API endpoints. API designers, and software engineers in general, strive for high cohesion, meaning that operations that belong together are offered by the same endpoint. Stevens, Myers, and Constantine [<a href="#ref-Constantine:1974">1974</a>] define a scale of cohesiveness that ranges from coincidental, logical, temporal, communicational, sequential to functional cohesiveness. In the highest form, functional cohesiveness, “all of the elements [of a module] are related to the performance of a single function.” The <a href="https://www.sebokwiki.org/wiki/Cohesion_(glossary)">Systems Engineering Body of Knowledge</a> also provides an explanation of this general term.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#coupling">#coupling</a></dt>
+  <dd>According to the <a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">Wikipedia entry</a> for this term, coupling is the degree of interdependence between software modules, a measure of how closely connected two modules or API endpoints are. “Strong coupling complicates a system since a module is harder to understand, change, or correct by itself if it is highly interrelated with other modules” [<a href="#ref-Constantine:1974">Stevens, Myers, and Constantine 1974</a>]. The pattern summary of <a href="https://www.cloudcomputingpatterns.org/loose_coupling/">Loose Coupling</a> suggests time, platform, reference, and format as key autonomy dimensions. <a href="https://www.enterpriseintegrationpatterns.com/ramblings/coupling_facets.html">“The Many Facets of Coupling”</a> and other “ramblings” by Gregor Hohpe suggest a “nuanced discussion of coupling”.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#team-organization">#team-organization</a></dt>
+  <dd>Both well-established [<a href="#ref-Conway:1968">Conway 1968</a>] and newer literature [<a href="#ref-Skelton:2019">Skelton, Pais, and Malan 2019</a>] emphasizes the impact that team structures and organization charts have on software structure and software quality. <a href="https://teamtopologies.com/key-concepts">“Team Topologies”</a> suggests four types of teams: stream-aligned team, platform team, enabling team, and complicated subsystem team. Assuming that these teams provide and consume APIs, changes to the team organization may cause a need to refactor their APIs.</dd>
+  <dt><a href="/refactorings/by-stakeholder-concerns/#understandability">#understandability</a> (a.k.a. <a href="/refactorings/by-stakeholder-concerns/#explainability">#explainability</a>)</dt>
+  <dd>Fewer endpoints might be easier to understand and maintain—if they are cohesive and do not contain too many operations. The refactorings <a href="/refactorings/moveoperation">Move Operation</a> and <a href="/refactorings/renameoperation">Rename Operation</a> explain the quality attributes <a href="/refactorings/by-stakeholder-concerns/#maintainability">maintainability</a> and <a href="/refactorings/by-stakeholder-concerns/#understandability">understandability</a> further.</dd>
+</dl>
+
+<h2 id="initial-position-sketch">Initial Position Sketch</h2>
+
+<p>The sketch in Figure 1 shows that the refactoring targets two endpoints and their operations.</p>
+
+<p><img src="/refactorings/images/MergeEndpoints_Initial.png" alt="Merge Endpoints: Initial Position Sketch. An API client uses two different operations (message exchanges 1-2 and 3-4) in two API endpoints for its communication with the API." /></p>
+
+<p>Figure 1: Merge Endpoints: Initial Position Sketch. An API client uses two different operations (message exchanges 1-2 and 3-4) in two API endpoints for its communication with the API.</p>
+
+<p>The client must be aware of and understand both endpoints. According to the context, they are semantically coupled through their operations, so the current API design does not meet the desire for high cohesion.</p>
+
+<h2 id="design-smells">Design Smells</h2>
+
+<dl>
+  <dt><em><a href="/refactorings/by-smells-drivers#api-does-not-get-to-the-point">API does not get to the POINT</a></em></dt>
+  <dd>According to the <strong>I</strong> in the POINT principles, which stands for <em>Isolation</em>, API operations should be free of unexpected side effects; they should not interfere with calls to other operations in the same or other APIs. The blog post <a href="https://medium.com/olzzio/apis-should-get-to-the-point-c79113efa31c">“APIs should get to the POINT”</a> explains the isolation principle (and the other four POINTs) in depth.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#cloud-native-traits-violated">Cloud-native traits violated</a></em></dt>
+  <dd>Cloud-Native Applications (CNAs) should be modular with each deployment unit having an adequate size. If two API endpoints are coupled and their operations depend on each other, this rule might be violated. The blog post <a href="https://medium.com/olzzio/what-is-a-cloud-native-application-anyway-part-2-f0e88c3caacb">“What is a Cloud-Native Application Anyway? 10 SUPER-IDEAL Application Properties and 7 Cloud-Native Traits”</a> provides a summary of modularization and other CNA traits.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#endpoint-implementation-spaghetti">Endpoint implementation spaghetti</a></em></dt>
+  <dd>The same backend system and/or domain data is processed by multiple endpoints. The endpoints are not self-contained and autonomous, but depend on each other indirectly because they access one or more shared implementation resources (such as another system or a data store). Such “implementation spaghetti” violates several of the <a href="https://ozimmer.ch/patterns/2020/07/06/MicroservicePositions.html">defining principles of service-oriented architectures and microservices</a>, for instance <em>independent deployability</em>.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#extreme-decomposition">Extreme decomposition</a></em></dt>
+  <dd>A strong desire to decompose an API and its implementation into independently deployable units can be observed, for instance caused by external forces such as the popularity of microservices. This desire has led to an intense decomposition that cannot be justified by requirements and context; numerous endpoints expose narrowly-scoped operations. These operations call each other or have to be orchestrated on the client side.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#responsibility-spread">Responsibility spread</a></em></dt>
+  <dd>Having two highly coupled operations in different modules (here: endpoints) is an indication that the <a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">single responsibility principle</a> is violated. As another example, consider a stakeholder group that has to work with multiple endpoints to satisfy its information needs.</dd>
+  <dt><em><a href="/refactorings/by-smells-drivers#synonyms-for-single-concept-aliasitis-">Synonyms for single concept (“aliasitis”)</a></em></dt>
+  <dd>Several endpoints have different names but actually expose the same domain concept and are therefore <a href="https://www.enterpriseintegrationpatterns.com/ramblings/coupling_facets.html">coupled tightly</a>. This smell is related to <em>responsibility spread</em>. Using different names for the same concept to distinguish multiple endpoints could indicate that things are separated that actually belong together. A domain-driven approach such as <a href="https://www.infoq.com/articles/ddd-contextmapping/">Context Mapping</a> help decide whether endpoints truly belong to different Bounded Contexts or should be merged.</dd>
+</dl>
+
+<h2 id="instructions">Instructions</h2>
+
+<p>Before applying this refactoring, decide for an <a href="https://api-patterns.org/patterns/evolution/">evolution strategy</a> for the new merged endpoint that balances the different forces and stakeholder concerns according to the needs of both the provider and the clients of the previously existing endpoints. The following steps can then be used to apply the refactoring:</p>
+
+<ol>
+  <li>Move all operations from the source endpoint to the target endpoint. If an intermediate mapping/configuration from endpoints to classes/methods exists in the Web frameworks that are used to implement the API, adjust both the configuration and the code.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></li>
+  <li>Depending on the chosen evolution strategy, implement a new stub to redirect clients to the new endpoint (in HTTP, this can be achieved with URL redirection and status code <code>301</code> [<a href="#ref-rfc7231">Fielding and Reschke 2014</a>]).</li>
+  <li>Delete the now orphaned/empty source endpoint from the code base.</li>
+  <li>Update the API test cases. Run them and compare the test results with those of the previous version to ensure that clients are served in the same way as before (both from a functional and from a non-functional point of view).</li>
+  <li>Update both <a href="https://api-patterns.org/patterns/foundation/APIDescription">API Descriptions</a> (source and target) as well as the related <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/ServiceLevelAgreement">Service Level Agreements</a>. The API description of the target solution must reflect the new design; the one of the source should report the change and, if implemented, the redirect.</li>
+  <li>Also update all API directories (i.e., service registries and repositories) and/or portals (i.e., gateways, cluster managers, service meshes) that refer to source and target endpoints.</li>
+  <li>Communicate these changes to the affected clients early and consistently.</li>
+</ol>
+
+<h2 id="target-solution-sketch-evolution-outline">Target Solution Sketch (Evolution Outline)</h2>
+
+<p>After merging the endpoints, the operations are co-located in a single endpoint. Figure 2 visualizes the new endpoint design.</p>
+
+<p><img src="/refactorings/images/MergeEndpoints_Target.png" alt="Merge Endpoints: Target Solution Sketch. After the refactoring, the operations (message exchanges 1-2 and 3-4) are co-located in a single API endpoint." /></p>
+
+<p>Figure 2: Merge Endpoints: Target Solution Sketch. After the refactoring, the operations (message exchanges 1-2 and 3-4) are co-located in a single API endpoint.</p>
+
+<p>The complete MDSL source and target sketch is <a href="/contracts/IRC-MergeEndpointsSourceAndTarget.mdsl">here</a>. Its OpenAPI Specification (OAS) version can be found <a href="/contracts/IRC-MergeEndpointsSourceAndTarget.yaml">here</a>.</p>
+
+<h2 id="examples">Example(s)</h2>
+
+<p>Reverting the target example to the initial/source in <a href="/refactorings/extractoperation">Extract Operation</a> qualifies as an example of this refactoring. After Extract Operation has been applied, the publication management example may provide the following command and query endpoints:<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></p>
+
+<pre><code class="language-cml">Aggregate PublicationCommandsEndpoint {
+    Service PublicationManagementCommandFacade {
+        // a state creation/state transition operation:
+        @PaperId add(@PublicationEntryDTO newEntry);
+        
+        // computation operations (stateless):
+        String convertToBibtex(@PublicationEntryDTO entry); 
+    }
+}
+
+Aggregate PublicationQueriesEndpoint {
+    Service PublicationManagementQueryFacade {
+        // retrieval operations:
+        @PublicationArchive dumpPublicationArchive();
+        Set&lt;@PublicationEntryDTO&gt;
+          lookupPublicationsFromAuthor(String writer);
+        String renderAsBibtex(@PaperId paperId);
+    }
+}
+</code></pre>
+
+<p>These two endpoints can be merged into one, leading to the following API design:</p>
+
+<pre><code class="language-cml">Aggregate PublicationEndpoint {
+    Service PublicationManagementFacade {
+        // a state creation/state transition operation:
+        @PaperId add(@PublicationEntryDTO newEntry);
+        
+        // retrieval operations:
+        @PublicationArchive dumpPublicationArchive();
+        Set&lt;@PublicationEntryDTO&gt;
+          lookupPublicationsFromAuthor(String writer);
+        String renderAsBibtex(@PaperId paperId);
+        
+        // computation operations (stateless):
+        String convertToBibtex(@PublicationEntryDTO entry); 
+    }
+}
+</code></pre>
+
+<h2 id="hints-and-pitfalls-to-avoid">Hints and Pitfalls to Avoid</h2>
+
+<p>Before and when applying this refactoring, make sure to:</p>
+
+<ul>
+  <li>Watch out for naming conflicts; if a conflict does occur, apply the <a href="/refactorings/renameoperation">Rename Operation</a> refactoring before the merge.</li>
+  <li>In HTTP resource APIs, make sure that the merge does not cause any conflicts in the operation-to-verb mappings. Each resource, uniquely identified with a URI, is able to support one GET, one POST and one PUT operation (and so forth) only. Update the URI/resource naming scheme if required, for instance via sub-resources.</li>
+  <li>Do not take this refactoring to the extreme; creating one endpoint per stakeholder group or per application usually does not make much sense (end user requirements and API-level user/job stories will help to unveil the right API granularity.</li>
+</ul>
+
+<p>The source and the target endpoints may have different security requirements. For instance, some operations may require rather fine-grained, attribute-based authorization while others use role-based authorization (or none). Another case might be one endpoint using basic authentication and <a href="https://api-patterns.org/patterns/quality/qualityManagementAndGovernance/APIKey">API Keys</a> and the other one using OpenID Connect and OAuth. Such situations can either be (viewed as) opportunities to improve the weaker security solution, or as threats because they could cause unexpected/undesired complexity. It is important to identify such mismatches before applying the refactoring and make a conscious <a href="https://ozimmer.ch/practices/2020/04/27/ArchitectureDecisionMaking.html">architectural decision</a> whether to merge or not.</p>
+
+<h2 id="related-content">Related Content</h2>
+
+<p>This refactoring undoes <a href="/refactorings/extractoperation">Extract Operation</a>. A simpler form of it is <a href="/refactorings/moveoperation">Move Operation</a>. Viewed at the code level, <a href="https://refactoring.guru/inline-class">Inline Class</a> is a related refactoring that can be used to merge the implementation classes of the endpoints.</p>
+
+<p>There are different reasons why tightly-coupled endpoints exist. If the endpoints are responsible for data retrieval, they might provide access to the same underlying data, but for clients with different information needs. In that case, the <a href="/refactorings/addwishlist">Add Wish List</a> or <a href="/refactorings/addwishtemplate">Add Wish Template</a> refactorings might be suited as well.</p>
+
+<p>The general topic of API granularity is discussed in <a href="https://www.informit.com/articles/article.aspx?p=3153211">“What is the Right Service Granularity in APIs?”</a>). The <a href="https://github.com/ServiceCutter/ServiceCutter/wiki/Coupling-Criteria">Service Cutter</a> tool and method suggest sixteen coupling criteria such as “Semantic Proximity”, “Structural Volatility”, and “Security Contextuality” [<a href="#ref-GyselKGZ16">Gysel et al. 2016</a>]. These criteria are worth considering when merging endpoints and merging operations.</p>
+
+<h2 id="references">References</h2>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+  <div id="ref-Conway:1968" class="csl-entry">
+
+    <p>Conway, Melvin E. 1968. “How Do Committees Invent?” <em>Datamation</em>. <a href="http://www.melconway.com/research/committees.html">http://www.melconway.com/research/committees.html</a>.</p>
+
+  </div>
+
+  <div id="ref-rfc7231" class="csl-entry">
+
+    <p>Fielding, Roy T., and Julian Reschke. 2014. “Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content.” Request for Comments. RFC 7231; RFC Editor. <a href="https://doi.org/10.17487/RFC7231">https://doi.org/10.17487/RFC7231</a>.</p>
+
+  </div>
+
+  <div id="ref-GyselKGZ16" class="csl-entry">
+
+    <p>Gysel, Michael, Lukas Kölbener, Wolfgang Giersche, and Olaf Zimmermann. 2016. “Service Cutter: A Systematic Approach to Service Decomposition.” In <em>Service-Oriented and Cloud Computing - 5th IFIP WG 2.14 European Conference, ESOCC 2016, Vienna, Austria, September 5-7, 2016, Proceedings</em>, edited by Marco Aiello, Einar Broch Johnsen, Schahram Dustdar, and Ilche Georgievski, 9846:185–200. Lecture Notes in Computer Science. Springer. <a href="https://link.springer.com/chapter/10.1007/978-3-319-44482-6_12">https://link.springer.com/chapter/10.1007/978-3-319-44482-6_12</a>.</p>
+
+  </div>
+
+  <div id="ref-Skelton:2019" class="csl-entry">
+
+    <p>Skelton, M., M. Pais, and R. Malan. 2019. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution.</p>
+
+  </div>
+
+  <div id="ref-Constantine:1974" class="csl-entry">
+
+    <p>Stevens, W. P., G. J. Myers, and L. L. Constantine. 1974. “Structured Design.” <em>IBM Syst. J.</em> 13 (2): 115–39. <a href="https://doi.org/10.1147/sj.132.0115">https://doi.org/10.1147/sj.132.0115</a>.</p>
+
+  </div>
+
+</div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>An example of such framework is Play <a href="https://www.playframework.com/">https://www.playframework.com/</a>. Other frameworks work with annotations; Spring and JAX-RS/JAW-WS containers are examples of this distributed configuration approach. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>The notation in this example is CML, the tactic domain-driven design language supported by Context Mapper <a href="https://contextmapper.org/docs/language-reference/">https://contextmapper.org/docs/language-reference/</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/refactorings/makerequestconditional" class="pagination--pager" title="Make Request Conditional
+">Previous</a>
+    
+    
+      <a href="/refactorings/mergeoperations" class="pagination--pager" title="Merge Operations
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  }
+</script>
+
+<script>
+  function collapseAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.remove("active");
+    }
+  }
+
+  function expandAll() {
+    var collapsible = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].classList.add("active");
+    }
+  }
+  </script>
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/m_st" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/Interface-Refactoring/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Mirko Stocker &amp; Olaf Zimmermann. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//matomo.microservice-api-patterns.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

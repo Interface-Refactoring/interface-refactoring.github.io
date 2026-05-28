@@ -1,0 +1,32 @@
+API description EncapsulateContextRepresentationSketch
+
+data type RequestContext {
+    "apiKey":ID<int>, 
+    "sessionId":D<int>?, 
+    "qosPropertiesThatShouldNotGoToProtocolHeader":KeyValuePair*}
+
+data type KeyValuePair {
+    "name": ID<string>,
+    "property": D<string>}+
+
+endpoint type SampleService 
+  exposes 
+    operation sampleOperationInitial
+      expecting 
+        headers
+        headers {
+          "apiKey":ID<int>, 
+          "sessionId":D<int>?, 
+          "qosPropertiesThatShouldNotGoToProtocolHeader":KeyValuePair*}
+        payload 
+          "regularRequestPayload":D<string>
+      delivering payload "someUnspecifiedResponseData"
+
+endpoint type SampleServiceTarget 
+  exposes
+    operation sampleOperationTarget
+      expecting payload { 
+         <<Context_Representation>> "qosControl": RequestContext,
+         <<Data_Element>> "regularRequestPayload":D<string>
+      }
+      delivering payload "someUnspecifiedResponseData"

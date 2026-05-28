@@ -1,0 +1,12 @@
+API description ExtractOperationSketch
+
+endpoint type SomeEndpoint
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+    
+   operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+  
