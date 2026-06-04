@@ -1,0 +1,72 @@
+@startuml
+
+skinparam nodesep 30
+skinparam ranksep 10
+
+package "Example Initial Position" <<Rectangle>> {
+  class PublicationArchive <<Entity>> {
+    List<PublicationEntryDTO> paperitemList
+  }
+  class PublicationEntryDTO <<Entity>> {
+    String title
+    List<String> authors
+    String venue
+    PaperId paperId
+  }
+  class PaperId <<Value Object>> {
+    int id
+  }
+  class PublicationManagementQueries <<Service>> {
+    PublicationArchive dumpPublicationArchive()
+    Set<PublicationEntryDTO> lookupPublicationsFromAuthor(String author)
+    String renderAsBibtex(PaperId paperId)
+    Set<PaperId> bulkImportFromBibtex(String bibtex)
+  }
+
+  class PublicationManagementCommands <<Service>> {
+    PaperId add(PublicationEntryDTO newEntry)
+  }
+  
+  PublicationArchive *--> PublicationEntryDTO : paperitemList
+  PublicationEntryDTO -right-> PaperId : paperId
+  PublicationManagementQueries --> PublicationArchive : dumpPublicationArchive
+  PublicationManagementQueries --> PublicationEntryDTO : lookupPublicationsFromAuthor
+  PublicationManagementQueries --> PublicationEntryDTO : add
+  PublicationManagementCommands -up-> PublicationEntryDTO : add
+
+}
+
+package "Example Target Solution" <<Rectangle>> {
+  class PublicationArchive2 as "PublicationArchive" <<Entity>> {
+    List<PublicationEntryDTO> paperitemList
+  }
+  class PublicationEntryDTO2 as "PublicationEntryDTO" <<Entity>> {
+    String title
+    List<String> authors
+    String venue
+    PaperId paperId
+  }
+  class PaperId2 as "PaperId" <<Value Object>> {
+    int id
+  }
+  class PublicationManagementQueries2 as "PublicationManagementQueries" <<Service>> {
+    PublicationArchive dumpPublicationArchive()
+    Set<PublicationEntryDTO> lookupPublicationsFromAuthor(String author)
+    String renderAsBibtex(PaperId paperId)
+  }
+  class PublicationManagementCommands2 as "PublicationManagementCommands" <<Service>> {
+        PaperId add(PublicationEntryDTO newEntry)
+    Set<PaperId> bulkImportFromBibtex(String bibtex)
+  }
+
+  PublicationArchive2 *--> PublicationEntryDTO2 : paperitemList
+  PublicationEntryDTO2 -right-> PaperId2 : paperId
+  PublicationManagementQueries2 --> PublicationArchive2 : dumpPublicationArchive
+  PublicationManagementQueries2 --> PublicationEntryDTO2 : lookupPublicationsFromAuthor
+  PublicationManagementCommands2 -up-> PublicationEntryDTO2 : add
+
+}
+
+"Example Initial Position" ---[hidden]d--> "Example Target Solution"
+
+@enduml

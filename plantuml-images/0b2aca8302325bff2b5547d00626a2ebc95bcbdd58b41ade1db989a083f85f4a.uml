@@ -1,0 +1,17 @@
+@startuml
+hide empty description
+
+'state Monolith
+state "Monolith (Co-Located Presentation, Business Logic, Persistence)" as Monolith
+state "Distributed Presentation" as DistributedPresentation
+state "Remote User Interface" as RemoteUI
+
+Monolith --> DistributedPresentation : (A) Introduce thin \napplication frontend\n(thin client, server-side rendering)
+Monolith --> RemoteUI : (B) Introduce rich \napplication frontend \n(remote user interface, client-side rendering)
+
+DistributedPresentation --> RemoteUI : (C) Switch to \nremote user interface
+RemoteUI --> DistributedPresentation : (D) Switch to \ndistributed presentation
+
+DistributedPresentation -[dashed]-> Monolith : (E) Return to \nmonolith
+RemoteUI -[dashed]-> Monolith : (E) Return to \nmonolith
+@enduml

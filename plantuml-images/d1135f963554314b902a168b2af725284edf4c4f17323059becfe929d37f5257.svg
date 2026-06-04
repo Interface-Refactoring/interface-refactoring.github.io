@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1131px" preserveAspectRatio="none" style="width:1361px;height:1131px;background:#F3F6F6;" version="1.1" viewBox="0 0 1361 1131" width="1361px" zoomAndPan="magnify"><defs/><g><!--MD5=[1c68d207c478208b31dfc84ab0ef359f]
+cluster Example Initial Position--><rect fill="#F3F6F6" height="535" style="stroke:#000000;stroke-width:1.5;" width="715" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="179" x="275" y="21.9951">Example Initial Position</text><!--MD5=[6e6b96dc11c6f81de8c2ad6cfa633bd2]
+cluster Example Target Solution--><rect fill="#F3F6F6" height="534" style="stroke:#000000;stroke-width:1.5;" width="627" x="728" y="591"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="191" x="946" y="605.9951">Example Target Solution</text><!--MD5=[fd31816d3b08c53072fad4d9de776098]
+class PublicationArchive--><rect codeLine="6" fill="#FFFFFF" height="66.8906" id="PublicationArchive" style="stroke:#A80036;stroke-width:1.5;" width="297" x="392.5" y="200"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="57" x="512.5" y="217.9951">«Entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="146" x="468" y="234.292">PublicationArchive</text><line style="stroke:#A80036;stroke-width:1.5;" x1="393.5" x2="688.5" y1="242.5938" y2="242.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="285" x="398.5" y="259.5889">List&lt;PublicationEntryDTO&gt; paperitemList</text><!--MD5=[37e308c654c87ebce488e51b0c1aa8ad]
+class PublicationEntryDTO--><rect codeLine="9" fill="#FFFFFF" height="115.7813" id="PublicationEntryDTO" style="stroke:#A80036;stroke-width:1.5;" width="166" x="251" y="301"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="57" x="305.5" y="318.9951">«Entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="160" x="254" y="335.292">PublicationEntryDTO</text><line style="stroke:#A80036;stroke-width:1.5;" x1="252" x2="416" y1="343.5938" y2="343.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="257" y="360.5889">String title</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="257" y="376.8857">List&lt;String&gt; authors</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="257" y="393.1826">String venue</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="257" y="409.4795">PaperId paperId</text><!--MD5=[5cfd8e76160c04ba7547953f0e36c8a8]
+class PaperId--><rect codeLine="15" fill="#FFFFFF" height="66.8906" id="PaperId" style="stroke:#A80036;stroke-width:1.5;" width="108" x="501" y="325.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="502" y="343.4951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="60" x="525" y="359.792">PaperId</text><line style="stroke:#A80036;stroke-width:1.5;" x1="502" x2="608" y1="368.0938" y2="368.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="507" y="385.0889">int id</text><!--MD5=[d7f53e08a2914ecf74c87b4c37843bf6]
+class PublicationManagementQueries--><rect codeLine="18" fill="#FFFFFF" height="115.7813" id="PublicationManagementQueries" style="stroke:#A80036;stroke-width:1.5;" width="514" x="77" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="299.5" y="67.9951">«Service»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="249" x="209.5" y="84.292">PublicationManagementQueries</text><line style="stroke:#A80036;stroke-width:1.5;" x1="78" x2="590" y1="92.5938" y2="92.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="304" x="83" y="109.5889">PublicationArchive dumpPublicationArchive()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="502" x="83" y="125.8857">Set&lt;PublicationEntryDTO&gt; lookupPublicationsFromAuthor(String author)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="268" x="83" y="142.1826">String renderAsBibtex(PaperId paperId)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="350" x="83" y="158.4795">Set&lt;PaperId&gt; bulkImportFromBibtex(String bibtex)</text><!--MD5=[26818d951d156b5f81821ca14a45b56a]
+class PublicationManagementCommands--><rect codeLine="25" fill="#FFFFFF" height="66.8906" id="PublicationManagementCommands" style="stroke:#A80036;stroke-width:1.5;" width="313" x="177.5" y="451"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="299.5" y="468.9951">«Service»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="274" x="197" y="485.292">PublicationManagementCommands</text><line style="stroke:#A80036;stroke-width:1.5;" x1="178.5" x2="489.5" y1="493.5938" y2="493.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="301" x="183.5" y="510.5889">PaperId add(PublicationEntryDTO newEntry)</text><!--MD5=[bb75080feb4aae62de2d57a7a0073b5b]
+class PublicationArchive2--><rect codeLine="39" fill="#FFFFFF" height="66.8906" id="PublicationArchive2" style="stroke:#A80036;stroke-width:1.5;" width="297" x="1033.5" y="767"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="57" x="1153.5" y="784.9951">«Entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="146" x="1109" y="801.292">PublicationArchive</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1034.5" x2="1329.5" y1="809.5938" y2="809.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="285" x="1039.5" y="826.5889">List&lt;PublicationEntryDTO&gt; paperitemList</text><!--MD5=[e80be398f4c51e6fcde8b2990dba0613]
+class PublicationEntryDTO2--><rect codeLine="42" fill="#FFFFFF" height="115.7813" id="PublicationEntryDTO2" style="stroke:#A80036;stroke-width:1.5;" width="166" x="915" y="868"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="57" x="969.5" y="885.9951">«Entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="160" x="918" y="902.292">PublicationEntryDTO</text><line style="stroke:#A80036;stroke-width:1.5;" x1="916" x2="1080" y1="910.5938" y2="910.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="921" y="927.5889">String title</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="921" y="943.8857">List&lt;String&gt; authors</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="921" y="960.1826">String venue</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="921" y="976.4795">PaperId paperId</text><!--MD5=[96d7865163ca86ecf96cbe6f04d08b36]
+class PaperId2--><rect codeLine="48" fill="#FFFFFF" height="66.8906" id="PaperId2" style="stroke:#A80036;stroke-width:1.5;" width="108" x="1165" y="892.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="106" x="1166" y="910.4951">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="60" x="1189" y="926.792">PaperId</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1166" x2="1272" y1="935.0938" y2="935.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="1171" y="952.0889">int id</text><!--MD5=[0d62eee21b1ffc41f8ffd68e76574848]
+class PublicationManagementQueries2--><rect codeLine="51" fill="#FFFFFF" height="99.4844" id="PublicationManagementQueries2" style="stroke:#A80036;stroke-width:1.5;" width="514" x="791" y="634"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="1013.5" y="651.9951">«Service»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="249" x="923.5" y="668.292">PublicationManagementQueries</text><line style="stroke:#A80036;stroke-width:1.5;" x1="792" x2="1304" y1="676.5938" y2="676.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="304" x="797" y="693.5889">PublicationArchive dumpPublicationArchive()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="502" x="797" y="709.8857">Set&lt;PublicationEntryDTO&gt; lookupPublicationsFromAuthor(String author)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="268" x="797" y="726.1826">String renderAsBibtex(PaperId paperId)</text><!--MD5=[5cf11909d15e341745925e47f9e00f8e]
+class PublicationManagementCommands2--><rect codeLine="56" fill="#FFFFFF" height="83.1875" id="PublicationManagementCommands2" style="stroke:#A80036;stroke-width:1.5;" width="362" x="817" y="1018"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="963.5" y="1035.9951">«Service»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="274" x="861" y="1052.292">PublicationManagementCommands</text><line style="stroke:#A80036;stroke-width:1.5;" x1="818" x2="1178" y1="1060.5938" y2="1060.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="301" x="823" y="1077.5889">PaperId add(PublicationEntryDTO newEntry)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="350" x="823" y="1093.8857">Set&lt;PaperId&gt; bulkImportFromBibtex(String bibtex)</text><!--MD5=[fc8135288e5e8b408ae9075f32fcf5d6]
+link PublicationArchive to PublicationEntryDTO--><path codeLine="29" d="M476.0315,273.2529 C476.0315,273.2529 444.24,292.23 428.48,301.63 " fill="none" id="PublicationArchive-PublicationEntryDTO" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="417.08,308.43,426.8579,307.2498,421.3728,305.8664,422.7561,300.3813,417.08,308.43" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="421.3728" x2="428.245" y1="305.8664" y2="301.77"/><polygon fill="#A80036" points="486.34,267.11,479.1381,266.7453,476.0315,273.2529,483.2334,273.6176,486.34,267.11" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="470" y="288.9951">paperitemList</text><!--MD5=[e0ff8f15693b3a49b5e45067af2e08f7]
+link PublicationEntryDTO to PaperId--><path codeLine="30" d="M417.24,359 C443.39,359 471.73,359 495.86,359 " fill="none" id="PublicationEntryDTO-to-PaperId" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="500.94,359,491.94,355,495.94,359,491.94,363,500.94,359" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="433" y="351.9951">paperId</text><!--MD5=[c82647234b6eb81aeebf31e646c09277]
+link PublicationManagementQueries to PublicationArchive--><path codeLine="31" d="M429.62,166.05 C447.44,176.68 465.57,187.5 481.88,197.23 " fill="none" id="PublicationManagementQueries-to-PublicationArchive" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="486.44,199.95,480.749,191.9118,482.1425,197.3943,476.66,198.7878,486.44,199.95" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="470" y="187.9951">dumpPublicationArchive</text><!--MD5=[fefd7470d65652018e4b1673fdb8b745]
+link PublicationManagementQueries to PublicationEntryDTO--><path codeLine="32" d="M116.92,166.17 C104.36,175.76 93.14,186.95 84,200 C66.92,224.39 66.92,242.61 84,267 C120.32,318.88 189.45,341.29 245.83,350.92 " fill="none" id="PublicationManagementQueries-to-PublicationEntryDTO" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="250.9,351.75,242.6724,346.3364,245.9669,350.935,241.3683,354.2294,250.9,351.75" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="85" y="238.4951">lookupPublicationsFromAuthor</text><!--MD5=[fefd7470d65652018e4b1673fdb8b745]
+link PublicationManagementQueries to PublicationEntryDTO--><path codeLine="33" d="M334,166.13 C334,204.74 334,255.72 334,295.43 " fill="none" id="PublicationManagementQueries-to-PublicationEntryDTO-1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="334,300.71,338,291.71,334,295.71,330,291.71,334,300.71" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="335" y="238.4951">add</text><!--MD5=[284240a3ae6e9fa059801a076fa5df16]
+reverse link PublicationEntryDTO to PublicationManagementCommands--><path codeLine="34" d="M334,422.24 C334,432.17 334,442.08 334,450.95 " fill="none" id="PublicationEntryDTO-backto-PublicationManagementCommands" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="334,417.05,330,426.05,334,422.05,338,426.05,334,417.05" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="335" y="438.9951">add</text><!--MD5=[0db9462d708e5fec86e08183644af74e]
+link PublicationArchive2 to PublicationEntryDTO2--><path codeLine="61" d="M1123.2139,840.9689 C1123.2139,840.9689 1102.34,854.97 1092.2,861.77 " fill="none" id="PublicationArchive2-PublicationEntryDTO2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1081.22,869.15,1090.9211,867.4504,1085.3701,866.3613,1086.4592,860.8103,1081.22,869.15" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="1085.3701" x2="1092.01" y1="866.3613" y2="861.9"/><polygon fill="#A80036" points="1133.17,834.27,1125.959,834.3008,1123.2139,840.9689,1130.4249,840.9382,1133.17,834.27" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="1118" y="855.9951">paperitemList</text><!--MD5=[f13ff6ea9a02e3f4c7b7dd3c59398564]
+link PublicationEntryDTO2 to PaperId2--><path codeLine="62" d="M1081.24,926 C1107.39,926 1135.73,926 1159.86,926 " fill="none" id="PublicationEntryDTO2-to-PaperId2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1164.94,926,1155.94,922,1159.94,926,1155.94,930,1164.94,926" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="1097" y="918.9951">paperId</text><!--MD5=[c4cfae3e34aee59d306fb0877b35d2a9]
+link PublicationManagementQueries2 to PublicationArchive2--><path codeLine="63" d="M1104.83,733.27 C1116.64,743.41 1128.89,753.92 1140.06,763.5 " fill="none" id="PublicationManagementQueries2-to-PublicationArchive2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1144.12,766.99,1139.9064,758.088,1140.3298,763.729,1134.6888,764.1523,1144.12,766.99" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="1131" y="754.9951">dumpPublicationArchive</text><!--MD5=[6e6e3843b1f14554bf9efd4fd15d9dc1]
+link PublicationManagementQueries2 to PublicationEntryDTO2--><path codeLine="64" d="M840.69,733 C827.41,742.43 815.56,753.64 806,767 C788.67,791.22 790.08,808.84 806,834 C828.93,870.25 870.64,892.34 909.34,905.66 " fill="none" id="PublicationManagementQueries2-to-PublicationEntryDTO2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="914.54,907.4,907.2728,900.7526,909.798,905.8146,904.7361,908.3398,914.54,907.4" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="211" x="807" y="805.4951">lookupPublicationsFromAuthor</text><!--MD5=[312da9e796bdd3b9bf5578547ee62978]
+reverse link PublicationEntryDTO2 to PublicationManagementCommands2--><path codeLine="65" d="M998,989.37 C998,999.09 998,1008.92 998,1017.99 " fill="none" id="PublicationEntryDTO2-backto-PublicationManagementCommands2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="998,984.3,994,993.3,998,989.3,1002,993.3,998,984.3" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="999" y="1005.9951">add</text><!--MD5=[cf582ffea7e64bb5009de14df4ea46ab]
+link Example Initial Position to Example Target Solution--><!--MD5=[b8af78c4df821474f50dc3342a7ff0d7]
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+
+skinparam nodesep 30
+skinparam ranksep 10
+
+package "Example Initial Position" <<Rectangle>> {
+  class PublicationArchive <<Entity>> {
+    List<PublicationEntryDTO> paperitemList
+  }
+  class PublicationEntryDTO <<Entity>> {
+    String title
+    List<String> authors
+    String venue
+    PaperId paperId
+  }
+  class PaperId <<Value Object>> {
+    int id
+  }
+  class PublicationManagementQueries <<Service>> {
+    PublicationArchive dumpPublicationArchive()
+    Set<PublicationEntryDTO> lookupPublicationsFromAuthor(String author)
+    String renderAsBibtex(PaperId paperId)
+    Set<PaperId> bulkImportFromBibtex(String bibtex)
+  }
+
+  class PublicationManagementCommands <<Service>> {
+    PaperId add(PublicationEntryDTO newEntry)
+  }
+  
+  PublicationArchive *- -> PublicationEntryDTO : paperitemList
+  PublicationEntryDTO -right-> PaperId : paperId
+  PublicationManagementQueries - -> PublicationArchive : dumpPublicationArchive
+  PublicationManagementQueries - -> PublicationEntryDTO : lookupPublicationsFromAuthor
+  PublicationManagementQueries - -> PublicationEntryDTO : add
+  PublicationManagementCommands -up-> PublicationEntryDTO : add
+
+}
+
+package "Example Target Solution" <<Rectangle>> {
+  class PublicationArchive2 as "PublicationArchive" <<Entity>> {
+    List<PublicationEntryDTO> paperitemList
+  }
+  class PublicationEntryDTO2 as "PublicationEntryDTO" <<Entity>> {
+    String title
+    List<String> authors
+    String venue
+    PaperId paperId
+  }
+  class PaperId2 as "PaperId" <<Value Object>> {
+    int id
+  }
+  class PublicationManagementQueries2 as "PublicationManagementQueries" <<Service>> {
+    PublicationArchive dumpPublicationArchive()
+    Set<PublicationEntryDTO> lookupPublicationsFromAuthor(String author)
+    String renderAsBibtex(PaperId paperId)
+  }
+  class PublicationManagementCommands2 as "PublicationManagementCommands" <<Service>> {
+        PaperId add(PublicationEntryDTO newEntry)
+    Set<PaperId> bulkImportFromBibtex(String bibtex)
+  }
+
+  PublicationArchive2 *- -> PublicationEntryDTO2 : paperitemList
+  PublicationEntryDTO2 -right-> PaperId2 : paperId
+  PublicationManagementQueries2 - -> PublicationArchive2 : dumpPublicationArchive
+  PublicationManagementQueries2 - -> PublicationEntryDTO2 : lookupPublicationsFromAuthor
+  PublicationManagementCommands2 -up-> PublicationEntryDTO2 : add
+
+}
+
+"Example Initial Position" - - -[hidden]d- -> "Example Target Solution"
+
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

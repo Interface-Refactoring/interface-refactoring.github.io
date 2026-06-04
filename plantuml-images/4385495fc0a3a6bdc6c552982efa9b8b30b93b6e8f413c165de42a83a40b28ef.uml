@@ -1,0 +1,23 @@
+@startuml
+hide empty description
+
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Eternal Lifetime Guarantee " as EternalLifetimeGuarantee
+state "Limited Lifetime Guarantee " as LimitedLifetimeGuarantee
+state "Two in Production (N-1)" as TwoInProduction
+state "N In Production" as NInProduction
+
+EternalLifetimeGuarantee --> LimitedLifetimeGuarantee : Limit the lifetime of the API
+
+LimitedLifetimeGuarantee --> AggressiveObsolescence : Offer even fewer guarantees to clients,\nAPI can be deprecated\nand then removed at any time
+
+TwoInProduction --> LimitedLifetimeGuarantee : Transition from multiple version support\nto one with\na clearly defined lifetime
+
+TwoInProduction --> AggressiveObsolescence : Transition from multiple version support\nto ad hoc deprecation\nand subsequent removal 
+
+NInProduction --> TwoInProduction : Reduce the number of versions
+
+note "Two In Production and N In Production\ncan be combined with other\nlifetime guarantee patterns \nsuch as Limited Lifetime Guarantee" as N1
+'N1 -- TwoInProduction
+'N1 -- LimitedLifetimeGuarantee
+@enduml

@@ -1,0 +1,30 @@
+API description ExtractOperationSketch
+
+endpoint type Endpoint1
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+
+endpoint type Endpoint2    
+exposes
+operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+    
+    
+endpoint type Endpoint1AndEndpoint2Merged
+exposes 
+  operation operation1 
+    expecting payload "RequestMessage1" 
+    delivering payload "ResponseMessage1"
+    
+   operation operation2 
+    expecting payload "RequestMessage2" 
+    delivering payload "ResponseMessage2"
+
+API provider Endpoint1AndEndpoint2MergedProvider offers Endpoint1AndEndpoint2Merged at endpoint location "http://localhost:8080"
+via protocol HTTP binding
+resource Home at "/Home"
+operation operation1 to POST all elements realized as BODY parameters
+operation operation2 to PUT all elements realized as BODY parameters

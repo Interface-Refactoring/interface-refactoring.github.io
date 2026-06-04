@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="515px" preserveAspectRatio="none" style="width:924px;height:515px;background:#F3F6F6;" version="1.1" viewBox="0 0 924 515" width="924px" zoomAndPan="magnify"><defs/><g><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="190" x="381" y="469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="386" y="493.8467">Aggressive Obsolescence</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="196" x="7" y="159"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="12" y="183.8467">Eternal Lifetime Guarantee</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="197" x="228.5" y="314"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="233.5" y="338.8467">Limited Lifetime Guarantee</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="172" x="390" y="159"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="395" y="183.8467">Two in Production (N-1)</text><rect fill="#FEFECE" height="40" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="115" x="418.5" y="23.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="423.5" y="48.3467">N In Production</text><path d="M569,6 L569,81.1875 L853,81.1875 L853,16 L843,6 L569,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M843,6 L843,16 L853,16 L843,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="263" x="575" y="23.9951">Two In Production and N In Production</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="193" x="575" y="40.292">can be combined with other</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="575" y="56.5889">lifetime guarantee patterns</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="241" x="575" y="72.8857">such as Limited Lifetime Guarantee</text><!--MD5=[e4beae3738d4604d3feebdd4453a221f]
+link EternalLifetimeGuarantee to LimitedLifetimeGuarantee--><path d="M102.66,199 C101.06,221.08 102.09,257.27 122,279 C136.45,294.78 180.06,307.36 223.37,316.4 " fill="none" id="EternalLifetimeGuarantee-to-LimitedLifetimeGuarantee" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="228.37,317.43,220.3516,311.7111,223.471,316.4302,218.7519,319.5496,228.37,317.43" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="123" y="258.9951">Limit the lifetime of the API</text><!--MD5=[833b98e1a9a7a7d15ac5a6cfe761fc56]
+link LimitedLifetimeGuarantee to AggressiveObsolescence--><path d="M321.51,354.37 C316.34,377.01 311.82,414.48 330,439 C341.42,454.41 357.92,465.03 375.73,472.34 " fill="none" id="LimitedLifetimeGuarantee-to-AggressiveObsolescence" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="380.79,474.31,373.8559,467.3159,376.1311,472.495,370.9519,474.7702,380.79,474.31" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="267" x="331" y="402.9951">Offer even fewer guarantees to clients,</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="386.5" y="419.292">API can be deprecated</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="206" x="361.5" y="435.5889">and then removed at any time</text><!--MD5=[580ff2c9f4b75b01a35216c2e8319a2d]
+link TwoInProduction to LimitedLifetimeGuarantee--><path d="M389.66,188.5 C364.44,195.47 339.51,207.71 324,229 C307.29,251.94 312.22,285.9 318.52,308.71 " fill="none" id="TwoInProduction-to-LimitedLifetimeGuarantee" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="319.97,313.68,321.2978,303.9211,318.5738,308.8789,313.616,306.1549,319.97,313.68" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="273" x="325" y="242.9951">Transition from multiple version support</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="423" y="259.292">to one with</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="379.5" y="275.5889">a clearly defined lifetime</text><!--MD5=[412ba390d2a1328471dd7dbcca913d80]
+link TwoInProduction to AggressiveObsolescence--><path d="M562.3,197.22 C578.32,204.4 593.11,214.58 603,229 C655.8,305.96 655.8,362.04 603,439 C594.9,450.8 583.53,459.76 570.88,466.57 " fill="none" id="TwoInProduction-to-AggressiveObsolescence" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="566.17,468.98,576.0036,468.4324,570.6191,466.6984,572.3531,461.3139,566.17,468.98" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="273" x="643" y="322.9951">Transition from multiple version support</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="703.5" y="339.292">to ad hoc deprecation</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="172" x="693.5" y="355.5889">and subsequent removal</text><!--MD5=[a913795b69c6a3ac47b103331cca1f25]
+link NInProduction to TwoInProduction--><path d="M476,63.63 C476,87.32 476,127.72 476,153.61 " fill="none" id="NInProduction-to-TwoInProduction" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="476,158.91,480,149.91,476,153.91,472,149.91,476,158.91" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218" x="477" y="124.9951">Reduce the number of versions</text><!--MD5=[e9f322c7535e3debec8ed758c736865e]
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Eternal Lifetime Guarantee " as EternalLifetimeGuarantee
+state "Limited Lifetime Guarantee " as LimitedLifetimeGuarantee
+state "Two in Production (N-1)" as TwoInProduction
+state "N In Production" as NInProduction
+
+EternalLifetimeGuarantee - -> LimitedLifetimeGuarantee : Limit the lifetime of the API
+
+LimitedLifetimeGuarantee - -> AggressiveObsolescence : Offer even fewer guarantees to clients,\nAPI can be deprecated\nand then removed at any time
+
+TwoInProduction - -> LimitedLifetimeGuarantee : Transition from multiple version support\nto one with\na clearly defined lifetime
+
+TwoInProduction - -> AggressiveObsolescence : Transition from multiple version support\nto ad hoc deprecation\nand subsequent removal 
+
+NInProduction - -> TwoInProduction : Reduce the number of versions
+
+note "Two In Production and N In Production\ncan be combined with other\nlifetime guarantee patterns \nsuch as Limited Lifetime Guarantee" as N1
+'N1 - - TwoInProduction
+'N1 - - LimitedLifetimeGuarantee
+@enduml
+
+@startuml
+
+skinparam defaultFontName sans-serif
+skinparam ClassBackgroundColor White
+hide empty members
+hide circle
+skinparam defaultFontSize 14
+skinparam classfontstyle bold
+skinparam shadowing false
+skinparam backgroundColor #f3f6f6
+hide empty description
+
+state "Aggressive Obsolescence" as AggressiveObsolescence
+state "Eternal Lifetime Guarantee " as EternalLifetimeGuarantee
+state "Limited Lifetime Guarantee " as LimitedLifetimeGuarantee
+state "Two in Production (N-1)" as TwoInProduction
+state "N In Production" as NInProduction
+
+EternalLifetimeGuarantee - -> LimitedLifetimeGuarantee : Limit the lifetime of the API
+
+LimitedLifetimeGuarantee - -> AggressiveObsolescence : Offer even fewer guarantees to clients,\nAPI can be deprecated\nand then removed at any time
+
+TwoInProduction - -> LimitedLifetimeGuarantee : Transition from multiple version support\nto one with\na clearly defined lifetime
+
+TwoInProduction - -> AggressiveObsolescence : Transition from multiple version support\nto ad hoc deprecation\nand subsequent removal 
+
+NInProduction - -> TwoInProduction : Reduce the number of versions
+
+note "Two In Production and N In Production\ncan be combined with other\nlifetime guarantee patterns \nsuch as Limited Lifetime Guarantee" as N1
+@enduml
+
+PlantUML version 1.2021.14(Fri Nov 12 16:46:50 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
